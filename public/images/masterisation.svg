@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" width="800" height="340">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f23"/>
+      <stop offset="100%" style="stop-color:#1a1040"/>
+    </linearGradient>
+    <linearGradient id="serverGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="screenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9"/>
+      <stop offset="100%" style="stop-color:#6366f1"/>
+    </linearGradient>
+    <linearGradient id="diskGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#a855f7"/>
+    </linearGradient>
+    <linearGradient id="progressGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#06b6d4"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#06b6d4" opacity="0.8"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#10b981" opacity="0.8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="340" fill="url(#bg)"/>
+
+  <!-- Grid lines -->
+  <g opacity="0.06" stroke="#6366f1" stroke-width="1">
+    <line x1="0" y1="85" x2="800" y2="85"/>
+    <line x1="0" y1="170" x2="800" y2="170"/>
+    <line x1="0" y1="255" x2="800" y2="255"/>
+    <line x1="160" y1="0" x2="160" y2="340"/>
+    <line x1="320" y1="0" x2="320" y2="340"/>
+    <line x1="480" y1="0" x2="480" y2="340"/>
+    <line x1="640" y1="0" x2="640" y2="340"/>
+  </g>
+
+  <!-- Ambient glows -->
+  <circle cx="400" cy="170" r="120" fill="#3b82f6" opacity="0.04"/>
+  <circle cx="130" cy="260" r="60" fill="#8b5cf6" opacity="0.06"/>
+  <circle cx="670" cy="80" r="70" fill="#06b6d4" opacity="0.05"/>
+
+  <!-- ═══════════════ SERVEUR CENTRAL ═══════════════ -->
+  <!-- Server rack body -->
+  <rect x="310" y="80" width="180" height="140" rx="10" fill="#1e1b4b" stroke="#3b82f6" stroke-width="1.5" opacity="0.9"/>
+  <rect x="310" y="80" width="180" height="140" rx="10" fill="url(#serverGrad)" opacity="0.15"/>
+
+  <!-- Server units -->
+  <rect x="322" y="93" width="156" height="22" rx="4" fill="#1d3461" stroke="#3b82f6" stroke-width="0.8" opacity="0.9"/>
+  <circle cx="462" cy="104" r="4" fill="#10b981" filter="url(#glow)"/>
+  <circle cx="449" cy="104" r="4" fill="#3b82f6" opacity="0.6"/>
+  <rect x="330" y="99" width="80" height="10" rx="2" fill="#0f172a" opacity="0.7"/>
+  <rect x="331" y="100" width="45" height="8" rx="1" fill="#3b82f6" opacity="0.5"/>
+
+  <rect x="322" y="120" width="156" height="22" rx="4" fill="#1d3461" stroke="#3b82f6" stroke-width="0.8" opacity="0.9"/>
+  <circle cx="462" cy="131" r="4" fill="#10b981" filter="url(#glow)"/>
+  <circle cx="449" cy="131" r="4" fill="#f59e0b" opacity="0.6"/>
+  <rect x="330" y="126" width="80" height="10" rx="2" fill="#0f172a" opacity="0.7"/>
+  <rect x="331" y="127" width="65" height="8" rx="1" fill="#6366f1" opacity="0.5"/>
+
+  <rect x="322" y="147" width="156" height="22" rx="4" fill="#1d3461" stroke="#3b82f6" stroke-width="0.8" opacity="0.9"/>
+  <circle cx="462" cy="158" r="4" fill="#10b981" filter="url(#glow)"/>
+  <circle cx="449" cy="158" r="4" fill="#3b82f6" opacity="0.6"/>
+  <rect x="330" y="153" width="80" height="10" rx="2" fill="#0f172a" opacity="0.7"/>
+  <rect x="331" y="154" width="55" height="8" rx="1" fill="#06b6d4" opacity="0.5"/>
+
+  <rect x="322" y="174" width="156" height="22" rx="4" fill="#1d3461" stroke="#3b82f6" stroke-width="0.8" opacity="0.9"/>
+  <circle cx="462" cy="185" r="4" fill="#f59e0b" filter="url(#glow)"/>
+  <rect x="330" y="180" width="80" height="10" rx="2" fill="#0f172a" opacity="0.7"/>
+  <rect x="331" y="181" width="72" height="8" rx="1" fill="#8b5cf6" opacity="0.5"/>
+
+  <!-- Server label -->
+  <text x="400" y="234" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8" opacity="0.8">MDT / WDS SERVER</text>
+
+  <!-- ═══════════════ IMAGE WIM (disque dur au-dessus) ═══════════════ -->
+  <ellipse cx="400" cy="55" rx="38" ry="14" fill="#1e1b4b" stroke="#8b5cf6" stroke-width="1.5"/>
+  <ellipse cx="400" cy="55" rx="38" ry="14" fill="url(#diskGrad)" opacity="0.2"/>
+  <rect x="362" y="43" width="76" height="20" fill="#1e1b4b" stroke="#8b5cf6" stroke-width="1.5"/>
+  <rect x="362" y="43" width="76" height="20" fill="url(#diskGrad)" opacity="0.15"/>
+  <ellipse cx="400" cy="63" rx="38" ry="14" fill="#1e1b4b" stroke="#8b5cf6" stroke-width="1.5"/>
+  <ellipse cx="400" cy="63" rx="20" ry="7" fill="#8b5cf6" opacity="0.2"/>
+  <ellipse cx="400" cy="63" rx="5" ry="2" fill="#8b5cf6" opacity="0.4"/>
+  <text x="400" y="53" text-anchor="middle" font-family="monospace" font-size="8" fill="#c4b5fd" font-weight="bold">Windows.wim</text>
+
+  <!-- Ligne serveur → disque -->
+  <line x1="400" y1="77" x2="400" y2="80" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.6"/>
+
+  <!-- ═══════════════ PC GAUCHE (déployé) ═══════════════ -->
+  <!-- Monitor -->
+  <rect x="50" y="100" width="130" height="85" rx="6" fill="#0f172a" stroke="#06b6d4" stroke-width="1.5"/>
+  <rect x="55" y="105" width="120" height="72" rx="3" fill="url(#screenGrad)" opacity="0.15"/>
+  <!-- Screen content -->
+  <rect x="60" y="110" width="110" height="62" rx="2" fill="#0d1117"/>
+  <!-- Windows logo stylized -->
+  <rect x="85" y="122" width="14" height="14" rx="2" fill="#0078d4" opacity="0.9"/>
+  <rect x="101" y="122" width="14" height="14" rx="2" fill="#0078d4" opacity="0.7"/>
+  <rect x="85" y="138" width="14" height="14" rx="2" fill="#0078d4" opacity="0.7"/>
+  <rect x="101" y="138" width="14" height="14" rx="2" fill="#0078d4" opacity="0.5"/>
+  <!-- Progress bar on screen -->
+  <rect x="65" y="158" width="100" height="7" rx="3" fill="#1e293b"/>
+  <rect x="65" y="158" width="78" height="7" rx="3" fill="url(#progressGrad)"/>
+  <text x="115" y="165" text-anchor="middle" font-family="monospace" font-size="6" fill="#e2e8f0">78%</text>
+  <!-- Stand -->
+  <rect x="107" y="185" width="16" height="8" fill="#1e293b"/>
+  <rect x="95" y="193" width="40" height="5" rx="2" fill="#1e293b" stroke="#06b6d4" stroke-width="0.8" opacity="0.6"/>
+  <!-- Label -->
+  <text x="115" y="215" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#94a3b8">PC-001</text>
+  <circle cx="115" cy="223" r="4" fill="#10b981" filter="url(#glow)"/>
+  <text x="125" y="227" font-family="sans-serif" font-size="7" fill="#10b981">Déployé</text>
+
+  <!-- ═══════════════ PC DROITE (en cours) ═══════════════ -->
+  <rect x="620" y="100" width="130" height="85" rx="6" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+  <rect x="625" y="105" width="120" height="72" rx="3" fill="#f59e0b" opacity="0.05"/>
+  <rect x="630" y="110" width="110" height="62" rx="2" fill="#0d1117"/>
+  <!-- Loading screen -->
+  <text x="685" y="135" text-anchor="middle" font-family="monospace" font-size="8" fill="#94a3b8">Applying image...</text>
+  <rect x="640" y="142" width="90" height="6" rx="3" fill="#1e293b"/>
+  <rect x="640" y="142" width="38" height="6" rx="3" fill="#f59e0b" opacity="0.8"/>
+  <text x="685" y="158" text-anchor="middle" font-family="monospace" font-size="7" fill="#f59e0b">42%</text>
+  <!-- Sysprep indicator -->
+  <rect x="640" y="163" width="90" height="5" rx="2" fill="#1e293b"/>
+  <rect x="640" y="163" width="22" height="5" rx="2" fill="#6366f1" opacity="0.6"/>
+  <text x="685" y="178" text-anchor="middle" font-family="monospace" font-size="6" fill="#64748b">Sysprep / OOBE</text>
+  <!-- Stand -->
+  <rect x="677" y="185" width="16" height="8" fill="#1e293b"/>
+  <rect x="665" y="193" width="40" height="5" rx="2" fill="#1e293b" stroke="#f59e0b" stroke-width="0.8" opacity="0.6"/>
+  <text x="685" y="215" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#94a3b8">PC-002</text>
+  <circle cx="685" cy="223" r="4" fill="#f59e0b" filter="url(#glow)"/>
+  <text x="695" y="227" font-family="sans-serif" font-size="7" fill="#f59e0b">En cours</text>
+
+  <!-- ═══════════════ PC BAS (en attente) ═══════════════ -->
+  <rect x="335" y="250" width="130" height="70" rx="6" fill="#0f172a" stroke="#475569" stroke-width="1" opacity="0.7"/>
+  <rect x="340" y="255" width="120" height="57" rx="2" fill="#0d1117"/>
+  <text x="400" y="278" text-anchor="middle" font-family="monospace" font-size="8" fill="#475569">Waiting for PXE...</text>
+  <text x="400" y="292" text-anchor="middle" font-family="monospace" font-size="7" fill="#334155">DHCP: 192.168.1.45</text>
+  <rect x="350" y="298" width="100" height="5" rx="2" fill="#1e293b"/>
+  <text x="400" y="330" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#64748b">PC-003</text>
+  <circle cx="400" cy="338" r="4" fill="#475569" opacity="0.6"/>
+
+  <!-- ═══════════════ FLÈCHES DE DÉPLOIEMENT ═══════════════ -->
+  <!-- Server → PC gauche -->
+  <path d="M310,155 C250,155 230,155 190,155" stroke="#06b6d4" stroke-width="1.8" fill="none" stroke-dasharray="6,3" opacity="0.7" marker-end="url(#arrowBlue)"/>
+  <!-- Particule animée -->
+  <circle cx="250" cy="155" r="3" fill="#06b6d4" opacity="0.8" filter="url(#glow)"/>
+
+  <!-- Server → PC droit -->
+  <path d="M490,155 C550,155 580,155 618,155" stroke="#f59e0b" stroke-width="1.8" fill="none" stroke-dasharray="6,3" opacity="0.7" marker-end="url(#arrowGreen)"/>
+  <circle cx="554" cy="155" r="3" fill="#f59e0b" opacity="0.8" filter="url(#glow)"/>
+
+  <!-- Server → PC bas -->
+  <path d="M400,220 L400,248" stroke="#475569" stroke-width="1.5" fill="none" stroke-dasharray="5,3" opacity="0.5" marker-end="url(#arrowBlue)"/>
+
+  <!-- ═══════════════ BADGES TECH ═══════════════ -->
+  <!-- MDT Badge -->
+  <rect x="30" y="248" width="72" height="24" rx="6" fill="#1e1b4b" stroke="#3b82f6" stroke-width="1" opacity="0.9"/>
+  <text x="66" y="264" text-anchor="middle" font-family="monospace" font-size="9" fill="#93c5fd" font-weight="bold">MDT / WDS</text>
+
+  <!-- Sysprep Badge -->
+  <rect x="30" y="278" width="72" height="24" rx="6" fill="#1e1b4b" stroke="#8b5cf6" stroke-width="1" opacity="0.9"/>
+  <text x="66" y="294" text-anchor="middle" font-family="monospace" font-size="9" fill="#c4b5fd" font-weight="bold">Sysprep</text>
+
+  <!-- PXE Badge -->
+  <rect x="698" y="248" width="72" height="24" rx="6" fill="#1e1b4b" stroke="#06b6d4" stroke-width="1" opacity="0.9"/>
+  <text x="734" y="264" text-anchor="middle" font-family="monospace" font-size="9" fill="#67e8f9" font-weight="bold">PXE Boot</text>
+
+  <!-- WSUS Badge -->
+  <rect x="698" y="278" width="72" height="24" rx="6" fill="#1e1b4b" stroke="#10b981" stroke-width="1" opacity="0.9"/>
+  <text x="734" y="294" text-anchor="middle" font-family="monospace" font-size="9" fill="#6ee7b7" font-weight="bold">WSUS</text>
+
+  <!-- ═══════════════ TITRE CENTRAL ═══════════════ -->
+  <text x="400" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b" letter-spacing="3">MASTERISATION &amp; DÉPLOIEMENT</text>
+</svg>

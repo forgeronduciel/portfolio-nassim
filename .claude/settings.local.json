@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun run:*)",
+      "Bash(npm run:*)",
+      "Read(//c/Users/nassi/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/bd1016fc-65ac-4354-a710-5af12a62b5f4/eae7e27a-942e-41c3-8eab-ee090ad834ce/skills/docx/**)",
+      "Bash(pandoc --track-changes=all \"C:/Users/nassi/Desktop/épreuve E6/projet master profesionnel/Documentation MASTERISATION en entreprise.docx\" -o /tmp/doc_original.md)",
+      "Read(//tmp/**)",
+      "Bash(python scripts/office/unpack.py \"C:/Users/nassi/Desktop/épreuve E6/projet master profesionnel/Documentation MASTERISATION en entreprise.docx\" /tmp/doc_unpacked/)",
+      "Bash(pip install:*)",
+      "Bash(python scripts/office/unpack.py --help)",
+      "Bash(python scripts/office/pack.py /tmp/doc_unpacked/ \"/tmp/Documentation MASTERISATION en entreprise - FINAL.docx\" --original \"C:/Users/nassi/Desktop/épreuve E6/projet master profesionnel/Documentation MASTERISATION en entreprise.docx\")",
+      "Bash(python scripts/office/pack.py /tmp/doc_unpacked/ \"/tmp/Documentation MASTERISATION en entreprise - FINAL.docx\" --original \"C:/Users/nassi/Desktop/épreuve E6/projet master profesionnel/Documentation MASTERISATION en entreprise.docx\" --validate false)",
+      "Bash(python scripts/office/soffice.py --headless --convert-to pdf \"C:/Users/nassi/Desktop/épreuve E6/projet master profesionnel/Documentation MASTERISATION en entreprise - FINAL.docx\" --outdir /tmp/)",
+      "Bash(start \"\" \"C:\\\\Users\\\\nassi\\\\Desktop\\\\épreuve E6\\\\projet master profesionnel\\\\Documentation MASTERISATION en entreprise - FINAL.docx\")",
+      "Bash(python scripts/office/unpack.py \"C:/Users/nassi/Downloads/Procedure_Masterisation_Entreprise.docx\" \"C:/Users/nassi/Downloads/docx_unpacked/\")",
+      "Bash(pandoc \"C:/Users/nassi/Downloads/Procedure_Masterisation_Entreprise.docx\" -t markdown)",
+      "Bash(netlify --version)",
+      "Bash(netlify status:*)",
+      "Bash(npx netlify-cli:*)",
+      "Bash(gh --version)",
+      "Bash(git --version)",
+      "Bash(where git:*)",
+      "Bash(cat C:/Users/nassi/Desktop/portfolio-elouan/.same/*)"
+    ]
+  }
+}
