@@ -48,12 +48,7 @@ const projetsEcole: Activite[] = [
       "Mise en place de conteneurs LXC pour services légers",
       "Configuration des VLANs et bridges réseau virtuels",
     ],
-    technologies: [
-      { label: "Proxmox VE", color: "bg-emerald-500/10 text-emerald-300 border-emerald-700/30" },
-      { label: "KVM/QEMU", color: "bg-teal-500/10 text-teal-300 border-teal-700/30" },
-      { label: "ZFS", color: "bg-cyan-500/10 text-cyan-300 border-cyan-700/30" },
-      { label: "Linux", color: "bg-slate-500/10 text-slate-300 border-slate-700/30" },
-    ],
+    technologies: [],
     competences: ["Virtualisation", "Linux", "Réseau", "Administration système"],
     resultats: "Infrastructure virtuelle opérationnelle hébergeant l'ensemble des services du lab (AD, NAS, Nextcloud, supervision).",
   },
@@ -74,12 +69,7 @@ const projetsEcole: Activite[] = [
       "Déploiement d'un tunnel Cloudflare Zero Trust pour l'accès sécurisé",
       "Analyse des logs de trafic et configuration des alertes",
     ],
-    technologies: [
-      { label: "Cloudflare DNS", color: "bg-amber-500/10 text-amber-300 border-amber-700/30" },
-      { label: "WAF", color: "bg-orange-500/10 text-orange-300 border-orange-700/30" },
-      { label: "SSL/TLS", color: "bg-yellow-500/10 text-yellow-300 border-yellow-700/30" },
-      { label: "Zero Trust", color: "bg-red-500/10 text-red-300 border-red-700/30" },
-    ],
+    technologies: [],
     competences: ["Réseau", "Sécurité", "DNS", "CDN"],
     resultats: "Services web sécurisés, protégés contre les attaques DDoS et accessibles via tunnel chiffré sans port exposé.",
   },
@@ -100,12 +90,7 @@ const projetsEcole: Activite[] = [
       "Intégration des postes clients Windows au domaine",
       "Configuration du service DHCP et DNS Active Directory",
     ],
-    technologies: [
-      { label: "Windows Server 2025", color: "bg-blue-500/10 text-blue-300 border-blue-700/30" },
-      { label: "Active Directory", color: "bg-indigo-500/10 text-indigo-300 border-indigo-700/30" },
-      { label: "GPO", color: "bg-violet-500/10 text-violet-300 border-violet-700/30" },
-      { label: "DNS/DHCP", color: "bg-purple-500/10 text-purple-300 border-purple-700/30" },
-    ],
+    technologies: [],
     competences: ["Active Directory", "Windows Server", "GPO", "Réseau"],
     resultats: "Annuaire centralisé opérationnel pour l'authentification et la gestion des droits utilisateurs.",
   },
@@ -126,12 +111,7 @@ const projetsEcole: Activite[] = [
       "Sécurisation HTTPS avec certificat Let's Encrypt",
       "Intégration LDAP pour l'authentification via Active Directory",
     ],
-    technologies: [
-      { label: "Nextcloud", color: "bg-violet-500/10 text-violet-300 border-violet-700/30" },
-      { label: "Debian/Linux", color: "bg-red-500/10 text-red-300 border-red-700/30" },
-      { label: "LDAP", color: "bg-pink-500/10 text-pink-300 border-pink-700/30" },
-      { label: "Apache/MySQL", color: "bg-slate-500/10 text-slate-300 border-slate-700/30" },
-    ],
+    technologies: [],
     competences: ["Linux", "Services réseau", "Sécurité", "LDAP"],
     resultats: "Solution de cloud privé opérationnelle avec authentification AD, partage de fichiers et collaboration en temps réel.",
   },
@@ -143,6 +123,7 @@ const projetsEcole: Activite[] = [
     badge: "Projet majeur",
     icon: <Network size={22} />,
     gradient: "from-blue-500 to-indigo-600",
+    imageUrl: "/images/ad-nextcloud.svg",
     objectifs:
       "Déployer une infrastructure d'entreprise complète combinant un domaine Active Directory (AFR.LOCAL) sous Windows Server 2025 et un serveur Nextcloud en DMZ, avec authentification centralisée via LDAP/LDAPS et sécurisation réseau par ACL.",
     travaux: [
@@ -154,15 +135,7 @@ const projetsEcole: Activite[] = [
       "Sécurisation par ACL routeur : flux autorisés LDAP (389/636), DNS (53), NTP (123) uniquement",
       "Configuration de 3 VLANs séparés : Clients (10), Serveurs (30), DMZ (20)",
     ],
-    technologies: [
-      { label: "Windows Server 2025", color: "bg-blue-500/10 text-blue-300 border-blue-700/30" },
-      { label: "Active Directory", color: "bg-indigo-500/10 text-indigo-300 border-indigo-700/30" },
-      { label: "Nextcloud", color: "bg-violet-500/10 text-violet-300 border-violet-700/30" },
-      { label: "LDAP/LDAPS", color: "bg-purple-500/10 text-purple-300 border-purple-700/30" },
-      { label: "PKI / Certificats", color: "bg-pink-500/10 text-pink-300 border-pink-700/30" },
-      { label: "VLANs / ACL", color: "bg-cyan-500/10 text-cyan-300 border-cyan-700/30" },
-      { label: "Debian Linux", color: "bg-slate-500/10 text-slate-300 border-slate-700/30" },
-    ],
+    technologies: [],
     competences: ["C1 – Gérer le patrimoine informatique", "C2 – Répondre aux incidents et aux demandes d'assistance", "C5 – Mettre à disposition des utilisateurs un service informatique"],
     resultats:
       "Infrastructure d'entreprise opérationnelle : authentification unifiée AD → LDAP → Nextcloud, ACL routeur fonctionnelles, accès externe cloud.afr-com.com via reverse proxy HTTPS.",
@@ -187,14 +160,7 @@ const projetsEcole: Activite[] = [
       "Activation et configuration du service SMB (partage \\\\NAS-AFR\\DATA)",
       "Validation de l'accès depuis un poste Windows du domaine",
     ],
-    technologies: [
-      { label: "TrueNAS SCALE", color: "bg-emerald-500/10 text-emerald-300 border-emerald-700/30" },
-      { label: "Proxmox VE", color: "bg-teal-500/10 text-teal-300 border-teal-700/30" },
-      { label: "ZFS / RAID-1", color: "bg-cyan-500/10 text-cyan-300 border-cyan-700/30" },
-      { label: "SMB", color: "bg-blue-500/10 text-blue-300 border-blue-700/30" },
-      { label: "Kerberos / AD", color: "bg-indigo-500/10 text-indigo-300 border-indigo-700/30" },
-      { label: "ACL NFSv4", color: "bg-violet-500/10 text-violet-300 border-violet-700/30" },
-    ],
+    technologies: [],
     competences: ["C1 – Gérer le patrimoine informatique", "C2 – Répondre aux incidents et aux demandes d'assistance", "C5 – Mettre à disposition des utilisateurs un service informatique"],
     resultats:
       "NAS opérationnel, intégré au domaine, accessible via \\\\TRUENAS\\data depuis tous les postes Windows du domaine avec droits différenciés admins / utilisateurs.",
@@ -221,13 +187,7 @@ const projetsEntreprise: Activite[] = [
       "Intégration du poste masterisé au domaine Active Directory (AFR.LOCAL)",
       "Rédaction de la procédure de masterisation pour capitaliser la démarche",
     ],
-    technologies: [
-      { label: "Sysprep", color: "bg-indigo-500/10 text-indigo-300 border-indigo-700/30" },
-      { label: "Windows 11", color: "bg-sky-500/10 text-sky-300 border-sky-700/30" },
-      { label: "Active Directory", color: "bg-violet-500/10 text-violet-300 border-violet-700/30" },
-      { label: "WIM", color: "bg-blue-500/10 text-blue-300 border-blue-700/30" },
-      { label: "PowerShell", color: "bg-slate-500/10 text-slate-300 border-slate-700/30" },
-    ],
+    technologies: [],
     competences: ["C1 – Gérer le patrimoine informatique", "C5 – Mettre à disposition des utilisateurs un service informatique"],
     resultats:
       "Poste Windows 11 masterisé, intégré au domaine et opérationnel, avec une procédure documentée permettant de reproduire la démarche sur d'autres postes du parc.",
@@ -282,15 +242,15 @@ function ModalProjet({ activite, onClose }: { activite: Activite; onClose: () =>
             </div>
           </div>
 
-          {/* Bouton téléchargement mis en avant */}
-          {activite.docUrl && activite.docUrl.endsWith(".docx") && (
+          {/* Bouton téléchargement documentation */}
+          {activite.docUrl && (
             <a
               href={activite.docUrl}
               download
               className="flex items-center justify-center gap-3 w-full rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-blue-500/20 hover:opacity-90 hover:shadow-blue-500/40 transition-all duration-200"
             >
               <FileText size={16} />
-              Télécharger la procédure de masterisation (.docx)
+              Télécharger la documentation
             </a>
           )}
 
@@ -313,18 +273,6 @@ function ModalProjet({ activite, onClose }: { activite: Activite; onClose: () =>
             </ul>
           </div>
 
-          {/* Technologies */}
-          {activite.technologies && activite.technologies.length > 0 && (
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-indigo-400 mb-2">Technologies</p>
-              <div className="flex flex-wrap gap-2">
-                {activite.technologies.map((tech) => (
-                  <span key={tech.label} className={`rounded-lg border px-2.5 py-0.5 text-xs font-medium ${tech.color}`}>{tech.label}</span>
-                ))}
-              </div>
-            </div>
-          )}
-
           {/* Compétences BTS */}
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-wider text-indigo-400 mb-2">Compétences BTS</p>
@@ -342,24 +290,12 @@ function ModalProjet({ activite, onClose }: { activite: Activite; onClose: () =>
           </div>
 
           {/* Footer */}
-          {(activite.docUrl || activite.explorUrl) && (
+          {activite.explorUrl && (
             <div className="flex gap-3 pt-1">
-              {activite.docUrl && (
-                <a
-                  href={activite.docUrl}
-                  download
-                  className="inline-flex items-center gap-2 rounded-xl border border-indigo-700/40 bg-indigo-950/40 px-4 py-2.5 text-sm font-semibold text-indigo-300 hover:bg-indigo-500/20 hover:border-indigo-500 transition-all duration-200"
-                >
-                  <FileText size={14} />
-                  {activite.docUrl.endsWith(".docx") ? "Télécharger la procédure" : "Documentation"}
-                </a>
-              )}
-              {activite.explorUrl && (
-                <a href={activite.explorUrl} target="_blank" rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 rounded-xl bg-gradient-to-r ${activite.gradient} px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:opacity-90`}>
-                  Explorer<ExternalLink size={14} />
-                </a>
-              )}
+              <a href={activite.explorUrl} target="_blank" rel="noopener noreferrer"
+                className={`inline-flex items-center gap-2 rounded-xl bg-gradient-to-r ${activite.gradient} px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:opacity-90`}>
+                Explorer<ExternalLink size={14} />
+              </a>
             </div>
           )}
         </div>
@@ -417,16 +353,6 @@ function CarteMajeure({ activite, index }: { activite: Activite; index: number }
               <h3 className="text-base font-bold text-white leading-tight">{activite.titre}</h3>
               {activite.soustitre && <p className="text-xs text-slate-500 truncate">{activite.soustitre}</p>}
             </div>
-          </div>
-
-          {/* Tech tags */}
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {(activite.technologies ?? []).slice(0, 4).map((tech) => (
-              <span key={tech.label} className={`rounded-md border px-2 py-0.5 text-[11px] font-medium ${tech.color}`}>{tech.label}</span>
-            ))}
-            {(activite.technologies ?? []).length > 4 && (
-              <span className="rounded-md border border-slate-700/40 px-2 py-0.5 text-[11px] text-slate-500">+{(activite.technologies ?? []).length - 4}</span>
-            )}
           </div>
 
           {/* Bouton */}
@@ -497,21 +423,6 @@ function CarteCompacte({ activite, index }: { activite: Activite; index: number 
             </div>
           </div>
 
-          {/* Tech tags toujours visibles */}
-          {activite.technologies && activite.technologies.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 mt-3">
-              {activite.technologies.slice(0, 4).map((tech) => (
-                <span key={tech.label} className={`rounded-md border px-2 py-0.5 text-[11px] font-medium ${tech.color}`}>
-                  {tech.label}
-                </span>
-              ))}
-              {activite.technologies.length > 4 && (
-                <span className="rounded-md border border-slate-700/40 px-2 py-0.5 text-[11px] text-slate-500">
-                  +{activite.technologies.length - 4}
-                </span>
-              )}
-            </div>
-          )}
         </button>
 
         {/* Contenu dépliable */}

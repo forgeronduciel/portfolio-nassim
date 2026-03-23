@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="900" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f1a"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="adGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#6366f1"/>
+    </linearGradient>
+    <linearGradient id="ncGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0082c9"/>
+      <stop offset="100%" style="stop-color:#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="routerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981"/>
+      <stop offset="100%" style="stop-color:#059669"/>
+    </linearGradient>
+    <linearGradient id="userGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#d97706"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#6366f1" opacity="0.9"/>
+    </marker>
+    <marker id="arrowCyan" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#0ea5e9" opacity="0.9"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#10b981" opacity="0.9"/>
+    </marker>
+    <marker id="arrowBoth" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#a78bfa" opacity="0.9"/>
+    </marker>
+    <marker id="arrowBothStart" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#a78bfa" opacity="0.9"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="400" fill="url(#bg)"/>
+
+  <!-- Grid dots -->
+  <g opacity="0.06">
+    <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#6366f1"/>
+    </pattern>
+    <rect width="900" height="400" fill="url(#dots)"/>
+  </g>
+
+  <!-- ===== VLAN LAN (Clients) ===== -->
+  <rect x="20" y="30" width="200" height="340" rx="14" fill="none" stroke="#f59e0b" stroke-width="1" stroke-dasharray="6,4" opacity="0.3"/>
+  <text x="120" y="24" text-anchor="middle" font-family="monospace" font-size="10" fill="#f59e0b" opacity="0.7">VLAN 10 — Clients</text>
+
+  <!-- ===== VLAN Servers ===== -->
+  <rect x="340" y="30" width="220" height="340" rx="14" fill="none" stroke="#6366f1" stroke-width="1" stroke-dasharray="6,4" opacity="0.3"/>
+  <text x="450" y="24" text-anchor="middle" font-family="monospace" font-size="10" fill="#6366f1" opacity="0.7">VLAN 30 — Serveurs</text>
+
+  <!-- ===== VLAN DMZ ===== -->
+  <rect x="680" y="30" width="200" height="340" rx="14" fill="none" stroke="#0ea5e9" stroke-width="1" stroke-dasharray="6,4" opacity="0.3"/>
+  <text x="780" y="24" text-anchor="middle" font-family="monospace" font-size="10" fill="#0ea5e9" opacity="0.7">VLAN 20 — DMZ</text>
+
+  <!-- ===== USER WORKSTATION ===== -->
+  <g filter="url(#glow)">
+    <rect x="40" y="60" width="160" height="130" rx="12" fill="#1e1e35" stroke="#f59e0b" stroke-width="1.5" opacity="0.9"/>
+  </g>
+  <!-- Monitor icon -->
+  <rect x="80" y="78" width="80" height="54" rx="5" fill="none" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="112" y="132" width="16" height="8" fill="#f59e0b" opacity="0.6"/>
+  <rect x="100" y="140" width="40" height="3" rx="1.5" fill="#f59e0b" opacity="0.4"/>
+  <circle cx="120" cy="105" r="18" fill="url(#userGrad)" opacity="0.2"/>
+  <text x="120" y="109" text-anchor="middle" font-size="20" fill="#f59e0b">💻</text>
+  <text x="120" y="166" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#f59e0b">Poste Windows</text>
+  <text x="120" y="181" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">192.168.10.x</text>
+
+  <!-- GPO badge -->
+  <rect x="60" y="200" width="120" height="26" rx="8" fill="#92400e" fill-opacity="0.3" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="120" y="217" text-anchor="middle" font-family="monospace" font-size="9" fill="#fbbf24">GPO · MSI Deploy</text>
+
+  <!-- Domain joined badge -->
+  <rect x="60" y="232" width="120" height="26" rx="8" fill="#1e3a5f" fill-opacity="0.4" stroke="#6366f1" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="120" y="249" text-anchor="middle" font-family="monospace" font-size="9" fill="#a5b4fc">AFR.LOCAL</text>
+
+  <!-- ===== ROUTER / ACL ===== -->
+  <g filter="url(#glow)">
+    <rect x="40" y="290" width="160" height="60" rx="12" fill="#1e1e35" stroke="#10b981" stroke-width="1.5" opacity="0.9"/>
+  </g>
+  <text x="120" y="314" text-anchor="middle" font-size="18" fill="#10b981">🔀</text>
+  <text x="120" y="333" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#10b981">Routeur + ACL</text>
+  <text x="120" y="347" text-anchor="middle" font-family="monospace" font-size="8" fill="#6ee7b7">LDAP/DNS/NTP only</text>
+
+  <!-- ===== AD SERVER ===== -->
+  <g filter="url(#softglow)">
+    <rect x="360" y="55" width="180" height="150" rx="14" fill="#1a1a35" stroke="url(#adGrad)" stroke-width="2"/>
+  </g>
+  <!-- Server icon -->
+  <rect x="400" y="72" width="100" height="14" rx="4" fill="url(#adGrad)" opacity="0.8"/>
+  <rect x="400" y="90" width="100" height="14" rx="4" fill="url(#adGrad)" opacity="0.5"/>
+  <rect x="400" y="108" width="100" height="14" rx="4" fill="url(#adGrad)" opacity="0.3"/>
+  <circle cx="408" cy="79" r="3" fill="#fff" opacity="0.9"/>
+  <circle cx="408" cy="97" r="3" fill="#86efac" opacity="0.9"/>
+  <circle cx="408" cy="115" r="3" fill="#fbbf24" opacity="0.9"/>
+  <text x="450" y="146" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="800" fill="#e2e8f0">Windows Server</text>
+  <text x="450" y="162" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#818cf8">Active Directory</text>
+  <text x="450" y="178" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">AFR.LOCAL · 2 × DC</text>
+  <text x="450" y="195" text-anchor="middle" font-family="monospace" font-size="9" fill="#6366f1">192.168.30.x</text>
+
+  <!-- OU Tree -->
+  <g opacity="0.85">
+    <rect x="360" y="218" width="180" height="90" rx="10" fill="#13132a" stroke="#6366f1" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="450" y="235" text-anchor="middle" font-family="monospace" font-size="8" fill="#818cf8" font-weight="700">OU STRUCTURE</text>
+    <text x="375" y="252" font-family="monospace" font-size="8" fill="#94a3b8">├─ Admins</text>
+    <text x="375" y="265" font-family="monospace" font-size="8" fill="#94a3b8">├─ Utilisateurs</text>
+    <text x="375" y="278" font-family="monospace" font-size="8" fill="#94a3b8">├─ Postes</text>
+    <text x="375" y="291" font-family="monospace" font-size="8" fill="#94a3b8">└─ Operators</text>
+  </g>
+
+  <!-- ===== NEXTCLOUD SERVER ===== -->
+  <g filter="url(#softglow)">
+    <rect x="700" y="55" width="160" height="150" rx="14" fill="#0a1929" stroke="url(#ncGrad)" stroke-width="2"/>
+  </g>
+  <!-- Cloud icon -->
+  <ellipse cx="780" cy="90" rx="30" ry="20" fill="#0082c9" opacity="0.25"/>
+  <ellipse cx="763" cy="97" rx="20" ry="16" fill="#0082c9" opacity="0.25"/>
+  <ellipse cx="797" cy="97" rx="20" ry="16" fill="#0082c9" opacity="0.25"/>
+  <ellipse cx="780" cy="103" rx="38" ry="15" fill="#0082c9" opacity="0.3"/>
+  <text x="780" y="102" text-anchor="middle" font-size="22" fill="#0ea5e9">☁</text>
+  <text x="780" y="130" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="800" fill="#e2e8f0">Nextcloud</text>
+  <text x="780" y="147" text-anchor="middle" font-family="monospace" font-size="9" fill="#38bdf8">Debian — DMZ</text>
+  <text x="780" y="163" text-anchor="middle" font-family="monospace" font-size="9" fill="#0ea5e9">192.168.20.x</text>
+  <text x="780" y="180" text-anchor="middle" font-family="monospace" font-size="8" fill="#64748b">cloud.afr-com.com</text>
+  <text x="780" y="195" text-anchor="middle" font-family="monospace" font-size="8" fill="#0369a1">HTTPS via Rev. Proxy</text>
+
+  <!-- Features -->
+  <g opacity="0.85">
+    <rect x="700" y="218" width="160" height="90" rx="10" fill="#071525" stroke="#0ea5e9" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="780" y="235" text-anchor="middle" font-family="monospace" font-size="8" fill="#38bdf8" font-weight="700">SERVICES</text>
+    <text x="715" y="252" font-family="monospace" font-size="8" fill="#94a3b8">✓ Fichiers partagés</text>
+    <text x="715" y="265" font-family="monospace" font-size="8" fill="#94a3b8">✓ Calendrier / Contacts</text>
+    <text x="715" y="278" font-family="monospace" font-size="8" fill="#94a3b8">✓ Auth LDAP unifiée</text>
+    <text x="715" y="291" font-family="monospace" font-size="8" fill="#94a3b8">✓ GPO MSI install</text>
+  </g>
+
+  <!-- ===== CONNECTIONS ===== -->
+
+  <!-- Workstation → Router -->
+  <line x1="120" y1="290" x2="120" y2="260" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+
+  <!-- Router → AD (join domaine) -->
+  <path d="M200,320 Q280,320 360,200" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowGreen)" opacity="0.5"/>
+  <text x="270" y="290" text-anchor="middle" font-family="monospace" font-size="8" fill="#6ee7b7" transform="rotate(-25, 270, 290)">Kerberos</text>
+
+  <!-- Workstation → AD (auth) -->
+  <line x1="200" y1="130" x2="358" y2="130" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowBoth)" marker-start="url(#arrowBothStart)" opacity="0.8"/>
+  <text x="279" y="122" text-anchor="middle" font-family="monospace" font-size="9" fill="#a78bfa" font-weight="600">Authentification AD</text>
+
+  <!-- AD → Nextcloud (LDAP/LDAPS) -->
+  <line x1="542" y1="130" x2="698" y2="130" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#arrowBoth)" marker-start="url(#arrowBothStart)" opacity="0.9" filter="url(#glow)"/>
+  <rect x="570" y="112" width="110" height="22" rx="6" fill="#1e1a35" stroke="#a78bfa" stroke-width="1" stroke-opacity="0.5"/>
+  <text x="625" y="127" text-anchor="middle" font-family="monospace" font-size="9" fill="#c4b5fd" font-weight="700">LDAP/LDAPS 389/636</text>
+
+  <!-- svc-nextcloud label -->
+  <text x="625" y="157" text-anchor="middle" font-family="monospace" font-size="8" fill="#818cf8">svc-nextcloud@AFR.LOCAL</text>
+
+  <!-- ACL line between router/AD zone -->
+  <line x1="200" y1="320" x2="358" y2="320" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.5"/>
+  <text x="279" y="315" text-anchor="middle" font-family="monospace" font-size="8" fill="#6ee7b7">ACL Routeur</text>
+
+  <!-- Internet arrow on Nextcloud -->
+  <line x1="780" y1="360" x2="780" y2="310" stroke="#0ea5e9" stroke-width="2" marker-end="url(#arrowCyan)" opacity="0.7"/>
+  <text x="780" y="378" text-anchor="middle" font-family="monospace" font-size="9" fill="#38bdf8">Internet HTTPS</text>
+
+  <!-- Title -->
+  <text x="450" y="390" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#475569" letter-spacing="2">INFRASTRUCTURE AD + NEXTCLOUD — AFR.LOCAL</text>
+</svg>
