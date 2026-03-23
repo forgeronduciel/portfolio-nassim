@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { FileText, Table2, Download, ExternalLink, X } from "lucide-react";
 
@@ -239,6 +239,9 @@ function TableauCompetences() {
 export default function RealisationsSection() {
   const [activeTab, setActiveTab] = useState<TabType>("tableau");
   const [annexeModalOpen, setAnnexeModalOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   return (
     <section id="realisations" className="py-20 px-6 md:px-12 bg-indigo-950/20">
@@ -325,7 +328,7 @@ export default function RealisationsSection() {
             </a>
 
             {/* Modal plein écran — même système que le CV */}
-            {annexeModalOpen && typeof window !== "undefined" && createPortal(
+            {annexeModalOpen && mounted && createPortal(
               <div
                 className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
                 onClick={() => setAnnexeModalOpen(false)}

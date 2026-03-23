@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { FileText, GraduationCap, Briefcase, Target, Download, ExternalLink, X, Printer, BookOpen } from "lucide-react";
 import BTSSIOSection from "@/components/BTSSIOSection";
@@ -10,6 +10,9 @@ const CV_PDF = "/ABIARI_CV.pdf";
 
 export default function PresentationSection() {
   const [cvModalOpen, setCvModalOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   return (
     <section id="presentation" className="py-20 px-6 md:px-12">
@@ -183,7 +186,7 @@ export default function PresentationSection() {
       </div>
 
       {/* Modal CV — rendu via Portal pour éviter les conflits de transform */}
-      {cvModalOpen && typeof window !== "undefined" && createPortal(
+      {cvModalOpen && mounted && createPortal(
         <div
           className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in"
           onClick={() => setCvModalOpen(false)}
