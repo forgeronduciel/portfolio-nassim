@@ -5,7 +5,6 @@ import PresentationSection from "@/components/PresentationSection";
 import CompetencesSection from "@/components/CompetencesSection";
 import RealisationsSection from "@/components/RealisationsSection";
 import ActivitesSection from "@/components/ActivitesSection";
-import BaieSection from "@/components/BaieSection";
 import VeilleSection from "@/components/VeilleSection";
 import CertificationsSection from "@/components/CertificationsSection";
 import ContactSection from "@/components/ContactSection";
@@ -29,7 +28,6 @@ export default function Home() {
         <CompetencesSection />
         <RealisationsSection />
         <ActivitesSection />
-        <BaieSection />
         <VeilleSection />
         <CertificationsSection />
         <ContactSection />

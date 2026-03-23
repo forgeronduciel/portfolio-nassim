@@ -163,7 +163,7 @@ const projetsEcole: Activite[] = [
       { label: "VLANs / ACL", color: "bg-cyan-500/10 text-cyan-300 border-cyan-700/30" },
       { label: "Debian Linux", color: "bg-slate-500/10 text-slate-300 border-slate-700/30" },
     ],
-    competences: ["Active Directory", "LDAP", "Sécurité réseau", "GPO", "Linux", "Virtualisation"],
+    competences: ["C1 – Gérer le patrimoine informatique", "C2 – Répondre aux incidents et aux demandes d'assistance", "C5 – Mettre à disposition des utilisateurs un service informatique"],
     resultats:
       "Infrastructure d'entreprise opérationnelle : authentification unifiée AD → LDAP → Nextcloud, ACL routeur fonctionnelles, accès externe cloud.afr-com.com via reverse proxy HTTPS.",
     docUrl: "/docs/Documentation_Cloud_AD_v2.pdf",
@@ -195,7 +195,7 @@ const projetsEcole: Activite[] = [
       { label: "Kerberos / AD", color: "bg-indigo-500/10 text-indigo-300 border-indigo-700/30" },
       { label: "ACL NFSv4", color: "bg-violet-500/10 text-violet-300 border-violet-700/30" },
     ],
-    competences: ["NAS / Stockage", "ZFS", "Active Directory", "SMB", "Virtualisation", "ACL"],
+    competences: ["C1 – Gérer le patrimoine informatique", "C2 – Répondre aux incidents et aux demandes d'assistance", "C5 – Mettre à disposition des utilisateurs un service informatique"],
     resultats:
       "NAS opérationnel, intégré au domaine, accessible via \\\\TRUENAS\\data depuis tous les postes Windows du domaine avec droits différenciés admins / utilisateurs.",
     docUrl: "/docs/doc_technique_NAS_v2_.pdf",
@@ -217,8 +217,7 @@ const projetsEntreprise: Activite[] = [
     travaux: [
       "Installation et personnalisation de Windows 11 selon les standards de l'entreprise",
       "Configuration des paramètres système, logiciels métiers et paramètres réseau",
-      "Généralisation du poste avec Sysprep pour la création d'une image de référence",
-      "Capture de l'image WIM et sauvegarde pour un éventuel redéploiement",
+
       "Intégration du poste masterisé au domaine Active Directory (AFR.LOCAL)",
       "Rédaction de la procédure de masterisation pour capitaliser la démarche",
     ],
@@ -229,7 +228,7 @@ const projetsEntreprise: Activite[] = [
       { label: "WIM", color: "bg-blue-500/10 text-blue-300 border-blue-700/30" },
       { label: "PowerShell", color: "bg-slate-500/10 text-slate-300 border-slate-700/30" },
     ],
-    competences: ["Déploiement", "Windows 11", "Active Directory", "Support utilisateur"],
+    competences: ["C1 – Gérer le patrimoine informatique", "C5 – Mettre à disposition des utilisateurs un service informatique"],
     resultats:
       "Poste Windows 11 masterisé, intégré au domaine et opérationnel, avec une procédure documentée permettant de reproduire la démarche sur d'autres postes du parc.",
     docUrl: "/docs/Procedure_Masterisation_Entreprise.docx",
@@ -282,6 +281,18 @@ function ModalProjet({ activite, onClose }: { activite: Activite; onClose: () =>
               </button>
             </div>
           </div>
+
+          {/* Bouton téléchargement mis en avant */}
+          {activite.docUrl && activite.docUrl.endsWith(".docx") && (
+            <a
+              href={activite.docUrl}
+              download
+              className="flex items-center justify-center gap-3 w-full rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-blue-500/20 hover:opacity-90 hover:shadow-blue-500/40 transition-all duration-200"
+            >
+              <FileText size={16} />
+              Télécharger la procédure de masterisation (.docx)
+            </a>
+          )}
 
           {/* Objectifs */}
           <div className="rounded-xl bg-indigo-950/30 border border-indigo-900/30 p-4">

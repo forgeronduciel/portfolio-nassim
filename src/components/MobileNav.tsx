@@ -9,7 +9,6 @@ const navItems = [
   { id: "competences", label: "Compétences", icon: <FileCheck size={18} /> },
   { id: "realisations", label: "Tableau de compétences", icon: <ListChecks size={18} /> },
   { id: "activites", label: "Mes Projets", icon: <FolderOpen size={18} /> },
-  { id: "baie", label: "Ma Baie Informatique", icon: <Server size={18} /> },
   { id: "veille", label: "Veille Technologique", icon: <Eye size={18} /> },
   { id: "certifications", label: "Certifications", icon: <Award size={18} /> },
   { id: "contact", label: "Contact", icon: <Mail size={18} /> },
