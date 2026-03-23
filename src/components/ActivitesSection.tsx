@@ -149,6 +149,7 @@ const projetsEcole: Activite[] = [
     badge: "Projet majeur",
     icon: <Database size={22} />,
     gradient: "from-emerald-500 to-teal-600",
+    imageUrl: "/images/nas-truenas.svg",
     objectifs:
       "Déployer un serveur NAS TrueNAS SCALE en machine virtuelle sur Proxmox VE, l'intégrer au domaine Active Directory AFR.LOCAL et exposer un partage SMB sécurisé par ACL NFSv4 pour les utilisateurs du domaine.",
     travaux: [
