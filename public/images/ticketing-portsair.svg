@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0a1a"/>
+      <stop offset="100%" style="stop-color:#1a1030"/>
+    </linearGradient>
+    <linearGradient id="violetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#6366f1"/>
+    </linearGradient>
+    <linearGradient id="boxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e1a3a"/>
+      <stop offset="100%" style="stop-color:#0f0d20"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="420" fill="url(#bg)"/>
+  <!-- Grid -->
+  <g stroke="#8b5cf6" stroke-width="0.3" opacity="0.07">
+    <line x1="0" y1="42" x2="800" y2="42"/><line x1="0" y1="84" x2="800" y2="84"/>
+    <line x1="0" y1="126" x2="800" y2="126"/><line x1="0" y1="168" x2="800" y2="168"/>
+    <line x1="0" y1="210" x2="800" y2="210"/><line x1="0" y1="252" x2="800" y2="252"/>
+    <line x1="0" y1="294" x2="800" y2="294"/><line x1="0" y1="336" x2="800" y2="336"/>
+    <line x1="0" y1="378" x2="800" y2="378"/>
+    <line x1="80" y1="0" x2="80" y2="420"/><line x1="160" y1="0" x2="160" y2="420"/>
+    <line x1="240" y1="0" x2="240" y2="420"/><line x1="320" y1="0" x2="320" y2="420"/>
+    <line x1="400" y1="0" x2="400" y2="420"/><line x1="480" y1="0" x2="480" y2="420"/>
+    <line x1="560" y1="0" x2="560" y2="420"/><line x1="640" y1="0" x2="640" y2="420"/>
+    <line x1="720" y1="0" x2="720" y2="420"/>
+  </g>
+
+  <!-- Titre -->
+  <text x="400" y="40" text-anchor="middle" fill="#8b5cf6" font-size="15" font-weight="bold" filter="url(#glow)">Outil de Ticketing — EV Service Manager (Portsair)</text>
+  <text x="400" y="58" text-anchor="middle" fill="#9a9ab0" font-size="10">Banque de France · DGSI · File Q21601R_BUT · Paris Siège</text>
+
+  <!-- ===== FILE D'ATTENTE (gauche) ===== -->
+  <ellipse cx="135" cy="200" rx="90" ry="70" fill="#8b5cf6" opacity="0.06" filter="url(#softGlow)"/>
+  <rect x="40" y="130" width="190" height="155" rx="10" fill="url(#boxGrad)" stroke="#8b5cf6" stroke-width="1.5"/>
+  <!-- Header -->
+  <rect x="40" y="130" width="190" height="28" rx="10" fill="#8b5cf6" opacity="0.85"/>
+  <rect x="40" y="146" width="190" height="12" fill="#8b5cf6" opacity="0.85"/>
+  <text x="135" y="148" text-anchor="middle" fill="white" font-size="9" font-weight="bold">File Q21601R_BUT</text>
+  <text x="135" y="168" text-anchor="middle" fill="#a78bfa" font-size="7">Paris Siège · BDF</text>
+  <!-- Tickets dans la file -->
+  <rect x="52" y="174" width="166" height="18" rx="4" fill="#2a1f4a" stroke="#8b5cf6" stroke-width="0.8"/>
+  <rect x="57" y="178" width="6" height="6" rx="1" fill="#dc2626" opacity="0.9"/>
+  <text x="70" y="185" fill="#e2e8f0" font-size="7">S251208_00209 · Réseau</text>
+  <text x="190" y="185" fill="#dc2626" font-size="6" font-weight="bold">P2</text>
+  <rect x="52" y="196" width="166" height="18" rx="4" fill="#221c3a" stroke="#6366f1" stroke-width="0.6" opacity="0.7"/>
+  <rect x="57" y="200" width="6" height="6" rx="1" fill="#f59e0b" opacity="0.9"/>
+  <text x="70" y="207" fill="#9a9ab0" font-size="7">INC000047821 · Matériel</text>
+  <text x="190" y="207" fill="#f59e0b" font-size="6" font-weight="bold">P3</text>
+  <rect x="52" y="218" width="166" height="18" rx="4" fill="#221c3a" stroke="#6366f1" stroke-width="0.6" opacity="0.5"/>
+  <rect x="57" y="222" width="6" height="6" rx="1" fill="#22c55e" opacity="0.7"/>
+  <text x="70" y="229" fill="#9a9ab0" font-size="7">REQ000091247 · Logiciel</text>
+  <text x="190" y="229" fill="#22c55e" font-size="6" font-weight="bold">P4</text>
+  <rect x="52" y="240" width="166" height="18" rx="4" fill="#221c3a" stroke="#6366f1" stroke-width="0.6" opacity="0.5"/>
+  <rect x="57" y="244" width="6" height="6" rx="1" fill="#9a9ab0" opacity="0.5"/>
+  <text x="70" y="251" fill="#9a9ab0" font-size="7" opacity="0.6">INC000038492 · Accès</text>
+  <text x="135" y="272" text-anchor="middle" fill="#8b5cf6" font-size="8" font-weight="bold">4 tickets en attente</text>
+
+  <!-- Flèche file → ticket -->
+  <g filter="url(#glow)">
+    <line x1="232" y1="207" x2="285" y2="207" stroke="#8b5cf6" stroke-width="2.5" stroke-dasharray="6,3"/>
+    <polygon points="285,202 297,207 285,212" fill="#8b5cf6"/>
+  </g>
+  <text x="264" y="200" text-anchor="middle" fill="#a78bfa" font-size="8">Prise en</text>
+  <text x="264" y="210" text-anchor="middle" fill="#a78bfa" font-size="8">charge</text>
+
+  <!-- ===== DÉTAIL TICKET (centre) ===== -->
+  <ellipse cx="440" cy="207" rx="100" ry="75" fill="#8b5cf6" opacity="0.06" filter="url(#softGlow)"/>
+  <rect x="297" y="125" width="210" height="170" rx="10" fill="url(#boxGrad)" stroke="#8b5cf6" stroke-width="1.8"/>
+  <!-- Header -->
+  <rect x="297" y="125" width="210" height="30" rx="10" fill="#8b5cf6" opacity="0.85"/>
+  <rect x="297" y="143" width="210" height="12" fill="#8b5cf6" opacity="0.85"/>
+  <text x="402" y="144" text-anchor="middle" fill="white" font-size="9" font-weight="bold">S251208_00209</text>
+  <rect x="355" y="150" width="60" height="10" rx="3" fill="#dc2626" opacity="0.9"/>
+  <text x="385" y="158" text-anchor="middle" fill="white" font-size="7" font-weight="bold">PRIORITÉ 2</text>
+  <!-- Champs -->
+  <text x="310" y="177" fill="#9a9ab0" font-size="7">Type :</text>
+  <text x="348" y="177" fill="#e2e8f0" font-size="7">Incident Réseau</text>
+  <text x="310" y="191" fill="#9a9ab0" font-size="7">Statut :</text>
+  <rect x="345" y="184" width="60" height="10" rx="3" fill="#d97706" opacity="0.8"/>
+  <text x="375" y="192" text-anchor="middle" fill="white" font-size="7" font-weight="bold">En cours</text>
+  <text x="310" y="205" fill="#9a9ab0" font-size="7">Assigné :</text>
+  <text x="353" y="205" fill="#e2e8f0" font-size="7">ABIARI Nassim</text>
+  <text x="310" y="219" fill="#9a9ab0" font-size="7">Créé le :</text>
+  <text x="348" y="219" fill="#e2e8f0" font-size="7">08/12/2025 09:14</text>
+  <text x="310" y="233" fill="#9a9ab0" font-size="7">SLA :</text>
+  <rect x="342" y="226" width="70" height="10" rx="3" fill="#16a34a" opacity="0.8"/>
+  <text x="377" y="234" text-anchor="middle" fill="white" font-size="7" font-weight="bold">Dans les délais</text>
+  <text x="310" y="248" fill="#9a9ab0" font-size="7">Description :</text>
+  <text x="310" y="260" fill="#a78bfa" font-size="6.5">Perte de connectivité réseau sur</text>
+  <text x="310" y="270" fill="#a78bfa" font-size="6.5">poste bureau 3ème étage, bât. B</text>
+  <text x="402" y="287" text-anchor="middle" fill="#8b5cf6" font-size="7" font-weight="bold">EV Service Manager · Portsair</text>
+
+  <!-- Flèche ticket → résolution -->
+  <g filter="url(#glow)">
+    <line x1="510" y1="207" x2="565" y2="207" stroke="#8b5cf6" stroke-width="2.5" stroke-dasharray="6,3"/>
+    <polygon points="565,202 577,207 565,212" fill="#8b5cf6"/>
+  </g>
+  <text x="542" y="200" text-anchor="middle" fill="#a78bfa" font-size="8">Résolu</text>
+
+  <!-- ===== RÉSOLUTION (droite) ===== -->
+  <rect x="577" y="140" width="180" height="140" rx="10" fill="#0a1a0a" stroke="#22c55e" stroke-width="1.5"/>
+  <rect x="577" y="140" width="180" height="28" rx="10" fill="#16a34a" opacity="0.9"/>
+  <rect x="577" y="156" width="180" height="12" fill="#16a34a" opacity="0.9"/>
+  <text x="667" y="157" text-anchor="middle" fill="white" font-size="9" font-weight="bold">Ticket clôturé</text>
+  <text x="590" y="180" fill="#22c55e" font-size="10">✓</text>
+  <text x="604" y="180" fill="#e2e8f0" font-size="7.5">Incident diagnostiqué</text>
+  <text x="590" y="196" fill="#22c55e" font-size="10">✓</text>
+  <text x="604" y="196" fill="#e2e8f0" font-size="7.5">Résolution appliquée</text>
+  <text x="590" y="212" fill="#22c55e" font-size="10">✓</text>
+  <text x="604" y="212" fill="#e2e8f0" font-size="7.5">SLA respecté</text>
+  <text x="590" y="228" fill="#22c55e" font-size="10">✓</text>
+  <text x="604" y="228" fill="#e2e8f0" font-size="7.5">Utilisateur satisfait</text>
+  <text x="590" y="244" fill="#22c55e" font-size="10">✓</text>
+  <text x="604" y="244" fill="#e2e8f0" font-size="7.5">Historique tracé</text>
+  <text x="667" y="268" text-anchor="middle" fill="#22c55e" font-size="7.5" font-weight="bold">ITIL · C1 · C2</text>
+
+  <!-- Steps bas -->
+  <g><rect x="40" y="330" width="172" height="28" rx="5" fill="#8b5cf6" opacity="0.12" stroke="#8b5cf6" stroke-width="0.8"/>
+  <text x="126" y="348" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="bold">1. Consultation file</text></g>
+  <g><rect x="222" y="330" width="172" height="28" rx="5" fill="#8b5cf6" opacity="0.12" stroke="#8b5cf6" stroke-width="0.8"/>
+  <text x="308" y="348" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="bold">2. Prise en charge</text></g>
+  <g><rect x="404" y="330" width="172" height="28" rx="5" fill="#8b5cf6" opacity="0.12" stroke="#8b5cf6" stroke-width="0.8"/>
+  <text x="490" y="348" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="bold">3. Résolution</text></g>
+  <g><rect x="586" y="330" width="172" height="28" rx="5" fill="#8b5cf6" opacity="0.12" stroke="#8b5cf6" stroke-width="0.8"/>
+  <text x="672" y="348" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="bold">4. Clôture ticket</text></g>
+</svg>

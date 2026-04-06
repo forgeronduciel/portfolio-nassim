@@ -34,19 +34,17 @@ export default function PresentationSection() {
               onKeyDown={(e) => e.key === "Enter" && setCvModalOpen(true)}
               className="relative aspect-[3/4] bg-indigo-950/50 rounded-xl border-2 border-indigo-500/40 overflow-hidden hover:border-indigo-500 transition-all duration-300 group cursor-pointer"
             >
-              <object
-                data={CV_PDF}
-                type="application/pdf"
-                className="absolute inset-0 w-full h-full opacity-60 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"
-                aria-label="CV - Nassim ABIARI"
+              <iframe
+                src={CV_PDF}
+                className="absolute inset-0 w-full h-full opacity-60 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none overflow-hidden"
+                title="CV - Nassim ABIARI"
+                style={{ overflow: "hidden" }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a2e]/95 via-[#1a1a2e]/40 to-transparent" />
-              <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-slate-300 px-4">
-                <FileText size={48} className="mb-3 text-indigo-400 group-hover:scale-110 transition-transform duration-300" />
-                <p className="text-sm">Cliquez pour agrandir</p>
-                <span className="mt-2 text-xs text-indigo-300 flex items-center gap-2">
-                  <ExternalLink size={14} />
-                  Ouvrir dans un nouvel onglet
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a2e]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-3 left-0 right-0 z-10 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-xs text-indigo-300 bg-[#1a1a2e]/80 px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm border border-indigo-500/30">
+                  <ExternalLink size={12} />
+                  Cliquez pour agrandir
                 </span>
               </div>
             </div>
@@ -89,20 +87,52 @@ export default function PresentationSection() {
               {/* Vertical line */}
               <div className="absolute left-4 top-2 bottom-2 w-0.5 bg-gradient-to-b from-indigo-500 to-purple-600 opacity-30" />
               <div className="space-y-6">
-                {/* BTS SIO */}
+                {/* BTS SIO - 2e année */}
                 <div className="flex gap-4">
                   <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center z-10">
                     <GraduationCap size={14} className="text-white" />
                   </div>
                   <div className="flex-1 pb-2">
                     <div className="flex items-center gap-2 flex-wrap mb-1">
-                      <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">2024 → 2026</span>
+                      <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">2025 → 2026</span>
                       <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">En cours</span>
                     </div>
-                    <p className="font-bold text-white text-sm">BTS SIO — option SISR</p>
-                    <p className="text-xs text-indigo-300">Solutions d'Infrastructure, Systèmes et Réseaux</p>
+                    <p className="font-bold text-white text-sm">BTS SIO — option SISR · 2e année</p>
+                    <p className="text-xs text-indigo-300">Alternance · Banque de France — DGSI</p>
                     <p className="text-xs text-slate-400 mt-1">UTEC — Île-de-France</p>
-                    <p className="text-xs text-slate-500 mt-1">Formation en alternance · Administration réseau · Sécurité · Virtualisation</p>
+                    <p className="text-xs text-slate-500 mt-1">Technicien de proximité · Support N1/N2 · Projets infrastructure</p>
+                  </div>
+                </div>
+
+                {/* BTS SIO - 1e année */}
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center z-10">
+                    <GraduationCap size={14} className="text-white" />
+                  </div>
+                  <div className="flex-1 pb-2">
+                    <div className="flex items-center gap-2 flex-wrap mb-1">
+                      <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">2024 → 2025</span>
+                    </div>
+                    <p className="font-bold text-white text-sm">BTS SIO — option SISR · 1re année</p>
+                    <p className="text-xs text-indigo-300">Alternance · Kereis</p>
+                    <p className="text-xs text-slate-400 mt-1">UTEC — Île-de-France</p>
+                    <p className="text-xs text-slate-500 mt-1">Support technique · Gestion tickets</p>
+                  </div>
+                </div>
+
+                {/* CDI Intelcia */}
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-600 to-teal-700 flex items-center justify-center z-10">
+                    <Briefcase size={14} className="text-white" />
+                  </div>
+                  <div className="flex-1 pb-2">
+                    <div className="flex items-center gap-2 flex-wrap mb-1">
+                      <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">2023 → 2024</span>
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">CDI</span>
+                    </div>
+                    <p className="font-bold text-white text-sm">Technicien Support N2</p>
+                    <p className="text-xs text-cyan-300">Intelcia — SFR</p>
+                    <p className="text-xs text-slate-500 mt-1">Support utilisateurs · Dépannage réseau · Gestion des tickets</p>
                   </div>
                 </div>
 
@@ -113,7 +143,7 @@ export default function PresentationSection() {
                   </div>
                   <div className="flex-1 pb-2">
                     <div className="flex items-center gap-2 flex-wrap mb-1">
-                      <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-500/20 text-slate-300 border border-slate-500/30">→ 2023</span>
+                      <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-500/20 text-slate-300 border border-slate-500/30">2021 → 2023</span>
                       <span className="text-xs px-2 py-0.5 rounded-full bg-slate-500/10 text-slate-400 border border-slate-500/20">Obtenu</span>
                     </div>
                     <p className="font-bold text-white text-sm">Baccalauréat STI2D</p>
@@ -156,27 +186,6 @@ export default function PresentationSection() {
             </div>
           </div>
 
-          {/* Portfolio Purpose */}
-          <div className="card-bg rounded-2xl p-6 border border-indigo-900/30 hover-lift animate-slide-up stagger-4">
-            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <Target size={24} className="text-indigo-400" />
-              Objectif de ce portfolio
-            </h3>
-            <div className="text-slate-300 space-y-4 leading-relaxed">
-              <p>
-                À travers ce portfolio, je présente l'ensemble de mon parcours, de mes compétences et de mes projets en lien avec le numérique, aussi bien ceux réalisés lors de ma formation à l'<span className="text-indigo-400">UTEC</span> que ceux effectués à la <span className="text-indigo-400">Banque de France</span>.
-              </p>
-              <p>
-                Ce site a pour objectif de mettre en valeur les différents thèmes explorés durant le BTS SIO, dans le cadre de l'<span className="text-indigo-400 font-semibold">épreuve E5</span>.
-              </p>
-              <div className="mt-6 p-4 bg-indigo-950/50 rounded-xl border-l-4 border-indigo-500">
-                <p className="font-semibold text-white mb-1">Mon objectif professionnel</p>
-                <p className="text-sm">
-                  Poursuivre mes études afin de devenir <span className="text-indigo-400 font-semibold">ingénieur réseau et sécurité</span>.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -231,25 +240,11 @@ export default function PresentationSection() {
               </button>
             </div>
             <div className="flex-1 min-h-0 relative">
-              <object
-                data={CV_PDF}
-                type="application/pdf"
+              <iframe
+                src={CV_PDF}
                 className="absolute inset-0 w-full h-full"
-                aria-label="CV - Nassim ABIARI"
-              >
-                <div className="flex flex-col items-center justify-center h-full gap-4 text-slate-400 p-8 text-center">
-                  <FileText size={48} className="text-indigo-400" />
-                  <p>Votre navigateur ne peut pas afficher ce PDF directement.</p>
-                  <a
-                    href={CV_PDF}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold hover:shadow-lg transition-all duration-300"
-                  >
-                    Ouvrir le CV
-                  </a>
-                </div>
-              </object>
+                title="CV - Nassim ABIARI"
+              />
             </div>
           </div>
         </div>,

@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#001a1a"/>
+      <stop offset="100%" style="stop-color:#002d2d"/>
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#14b8a6"/>
+      <stop offset="100%" style="stop-color:#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="boxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a3a"/>
+      <stop offset="100%" style="stop-color:#0f2020"/>
+    </linearGradient>
+    <linearGradient id="printerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a4a4a"/>
+      <stop offset="100%" style="stop-color:#1a2e2e"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="420" fill="url(#bg)"/>
+  <!-- Grid -->
+  <g stroke="#14b8a6" stroke-width="0.3" opacity="0.07">
+    <line x1="0" y1="42" x2="800" y2="42"/><line x1="0" y1="84" x2="800" y2="84"/>
+    <line x1="0" y1="126" x2="800" y2="126"/><line x1="0" y1="168" x2="800" y2="168"/>
+    <line x1="0" y1="210" x2="800" y2="210"/><line x1="0" y1="252" x2="800" y2="252"/>
+    <line x1="0" y1="294" x2="800" y2="294"/><line x1="0" y1="336" x2="800" y2="336"/>
+    <line x1="0" y1="378" x2="800" y2="378"/>
+    <line x1="80" y1="0" x2="80" y2="420"/><line x1="160" y1="0" x2="160" y2="420"/>
+    <line x1="240" y1="0" x2="240" y2="420"/><line x1="320" y1="0" x2="320" y2="420"/>
+    <line x1="400" y1="0" x2="400" y2="420"/><line x1="480" y1="0" x2="480" y2="420"/>
+    <line x1="560" y1="0" x2="560" y2="420"/><line x1="640" y1="0" x2="640" y2="420"/>
+    <line x1="720" y1="0" x2="720" y2="420"/>
+  </g>
+
+  <!-- Titre -->
+  <text x="400" y="40" text-anchor="middle" fill="#14b8a6" font-size="15" font-weight="bold" filter="url(#glow)">Partage d'Imprimante Réseau — PADII</text>
+  <text x="400" y="58" text-anchor="middle" fill="#9a9ab0" font-size="10">Banque de France · DGSI · Gestion des files d'impression ADBDF</text>
+
+  <!-- Glow PC -->
+  <ellipse cx="120" cy="195" rx="80" ry="60" fill="#14b8a6" opacity="0.07" filter="url(#softGlow)"/>
+
+  <!-- ===== PC (gauche) ===== -->
+  <rect x="45" y="145" width="150" height="100" rx="8" fill="url(#boxGrad)" stroke="#14b8a6" stroke-width="1.5"/>
+  <rect x="58" y="157" width="124" height="75" rx="4" fill="#0a1a1a"/>
+  <!-- Fenêtre -->
+  <rect x="58" y="157" width="124" height="15" rx="4" fill="#1a3a3a"/>
+  <circle cx="68" cy="164" r="3" fill="#ef4444" opacity="0.8"/>
+  <circle cx="78" cy="164" r="3" fill="#f59e0b" opacity="0.8"/>
+  <circle cx="88" cy="164" r="3" fill="#22c55e" opacity="0.8"/>
+  <text x="138" y="166" text-anchor="middle" fill="#9a9ab0" font-size="6">File d'impression</text>
+  <!-- Contenu écran -->
+  <rect x="66" y="177" width="108" height="8" rx="2" fill="#14b8a6" opacity="0.3"/>
+  <rect x="66" y="190" width="80" height="5" rx="2" fill="#9a9ab0" opacity="0.3"/>
+  <rect x="66" y="200" width="90" height="5" rx="2" fill="#9a9ab0" opacity="0.3"/>
+  <rect x="66" y="210" width="70" height="5" rx="2" fill="#9a9ab0" opacity="0.3"/>
+  <!-- Base pc -->
+  <rect x="95" y="245" width="30" height="8" rx="2" fill="url(#printerGrad)"/>
+  <rect x="80" y="253" width="60" height="5" rx="2" fill="url(#printerGrad)"/>
+  <text x="120" y="275" text-anchor="middle" fill="#14b8a6" font-size="10" font-weight="bold">Poste Windows</text>
+  <text x="120" y="290" text-anchor="middle" fill="#9a9ab0" font-size="8">Domaine AD</text>
+
+  <!-- ===== SWITCH (centre-gauche) ===== -->
+  <rect x="240" y="180" width="120" height="50" rx="6" fill="url(#printerGrad)" stroke="#14b8a6" stroke-width="1.2"/>
+  <!-- Ports switch -->
+  <g fill="#14b8a6" opacity="0.6">
+    <rect x="252" y="192" width="8" height="6" rx="1"/>
+    <rect x="264" y="192" width="8" height="6" rx="1"/>
+    <rect x="276" y="192" width="8" height="6" rx="1"/>
+    <rect x="288" y="192" width="8" height="6" rx="1"/>
+    <rect x="300" y="192" width="8" height="6" rx="1"/>
+    <rect x="312" y="192" width="8" height="6" rx="1"/>
+    <rect x="252" y="202" width="8" height="6" rx="1"/>
+    <rect x="264" y="202" width="8" height="6" rx="1"/>
+    <rect x="276" y="202" width="8" height="6" rx="1"/>
+    <rect x="288" y="202" width="8" height="6" rx="1"/>
+    <rect x="300" y="202" width="8" height="6" rx="1"/>
+    <rect x="312" y="202" width="8" height="6" rx="1"/>
+  </g>
+  <!-- LED verts -->
+  <circle cx="252" cy="220" r="2.5" fill="#22c55e" opacity="0.9"/>
+  <circle cx="264" cy="220" r="2.5" fill="#22c55e" opacity="0.9"/>
+  <circle cx="276" cy="220" r="2.5" fill="#f59e0b" opacity="0.9"/>
+  <circle cx="288" cy="220" r="2.5" fill="#22c55e" opacity="0.9"/>
+  <text x="300" y="222" fill="#9a9ab0" font-size="7">Switch</text>
+  <text x="300" y="272" text-anchor="middle" fill="#9a9ab0" font-size="8">Réseau BDF</text>
+  <text x="300" y="284" text-anchor="middle" fill="#14b8a6" font-size="7">VLAN Imprimantes</text>
+
+  <!-- ===== IMPRIMANTE (droite) ===== -->
+  <ellipse cx="560" cy="205" rx="90" ry="70" fill="#14b8a6" opacity="0.06" filter="url(#softGlow)"/>
+  <!-- Corps imprimante -->
+  <rect x="480" y="155" width="160" height="110" rx="10" fill="url(#printerGrad)" stroke="#14b8a6" stroke-width="2"/>
+  <!-- Fente papier haut -->
+  <rect x="505" y="168" width="110" height="8" rx="3" fill="#0a1a1a"/>
+  <!-- Panneau avant -->
+  <rect x="495" y="185" width="130" height="40" rx="4" fill="#1a3030"/>
+  <circle cx="520" cy="205" r="8" fill="#14b8a6" opacity="0.8"/>
+  <text x="520" y="208" text-anchor="middle" fill="white" font-size="6" font-weight="bold">OK</text>
+  <!-- Écran LCD -->
+  <rect x="535" y="195" width="75" height="22" rx="3" fill="#0a1a1a" stroke="#14b8a6" stroke-width="0.8"/>
+  <text x="572" y="207" text-anchor="middle" fill="#14b8a6" font-size="7">10.32.3.201</text>
+  <text x="572" y="215" text-anchor="middle" fill="#22c55e" font-size="6">En ligne</text>
+  <!-- Fente papier bas -->
+  <rect x="505" y="232" width="110" height="20" rx="3" fill="#0a1a1a"/>
+  <!-- Papier sortie -->
+  <rect x="520" y="230" width="80" height="3" rx="1" fill="white" opacity="0.7"/>
+  <rect x="520" y="226" width="80" height="3" rx="1" fill="white" opacity="0.5"/>
+  <!-- IP Badge -->
+  <rect x="490" y="272" width="140" height="18" rx="5" fill="#14b8a6" opacity="0.15" stroke="#14b8a6" stroke-width="0.8"/>
+  <text x="560" y="284" text-anchor="middle" fill="#14b8a6" font-size="8" font-weight="bold">IP Réservée : 10.32.3.201</text>
+  <text x="560" y="300" text-anchor="middle" fill="#9a9ab0" font-size="8">REQ000000484360</text>
+
+  <!-- Câble PC → Switch -->
+  <line x1="195" y1="195" x2="240" y2="205" stroke="#14b8a6" stroke-width="2" stroke-dasharray="5,3" filter="url(#glow)"/>
+  <polygon points="240,200 252,205 240,210" fill="#14b8a6"/>
+
+  <!-- Câble Switch → Imprimante -->
+  <line x1="360" y1="205" x2="480" y2="205" stroke="#14b8a6" stroke-width="2" stroke-dasharray="5,3" filter="url(#glow)"/>
+  <polygon points="480,200 492,205 480,210" fill="#14b8a6"/>
+
+  <!-- PADII boîte -->
+  <rect x="680" y="140" width="105" height="130" rx="10" fill="url(#boxGrad)" stroke="#14b8a6" stroke-width="1.5"/>
+  <rect x="680" y="140" width="105" height="28" rx="10" fill="#14b8a6" opacity="0.9"/>
+  <rect x="680" y="156" width="105" height="12" fill="#14b8a6" opacity="0.9"/>
+  <text x="732" y="158" text-anchor="middle" fill="white" font-size="9" font-weight="bold">PADII</text>
+  <text x="732" y="178" text-anchor="middle" fill="#9a9ab0" font-size="7">Outil BDF ADBDF</text>
+  <text x="690" y="194" fill="#22c55e" font-size="9">✓</text>
+  <text x="702" y="194" fill="#e2e8f0" font-size="7">File créée</text>
+  <text x="690" y="208" fill="#22c55e" font-size="9">✓</text>
+  <text x="702" y="208" fill="#e2e8f0" font-size="7">IP réservée</text>
+  <text x="690" y="222" fill="#22c55e" font-size="9">✓</text>
+  <text x="702" y="222" fill="#e2e8f0" font-size="7">Brassage OK</text>
+  <text x="690" y="236" fill="#22c55e" font-size="9">✓</text>
+  <text x="702" y="236" fill="#e2e8f0" font-size="7">Test imprimé</text>
+  <text x="732" y="256" text-anchor="middle" fill="#14b8a6" font-size="7" font-weight="bold">C1 · C2 · C5</text>
+
+  <!-- Steps bas -->
+  <g><rect x="45" y="332" width="160" height="28" rx="5" fill="#14b8a6" opacity="0.12" stroke="#14b8a6" stroke-width="0.8"/>
+  <text x="125" y="350" text-anchor="middle" fill="#14b8a6" font-size="9" font-weight="bold">1. Réservation IP</text></g>
+  <g><rect x="217" y="332" width="160" height="28" rx="5" fill="#14b8a6" opacity="0.12" stroke="#14b8a6" stroke-width="0.8"/>
+  <text x="297" y="350" text-anchor="middle" fill="#14b8a6" font-size="9" font-weight="bold">2. Brassage réseau</text></g>
+  <g><rect x="389" y="332" width="160" height="28" rx="5" fill="#14b8a6" opacity="0.12" stroke="#14b8a6" stroke-width="0.8"/>
+  <text x="469" y="350" text-anchor="middle" fill="#14b8a6" font-size="9" font-weight="bold">3. Config PADII</text></g>
+  <g><rect x="561" y="332" width="160" height="28" rx="5" fill="#14b8a6" opacity="0.12" stroke="#14b8a6" stroke-width="0.8"/>
+  <text x="641" y="350" text-anchor="middle" fill="#14b8a6" font-size="9" font-weight="bold">4. Test impression</text></g>
+</svg>

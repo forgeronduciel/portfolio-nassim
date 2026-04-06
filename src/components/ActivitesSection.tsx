@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import { ExternalLink, Server, Cloud, Shield, Database, GraduationCap, Briefcase, Network, FileText, CheckCircle2, ChevronDown, Star, X, ArrowUpRight } from "lucide-react";
+import { ExternalLink, Server, Cloud, Shield, Database, GraduationCap, Briefcase, Network, FileText, CheckCircle2, ChevronDown, Star, X, ArrowUpRight, KeyRound, Monitor, Laptop, Printer, ClipboardList } from "lucide-react";
 
 type TabType = "pro" | "perso";
 
@@ -32,6 +32,33 @@ type Activite = {
 
 const projetsEcole: Activite[] = [
   {
+    id: "supervision",
+    titre: "Supervision réseau — Observium",
+    soustitre: "SNMP · Observium · NAS · Windows · Virtualisation",
+    annee: "2024-2025",
+    badge: "Formation",
+    icon: <Monitor size={22} />,
+    gradient: "from-cyan-500 to-blue-600",
+    objectifs:
+      "Mettre en place une solution de supervision réseau complète pour surveiller l'état du serveur NAS et d'un poste Windows, en utilisant le protocole SNMP et le serveur de supervision Observium déployé sous Linux.",
+    travaux: [
+      "Configuration du service SNMP sur le serveur NAS OpenMediaVault (OMV 6.5)",
+      "Déploiement du serveur Observium (TurnKey Linux) sous VirtualBox en mode pont",
+      "Ajout du serveur NAS comme équipement supervisé dans Observium (menu Devices)",
+      "Configuration du service SNMP sur une machine virtuelle Windows 10",
+      "Visualisation des métriques : CPU, RAM, stockage, réseau en temps réel",
+      "Configuration des alertes email pour événements critiques (seuil RAID à 5%)",
+    ],
+    technologies: [],
+    competences: [
+      "C1 – Gérer le patrimoine informatique",
+      "C5 – Mettre à disposition des utilisateurs un service informatique",
+    ],
+    resultats:
+      "Infrastructure supervisée opérationnelle : le serveur NAS et le poste Windows sont surveillés en temps réel via Observium. Les alertes email sont configurées pour prévenir l'administrateur en cas d'événement critique.",
+    docUrl: "/docs/01.TP01_ConfServeurSupervision_Rev04.docx",
+  },
+  {
     id: "proxmox",
     titre: "Proxmox VE",
     soustitre: "Plateforme de virtualisation",
@@ -45,7 +72,6 @@ const projetsEcole: Activite[] = [
       "Installation et configuration de Proxmox VE sur serveur dédié",
       "Création de VMs (Linux Debian, Windows Server 2025) et templates réutilisables",
       "Gestion du stockage ZFS, sauvegardes et snapshots",
-      "Mise en place de conteneurs LXC pour services légers",
       "Configuration des VLANs et bridges réseau virtuels",
     ],
     technologies: [],
@@ -55,22 +81,21 @@ const projetsEcole: Activite[] = [
   {
     id: "cloudflare",
     titre: "Cloudflare",
-    soustitre: "DNS, CDN & sécurité web",
+    soustitre: "DNS & sécurité web",
     annee: "2024-2025",
     badge: "Formation",
     icon: <Cloud size={22} />,
     gradient: "from-amber-500 to-orange-600",
     logoUrl: "https://cdn.simpleicons.org/cloudflare/F38020",
-    objectifs: "Utiliser Cloudflare pour sécuriser et optimiser des services web exposés sur Internet (DNS, CDN, protection DDoS, SSL/TLS).",
+    objectifs: "Utiliser Cloudflare pour sécuriser et optimiser des services web exposés sur Internet (DNS, protection DDoS, SSL/TLS).",
     travaux: [
       "Configuration DNS et gestion des enregistrements A, CNAME, MX, TXT",
       "Activation du proxy Cloudflare et configuration SSL/TLS (Full Strict)",
-      "Mise en place de règles de sécurité WAF et rate limiting",
       "Déploiement d'un tunnel Cloudflare Zero Trust pour l'accès sécurisé",
       "Analyse des logs de trafic et configuration des alertes",
     ],
     technologies: [],
-    competences: ["Réseau", "Sécurité", "DNS", "CDN"],
+    competences: ["Réseau", "Sécurité", "DNS"],
     resultats: "Services web sécurisés, protégés contre les attaques DDoS et accessibles via tunnel chiffré sans port exposé.",
   },
   {
@@ -105,10 +130,8 @@ const projetsEcole: Activite[] = [
     logoUrl: "https://cdn.simpleicons.org/nextcloud/0082C9",
     objectifs: "Déployer un serveur Nextcloud pour le partage de fichiers, la synchronisation et la collaboration en mode cloud privé.",
     travaux: [
-      "Installation de Nextcloud sur serveur Debian (LAMP stack)",
       "Configuration des utilisateurs, groupes et quotas de stockage",
       "Activation des applications collaboratives (calendrier, contacts, Talk)",
-      "Sécurisation HTTPS avec certificat Let's Encrypt",
       "Intégration LDAP pour l'authentification via Active Directory",
     ],
     technologies: [],
@@ -142,6 +165,34 @@ const projetsEcole: Activite[] = [
     docUrl: "/docs/Documentation_Cloud_AD_v2.pdf",
   },
   {
+    id: "authentik-sso",
+    titre: "Authentik SSO",
+    soustitre: "Identity Provider · OAuth2 · OpenID Connect · Active Directory",
+    annee: "2025-2026",
+    badge: "Projet",
+    icon: <KeyRound size={22} />,
+    gradient: "from-orange-500 to-red-600",
+    imageUrl: "/images/authentik-sso.svg",
+    objectifs:
+      "Déployer et configurer Authentik comme serveur SSO (Single Sign-On) pour centraliser l'authentification des utilisateurs via leur compte Active Directory et permettre la connexion à Nextcloud via le protocole OpenID Connect.",
+    travaux: [
+      "Configuration du serveur Authentik (192.168.30.22:9000) et liaison à l'Active Directory (192.168.30.42) via LDAP",
+      "Création de l'application Nextcloud et du provider OAuth2/OpenID Connect dans Authentik",
+      "Récupération et configuration des endpoints OpenID (Authorize, Token, Userinfo, Logout…)",
+      "Configuration du plugin Social Login dans Nextcloud avec le Client ID et le Client Secret",
+      "Test du flux SSO complet : Nextcloud → Authentik → Vérification AD → Token → Accès accordé",
+      "Vérification de la déconnexion centralisée (Single Logout)",
+    ],
+    technologies: [],
+    competences: [
+      "C1 – Gérer le patrimoine informatique",
+      "C5 – Mettre à disposition des utilisateurs un service informatique",
+    ],
+    resultats:
+      "Authentification SSO opérationnelle : les utilisateurs se connectent à Nextcloud avec leurs identifiants Active Directory via Authentik, sans double authentification. Rapport d'accès centralisé sur la console Authentik.",
+    docUrl: "/docs/Documentation_Authentik_SSO.docx",
+  },
+  {
     id: "nas-truenas",
     titre: "Serveur NAS TrueNAS SCALE",
     soustitre: "Intégration AD · Partage SMB · ACL · Proxmox VE",
@@ -171,6 +222,89 @@ const projetsEcole: Activite[] = [
 
 const projetsEntreprise: Activite[] = [
   {
+    id: "incident-pc",
+    titre: "Gestion d'un incident PC",
+    soustitre: "BMC Remedy · Support N1/N2 · Traçabilité ITIL",
+    annee: "2025-2026",
+    badge: "Activité",
+    icon: <Laptop size={22} />,
+    gradient: "from-orange-500 to-amber-600",
+    imageUrl: "/images/incident-pc.svg",
+    objectifs:
+      "Prendre en charge un poste Windows défaillant signalé par un utilisateur, ouvrir un ticket d'incident dans BMC Remedy, obtenir les autorisations nécessaires et expédier le matériel en atelier pour réparation.",
+    travaux: [
+      "Réception du poste Windows en panne et diagnostic de premier niveau (démarrage, hardware)",
+      "Création du ticket d'incident dans BMC Remedy avec catégorisation et priorité",
+      "Rédaction du mail d'autorisation à l'expéditeur et au responsable hiérarchique",
+      "Emballage sécurisé du matériel et envoi en atelier de réparation",
+      "Suivi du ticket jusqu'à la résolution et clôture dans BMC Remedy",
+    ],
+    technologies: [],
+    competences: [
+      "C1 – Gérer le patrimoine informatique",
+      "C2 – Répondre aux incidents et aux demandes d'assistance",
+      "C5 – Mettre à disposition des utilisateurs un service informatique",
+    ],
+    resultats:
+      "Incident traité dans les délais ITIL : ticket créé, autorisations obtenues, matériel envoyé en atelier. Traçabilité complète dans BMC Remedy avec historique des actions.",
+    docUrl: "/docs/Procedure_Incident_PC.docx",
+  },
+  {
+    id: "imprimante",
+    titre: "Partage d'imprimante réseau",
+    soustitre: "PADII · ADBDF · Réservation IP · Active Directory",
+    annee: "2025-2026",
+    badge: "Activité",
+    icon: <Printer size={22} />,
+    gradient: "from-teal-500 to-cyan-600",
+    imageUrl: "/images/imprimante.svg",
+    objectifs:
+      "Mettre en service une imprimante réseau partagée à la Banque de France via l'outil PADII (Gestion des files d'impression ADBDF), en effectuant la réservation d'adresse IP, le raccordement réseau et la configuration du partage.",
+    travaux: [
+      "Réservation d'une adresse IP fixe pour l'imprimante dans le système de gestion ADBDF (ticket REQ000000484360)",
+      "Raccordement physique de l'imprimante au réseau (câblage, prise RJ45, VLAN)",
+      "Ouverture d'une demande de partage dans l'outil PADII avec paramètres : nom, modèle, emplacement",
+      "Validation de la file d'impression et test d'impression depuis un poste du domaine",
+      "Traçabilité des actions via tickets de demande (REQ000000391095, REQ000000484360)",
+    ],
+    technologies: [],
+    competences: [
+      "C1 – Gérer le patrimoine informatique",
+      "C2 – Répondre aux incidents et aux demandes d'assistance",
+      "C5 – Mettre à disposition des utilisateurs un service informatique",
+    ],
+    resultats:
+      "Imprimante réseau opérationnelle et partagée sur le domaine Active Directory. Adresse IP réservée et file d'impression configurée via PADII. Utilisateurs en mesure d'imprimer depuis leurs postes.",
+    docUrl: "/docs/Procedure_Imprimante.docx",
+  },
+  {
+    id: "ticketing-portsair",
+    titre: "Outil de ticketing — EV Service Manager",
+    soustitre: "Portsair · ITIL · Incidents · Demandes",
+    annee: "2025-2026",
+    badge: "Activité",
+    icon: <ClipboardList size={22} />,
+    gradient: "from-violet-500 to-indigo-600",
+    imageUrl: "/images/ticketing-portsair.svg",
+    objectifs:
+      "Utiliser l'outil de ticketing EV Service Manager (Portsair) de la Banque de France pour créer, suivre et clôturer des tickets d'incidents et de demandes de service dans le respect du processus ITIL.",
+    travaux: [
+      "Prise en main de l'interface EV Service Manager (Portsair) — files d'attente, formulaires",
+      "Création d'un ticket d'incident réseau (S251208_00209) avec catégorie, priorité et description",
+      "Suivi de la file d'attente Q21601R_BUT (Paris Siège) et traitement des tickets entrants",
+      "Qualification, escalade et résolution des incidents dans les délais SLA définis",
+      "Clôture du ticket avec compte rendu de résolution et satisfaction utilisateur",
+    ],
+    technologies: [],
+    competences: [
+      "C1 – Gérer le patrimoine informatique",
+      "C2 – Répondre aux incidents et aux demandes d'assistance",
+    ],
+    resultats:
+      "Maîtrise de l'outil de ticketing Portsair (EV Service Manager) utilisé à la Banque de France. Incidents traités conformément au processus ITIL avec traçabilité complète dans la file Q21601R_BUT.",
+    docUrl: "/docs/Procedure_Ticketing_Portsair.docx",
+  },
+  {
     id: "masterisation",
     titre: "Masterisation d'un poste Windows",
     soustitre: "Sysprep · WIM · Windows 11 · Active Directory",
@@ -193,6 +327,34 @@ const projetsEntreprise: Activite[] = [
     resultats:
       "Poste Windows 11 masterisé, intégré au domaine et opérationnel, avec une procédure documentée permettant de reproduire la démarche sur d'autres postes du parc.",
     docUrl: "/docs/Procedure_Masterisation_Entreprise.docx",
+  },
+  {
+    id: "blancco",
+    titre: "Effacement sécurisé des données",
+    soustitre: "Blancco · BIOS UEFI · Secure Boot · NVMe",
+    annee: "2025-2026",
+    badge: "Projet majeur",
+    icon: <Shield size={22} />,
+    gradient: "from-red-500 to-rose-600",
+    imageUrl: "/images/blancco-erasure.svg",
+    objectifs:
+      "Réaliser l'effacement sécurisé et certifié des données d'un poste informatique avant restitution ou recyclage, à l'aide du logiciel Blancco déployé depuis une clé USB bootable.",
+    travaux: [
+      "Réinitialisation du BIOS aux paramètres d'usine et vérification de l'absence de mot de passe",
+      "Désactivation du Secure Boot pour permettre le boot sur la clé Linux Blancco",
+      "Sélection du mode réseau (Ethernet) et démarrage de l'interface Blancco",
+      "Authentification sur la console BMC et vérification de la connexion réseau",
+      "Sélection du disque NVMe Samsung et lancement de l'effacement certifié",
+      "Génération du rapport d'effacement conforme (NIST 800-88, DoD 5220.22-M)",
+    ],
+    technologies: [],
+    competences: [
+      "C1 – Gérer le patrimoine informatique",
+      "C5 – Mettre à disposition des utilisateurs un service informatique",
+    ],
+    resultats:
+      "Disque NVMe effacé de façon irréversible avec rapport certifié archivé dans la console Blancco Management Console (BMC), garantissant la conformité légale avant restitution du poste.",
+    docUrl: "/docs/Procedure_Effacement_Blancco.docx",
   },
 ];
 

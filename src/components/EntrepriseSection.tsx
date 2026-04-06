@@ -78,7 +78,7 @@ export default function EntrepriseSection() {
             Organigramme de mon service
           </h3>
           <p className="text-slate-400 text-sm mb-6">
-            Le service dans lequel je travaille dépend de la <span className="text-indigo-400">Direction Générale des Systèmes d'Information (DGSI)</span>, plus précisément du département <span className="text-indigo-400">DIT PRISM</span>.
+            Le service dans lequel je travaille dépend de la <span className="text-indigo-400">Direction Générale des Systèmes d'Information (DGSI)</span>.
           </p>
 
           {/* Org Chart */}
@@ -86,8 +86,8 @@ export default function EntrepriseSection() {
             {/* Direction */}
             <div className="flex justify-center">
               <div className="p-4 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500 rounded-xl text-center animate-pulse-glow">
-                <p className="text-xs text-slate-400 mb-1">Directrice DGSI – DIT PRISM</p>
-                <p className="font-semibold text-indigo-400">Catherine Joyeux</p>
+                <p className="text-xs text-slate-400 mb-1">Directrice DGSI</p>
+                <p className="font-semibold text-indigo-400">Sophie Marchand</p>
               </div>
             </div>
 
@@ -99,11 +99,11 @@ export default function EntrepriseSection() {
             <div className="flex justify-center gap-4 flex-wrap">
               <div className="p-4 bg-indigo-950/50 border border-indigo-500/30 rounded-xl text-center">
                 <p className="text-xs text-slate-400 mb-1">Chef de service</p>
-                <p className="font-semibold text-white">Anthony Debelle</p>
+                <p className="font-semibold text-white">Thomas Renard</p>
               </div>
               <div className="p-4 bg-indigo-950/50 border border-indigo-500/30 rounded-xl text-center">
                 <p className="text-xs text-slate-400 mb-1">Adjoint</p>
-                <p className="font-semibold text-white">Benoît Chemin</p>
+                <p className="font-semibold text-white">Lucas Fontaine</p>
               </div>
             </div>
 
@@ -122,15 +122,15 @@ export default function EntrepriseSection() {
                 <div className="space-y-2 text-xs">
                   <div className="p-2 bg-indigo-950/50 rounded-lg">
                     <p className="text-slate-400">Siège</p>
-                    <p className="text-white">David Delbare</p>
+                    <p className="text-white">Marc Dupont</p>
                   </div>
                   <div className="p-2 bg-indigo-950/50 rounded-lg">
                     <p className="text-slate-400">Réaumur</p>
-                    <p className="text-white">Michael Fejer de Harali</p>
+                    <p className="text-white">Julien Morel</p>
                   </div>
                   <div className="p-2 bg-indigo-950/50 rounded-lg">
                     <p className="text-slate-400">Noisiel</p>
-                    <p className="text-white">Didier Quinquilla</p>
+                    <p className="text-white">Pierre Lambert</p>
                   </div>
                 </div>
                 <p className="text-xs text-slate-500 mt-3 text-center">Support sur site, intervention directe</p>

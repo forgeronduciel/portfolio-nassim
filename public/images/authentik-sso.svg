@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d1a"/>
+      <stop offset="100%" style="stop-color:#1a0a05"/>
+    </linearGradient>
+    <linearGradient id="authGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e53e1a"/>
+      <stop offset="100%" style="stop-color:#b02d10"/>
+    </linearGradient>
+    <linearGradient id="adGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078d4"/>
+      <stop offset="100%" style="stop-color:#005a9e"/>
+    </linearGradient>
+    <linearGradient id="ncGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0082c9"/>
+      <stop offset="100%" style="stop-color:#005a8e"/>
+    </linearGradient>
+    <linearGradient id="userGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#4338ca"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#e53e1a"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#0078d4"/>
+    </marker>
+    <marker id="arrowCyan" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#0082c9"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#22c55e"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="420" fill="url(#bgGrad)" rx="12"/>
+
+  <!-- Grid -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff06" stroke-width="0.5"/>
+  </pattern>
+  <rect width="800" height="420" fill="url(#grid)" rx="12"/>
+
+  <!-- ══ UTILISATEUR (left) ══ -->
+  <g transform="translate(42, 130)">
+    <!-- Silhouette user -->
+    <circle cx="55" cy="32" r="22" fill="url(#userGrad)" stroke="#818cf8" stroke-width="1.5" filter="url(#glow)"/>
+    <text x="55" y="38" text-anchor="middle" fill="white" font-size="18" font-weight="bold">👤</text>
+    <!-- Badge key -->
+    <circle cx="82" cy="12" r="10" fill="#1e1e3a" stroke="#818cf8" stroke-width="1.5"/>
+    <text x="82" y="17" text-anchor="middle" font-size="11">🔑</text>
+
+    <rect x="0" y="62" width="110" height="44" rx="8" fill="#1e1e3a" stroke="#4338ca" stroke-width="1.2"/>
+    <text x="55" y="78" text-anchor="middle" fill="#a5b4fc" font-size="9" font-weight="bold">Utilisateur</text>
+    <text x="55" y="91" text-anchor="middle" fill="#6366f1" font-size="8">a806104_ot2</text>
+    <text x="55" y="102" text-anchor="middle" fill="#4b5563" font-size="7.5">Poste Windows</text>
+
+    <text x="55" y="128" text-anchor="middle" fill="#818cf8" font-size="9" font-weight="bold">Navigateur</text>
+    <text x="55" y="140" text-anchor="middle" fill="#4b5563" font-size="8">https://cloud.afr-com.com</text>
+  </g>
+
+  <!-- ══ AUTHENTIK SERVER (centre) ══ -->
+  <g transform="translate(290, 60)">
+    <!-- Boîtier -->
+    <rect x="0" y="0" width="220" height="200" rx="12" fill="#1a0a05" stroke="#e53e1a" stroke-width="2" filter="url(#softGlow)"/>
+    <rect x="0" y="0" width="220" height="38" rx="12" fill="url(#authGrad)"/>
+    <rect x="0" y="28" width="220" height="10" fill="url(#authGrad)"/>
+
+    <!-- Logo Authentik -->
+    <rect x="12" y="9" width="8" height="8" rx="2" fill="white" opacity="0.9"/>
+    <rect x="22" y="9" width="8" height="8" rx="2" fill="#fca5a5" opacity="0.8"/>
+    <rect x="32" y="9" width="8" height="8" rx="2" fill="#f87171" opacity="0.7"/>
+    <text x="46" y="22" fill="white" font-size="12" font-weight="bold" letter-spacing="0.5">authentik</text>
+    <text x="208" y="22" text-anchor="end" fill="#fca5a5" font-size="8">v2026.2</text>
+
+    <!-- IP -->
+    <text x="110" y="56" text-anchor="middle" fill="#9ca3af" font-size="8.5">192.168.30.22:9000</text>
+
+    <!-- Identity Provider badge -->
+    <rect x="25" y="64" width="170" height="20" rx="4" fill="#2d0f05" stroke="#e53e1a30" stroke-width="1"/>
+    <text x="110" y="78" text-anchor="middle" fill="#fca5a5" font-size="8.5" font-weight="bold">Identity Provider (IdP)</text>
+
+    <!-- Protocoles -->
+    <rect x="14" y="92" width="90" height="18" rx="4" fill="#1f1f35" stroke="#6366f130" stroke-width="1"/>
+    <text x="59" y="104" text-anchor="middle" fill="#a5b4fc" font-size="8" font-weight="bold">OAuth2</text>
+
+    <rect x="116" y="92" width="90" height="18" rx="4" fill="#1f1f35" stroke="#6366f130" stroke-width="1"/>
+    <text x="161" y="104" text-anchor="middle" fill="#a5b4fc" font-size="8" font-weight="bold">OpenID Connect</text>
+
+    <!-- SSO badge -->
+    <rect x="14" y="118" width="192" height="22" rx="4" fill="#0a2010" stroke="#22c55e40" stroke-width="1"/>
+    <circle cx="26" cy="129" r="4" fill="#22c55e" filter="url(#glow)"/>
+    <text x="36" y="133" fill="#22c55e" font-size="8.5" font-weight="bold">Single Sign-On actif</text>
+
+    <!-- LDAP sync -->
+    <rect x="14" y="148" width="192" height="22" rx="4" fill="#0a1a2e" stroke="#0078d440" stroke-width="1"/>
+    <circle cx="26" cy="159" r="4" fill="#0078d4" filter="url(#glow)"/>
+    <text x="36" y="163" fill="#60a5fa" font-size="8.5">Source LDAP → AD 192.168.30.42</text>
+
+    <!-- Users count -->
+    <rect x="14" y="177" width="90" height="18" rx="4" fill="#111827"/>
+    <text x="59" y="189" text-anchor="middle" fill="#9ca3af" font-size="7.5">51 comptes</text>
+
+    <rect x="116" y="177" width="90" height="18" rx="4" fill="#111827"/>
+    <text x="161" y="189" text-anchor="middle" fill="#9ca3af" font-size="7.5">1 application</text>
+
+    <!-- Label -->
+    <text x="110" y="222" text-anchor="middle" fill="#f87171" font-size="11" font-weight="bold">Serveur Authentik</text>
+  </g>
+
+  <!-- ══ ACTIVE DIRECTORY (top right) ══ -->
+  <g transform="translate(570, 55)">
+    <rect x="0" y="0" width="180" height="120" rx="10" fill="#0a1628" stroke="#0078d4" stroke-width="1.8"/>
+    <rect x="0" y="0" width="180" height="30" rx="10" fill="url(#adGrad)"/>
+    <rect x="0" y="22" width="180" height="8" fill="url(#adGrad)"/>
+
+    <text x="90" y="20" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Active Directory</text>
+
+    <text x="90" y="50" text-anchor="middle" fill="#93c5fd" font-size="8.5">192.168.30.42</text>
+    <text x="90" y="64" text-anchor="middle" fill="#60a5fa" font-size="8">AFR.LOCAL</text>
+
+    <!-- Users -->
+    <rect x="12" y="72" width="156" height="16" rx="3" fill="#0f2040"/>
+    <circle cx="22" cy="80" r="3" fill="#22c55e"/>
+    <text x="30" y="84" fill="#9ca3af" font-size="7.5">nassim.TO · robin · a806104_ot2…</text>
+
+    <rect x="12" y="92" width="156" height="16" rx="3" fill="#0f2040"/>
+    <text x="90" y="103" text-anchor="middle" fill="#60a5fa" font-size="7.5">Vérification credentials LDAP</text>
+
+    <text x="90" y="132" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">Annuaire AD</text>
+    <text x="90" y="145" text-anchor="middle" fill="#4b5563" font-size="8">Source des comptes utilisateurs</text>
+  </g>
+
+  <!-- ══ NEXTCLOUD (bottom right) ══ -->
+  <g transform="translate(570, 230)">
+    <rect x="0" y="0" width="180" height="120" rx="10" fill="#0a1825" stroke="#0082c9" stroke-width="1.8"/>
+    <rect x="0" y="0" width="180" height="30" rx="10" fill="url(#ncGrad)"/>
+    <rect x="0" y="22" width="180" height="8" fill="url(#ncGrad)"/>
+
+    <text x="90" y="20" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Nextcloud</text>
+
+    <text x="90" y="50" text-anchor="middle" fill="#7dd3fc" font-size="8.5">cloud.afr-com.com</text>
+
+    <rect x="12" y="58" width="156" height="16" rx="3" fill="#051525"/>
+    <circle cx="22" cy="66" r="3" fill="#22c55e"/>
+    <text x="30" y="70" fill="#9ca3af" font-size="7.5">OpenID Connect configuré</text>
+
+    <rect x="12" y="78" width="156" height="16" rx="3" fill="#051525"/>
+    <circle cx="22" cy="86" r="3" fill="#22c55e"/>
+    <text x="30" y="90" fill="#9ca3af" font-size="7.5">Client ID + Secret → Authentik</text>
+
+    <rect x="12" y="98" width="156" height="16" rx="3" fill="#051525"/>
+    <text x="90" y="110" text-anchor="middle" fill="#7dd3fc" font-size="7.5">Se connecter avec OpenID Connect</text>
+
+    <text x="90" y="132" text-anchor="middle" fill="#7dd3fc" font-size="10" font-weight="bold">Cloud Privé</text>
+    <text x="90" y="145" text-anchor="middle" fill="#4b5563" font-size="8">Application cliente (Service Provider)</text>
+  </g>
+
+  <!-- ══ FLÈCHES ══ -->
+
+  <!-- User → Authentik : demande d'accès -->
+  <g filter="url(#glow)">
+    <line x1="155" y1="185" x2="285" y2="175" stroke="#6366f1" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrowOrange)"/>
+    <rect x="178" y="162" width="82" height="16" rx="3" fill="#0d0d1a" stroke="#6366f130" stroke-width="1"/>
+    <text x="219" y="173" text-anchor="middle" fill="#818cf8" font-size="8">① Accès Nextcloud</text>
+  </g>
+
+  <!-- Authentik → AD : vérification LDAP -->
+  <g filter="url(#glow)">
+    <line x1="510" y1="130" x2="568" y2="110" stroke="#0078d4" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowBlue)"/>
+    <rect x="510" y="92" width="70" height="16" rx="3" fill="#0d0d1a" stroke="#0078d430" stroke-width="1"/>
+    <text x="545" y="103" text-anchor="middle" fill="#60a5fa" font-size="8">② Vérif. LDAP</text>
+  </g>
+
+  <!-- AD → Authentik : validation -->
+  <g>
+    <line x1="568" y1="125" x2="512" y2="148" stroke="#22c55e" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowGreen)"/>
+    <rect x="514" y="130" width="58" height="16" rx="3" fill="#0d0d1a" stroke="#22c55e30" stroke-width="1"/>
+    <text x="543" y="141" text-anchor="middle" fill="#22c55e" font-size="8">③ Validé ✓</text>
+  </g>
+
+  <!-- Authentik → Nextcloud : token SSO -->
+  <g filter="url(#glow)">
+    <line x1="510" y1="200" x2="568" y2="258" stroke="#e53e1a" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowCyan)"/>
+    <rect x="510" y="218" width="70" height="16" rx="3" fill="#0d0d1a" stroke="#e53e1a30" stroke-width="1"/>
+    <text x="545" y="229" text-anchor="middle" fill="#fca5a5" font-size="8">④ Token SSO</text>
+  </g>
+
+  <!-- Nextcloud → User : accès accordé -->
+  <g filter="url(#glow)">
+    <line x1="568" y1="310" x2="160" y2="270" stroke="#22c55e" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowGreen)"/>
+    <rect x="305" y="282" width="88" height="16" rx="3" fill="#0d0d1a" stroke="#22c55e30" stroke-width="1"/>
+    <text x="349" y="293" text-anchor="middle" fill="#22c55e" font-size="8">⑤ Accès accordé ✓</text>
+  </g>
+
+  <!-- ══ LÉGENDE ══ -->
+  <g transform="translate(42, 330)">
+    <rect x="0" y="0" width="480" height="58" rx="8" fill="#0f0f1a" stroke="#ffffff10" stroke-width="1"/>
+    <text x="240" y="16" text-anchor="middle" fill="#6b7280" font-size="8" font-weight="bold">FLUX D'AUTHENTIFICATION SSO</text>
+    <line x1="20" y1="28" x2="50" y2="28" stroke="#818cf8" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="58" y="32" fill="#9ca3af" font-size="8">① Demande d'accès</text>
+    <line x1="130" y1="28" x2="160" y2="28" stroke="#0078d4" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="168" y="32" fill="#9ca3af" font-size="8">② Vérif. LDAP/AD</text>
+    <line x1="255" y1="28" x2="285" y2="28" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="293" y="32" fill="#9ca3af" font-size="8">③ Validation AD</text>
+    <line x1="370" y1="28" x2="400" y2="28" stroke="#e53e1a" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="408" y="32" fill="#9ca3af" font-size="8">④⑤ Token + Accès</text>
+    <text x="240" y="50" text-anchor="middle" fill="#374151" font-size="7.5">Authentik v2026.2 · OAuth2 / OpenID Connect · Active Directory 192.168.30.42 · Nextcloud cloud.afr-com.com</text>
+  </g>
+
+</svg>

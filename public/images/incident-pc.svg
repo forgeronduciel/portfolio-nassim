@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0d00"/>
+      <stop offset="100%" style="stop-color:#2d1500"/>
+    </linearGradient>
+    <linearGradient id="pcGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3a3a4a"/>
+      <stop offset="100%" style="stop-color:#1e1e2e"/>
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f97316"/>
+      <stop offset="100%" style="stop-color:#fb923c"/>
+    </linearGradient>
+    <linearGradient id="ticketGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e2a3a"/>
+      <stop offset="100%" style="stop-color:#0f1520"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="420" fill="url(#bg)"/>
+  <!-- Grid -->
+  <g stroke="#f97316" stroke-width="0.3" opacity="0.06">
+    <line x1="0" y1="42" x2="800" y2="42"/><line x1="0" y1="84" x2="800" y2="84"/>
+    <line x1="0" y1="126" x2="800" y2="126"/><line x1="0" y1="168" x2="800" y2="168"/>
+    <line x1="0" y1="210" x2="800" y2="210"/><line x1="0" y1="252" x2="800" y2="252"/>
+    <line x1="0" y1="294" x2="800" y2="294"/><line x1="0" y1="336" x2="800" y2="336"/>
+    <line x1="0" y1="378" x2="800" y2="378"/>
+    <line x1="80" y1="0" x2="80" y2="420"/><line x1="160" y1="0" x2="160" y2="420"/>
+    <line x1="240" y1="0" x2="240" y2="420"/><line x1="320" y1="0" x2="320" y2="420"/>
+    <line x1="400" y1="0" x2="400" y2="420"/><line x1="480" y1="0" x2="480" y2="420"/>
+    <line x1="560" y1="0" x2="560" y2="420"/><line x1="640" y1="0" x2="640" y2="420"/>
+    <line x1="720" y1="0" x2="720" y2="420"/>
+  </g>
+
+  <!-- Glow background PC -->
+  <ellipse cx="155" cy="210" rx="100" ry="80" fill="#f97316" opacity="0.08" filter="url(#softGlow)"/>
+
+  <!-- ===== PC EN PANNE (gauche) ===== -->
+  <!-- Écran laptop -->
+  <rect x="60" y="120" width="190" height="130" rx="10" fill="url(#pcGrad)" stroke="#f97316" stroke-width="2"/>
+  <!-- Écran -->
+  <rect x="75" y="133" width="160" height="100" rx="4" fill="#0d0d1a"/>
+  <!-- BSOD screen -->
+  <rect x="75" y="133" width="160" height="100" rx="4" fill="#1a3a6b" opacity="0.9"/>
+  <text x="155" y="168" text-anchor="middle" fill="#60a5fa" font-size="9" font-weight="bold">:(</text>
+  <text x="155" y="182" text-anchor="middle" fill="#93c5fd" font-size="6">Your PC ran into a problem</text>
+  <text x="155" y="193" text-anchor="middle" fill="#93c5fd" font-size="6">SYSTEM_SERVICE_EXCEPTION</text>
+  <text x="155" y="207" text-anchor="middle" fill="#60a5fa" font-size="7">0x0000003B</text>
+  <!-- Clavier laptop -->
+  <rect x="55" y="250" width="200" height="14" rx="3" fill="url(#pcGrad)" stroke="#f97316" stroke-width="1.5"/>
+  <rect x="130" y="250" width="50" height="5" rx="2" fill="#2a2a3a"/>
+  <!-- Label PC -->
+  <text x="155" y="290" text-anchor="middle" fill="#f97316" font-size="11" font-weight="bold">PC DÉFAILLANT</text>
+  <text x="155" y="305" text-anchor="middle" fill="#9a9ab0" font-size="9">Reçu par le technicien</text>
+
+  <!-- ===== FLÈCHE 1 ===== -->
+  <g filter="url(#glow)">
+    <line x1="275" y1="210" x2="330" y2="210" stroke="#f97316" stroke-width="2.5" stroke-dasharray="6,3"/>
+    <polygon points="330,205 342,210 330,215" fill="#f97316"/>
+  </g>
+  <text x="308" y="203" text-anchor="middle" fill="#fb923c" font-size="9">Ouverture</text>
+
+  <!-- ===== BMC REMEDY TICKET (centre) ===== -->
+  <!-- Boîte ticket -->
+  <rect x="342" y="140" width="200" height="145" rx="10" fill="url(#ticketGrad)" stroke="#f97316" stroke-width="1.5"/>
+  <!-- Header ticket -->
+  <rect x="342" y="140" width="200" height="30" rx="10" fill="#f97316" opacity="0.9"/>
+  <rect x="342" y="158" width="200" height="12" fill="#f97316" opacity="0.9"/>
+  <text x="442" y="160" text-anchor="middle" fill="white" font-size="10" font-weight="bold">BMC Remedy</text>
+  <!-- Champs ticket -->
+  <text x="358" y="188" fill="#9a9ab0" font-size="8">ID :</text>
+  <text x="385" y="188" fill="#fb923c" font-size="8" font-weight="bold">INC000001247823</text>
+  <text x="358" y="202" fill="#9a9ab0" font-size="8">Priorité :</text>
+  <rect x="400" y="195" width="40" height="10" rx="3" fill="#dc2626" opacity="0.8"/>
+  <text x="420" y="203" text-anchor="middle" fill="white" font-size="7" font-weight="bold">P2</text>
+  <text x="358" y="216" fill="#9a9ab0" font-size="8">Statut :</text>
+  <rect x="397" y="209" width="55" height="10" rx="3" fill="#16a34a" opacity="0.8"/>
+  <text x="424" y="217" text-anchor="middle" fill="white" font-size="7" font-weight="bold">En cours</text>
+  <text x="358" y="230" fill="#9a9ab0" font-size="8">Catégorie :</text>
+  <text x="416" y="230" fill="#e2e8f0" font-size="8">Matériel</text>
+  <text x="358" y="244" fill="#9a9ab0" font-size="8">Assigné :</text>
+  <text x="397" y="244" fill="#e2e8f0" font-size="8">ABIARI Nassim</text>
+  <!-- Ligne séparatrice -->
+  <line x1="358" y1="250" x2="526" y2="250" stroke="#f97316" stroke-width="0.5" opacity="0.4"/>
+  <text x="442" y="264" text-anchor="middle" fill="#fb923c" font-size="8">Ticket créé · Email envoyé</text>
+  <text x="442" y="278" text-anchor="middle" fill="#9a9ab0" font-size="7">Envoi en atelier autorisé</text>
+
+  <!-- ===== FLÈCHE 2 ===== -->
+  <g filter="url(#glow)">
+    <line x1="545" y1="210" x2="600" y2="210" stroke="#f97316" stroke-width="2.5" stroke-dasharray="6,3"/>
+    <polygon points="600,205 612,210 600,215" fill="#f97316"/>
+  </g>
+  <text x="578" y="203" text-anchor="middle" fill="#fb923c" font-size="9">Résolu</text>
+
+  <!-- ===== RÉSULTAT (droite) ===== -->
+  <!-- Boîte résultat -->
+  <rect x="612" y="155" width="135" height="115" rx="10" fill="#0f1f10" stroke="#22c55e" stroke-width="1.5"/>
+  <!-- Header -->
+  <rect x="612" y="155" width="135" height="28" rx="10" fill="#16a34a" opacity="0.9"/>
+  <rect x="612" y="171" width="135" height="12" fill="#16a34a" opacity="0.9"/>
+  <text x="679" y="173" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Résolution</text>
+  <!-- Checks -->
+  <text x="624" y="197" fill="#22c55e" font-size="10">✓</text>
+  <text x="638" y="197" fill="#e2e8f0" font-size="8">Ticket clôturé</text>
+  <text x="624" y="212" fill="#22c55e" font-size="10">✓</text>
+  <text x="638" y="212" fill="#e2e8f0" font-size="8">PC en atelier</text>
+  <text x="624" y="227" fill="#22c55e" font-size="10">✓</text>
+  <text x="638" y="227" fill="#e2e8f0" font-size="8">Email envoyé</text>
+  <text x="624" y="242" fill="#22c55e" font-size="10">✓</text>
+  <text x="638" y="242" fill="#e2e8f0" font-size="8">Traçabilité OK</text>
+  <text x="679" y="262" text-anchor="middle" fill="#22c55e" font-size="7" font-weight="bold">ITIL · N1/N2</text>
+
+  <!-- Titre en haut -->
+  <text x="400" y="40" text-anchor="middle" fill="#f97316" font-size="15" font-weight="bold" filter="url(#glow)">Gestion d'un Incident PC — BMC Remedy</text>
+  <text x="400" y="58" text-anchor="middle" fill="#9a9ab0" font-size="10">Banque de France · DGSI · Support Technique</text>
+
+  <!-- Steps bas de page -->
+  <g>
+    <rect x="60" y="340" width="155" height="28" rx="5" fill="#f97316" opacity="0.15" stroke="#f97316" stroke-width="0.8"/>
+    <text x="137" y="358" text-anchor="middle" fill="#fb923c" font-size="9" font-weight="bold">1. Réception PC</text>
+  </g>
+  <g>
+    <rect x="228" y="340" width="155" height="28" rx="5" fill="#f97316" opacity="0.15" stroke="#f97316" stroke-width="0.8"/>
+    <text x="305" y="358" text-anchor="middle" fill="#fb923c" font-size="9" font-weight="bold">2. Ticket BMC Remedy</text>
+  </g>
+  <g>
+    <rect x="396" y="340" width="155" height="28" rx="5" fill="#f97316" opacity="0.15" stroke="#f97316" stroke-width="0.8"/>
+    <text x="473" y="358" text-anchor="middle" fill="#fb923c" font-size="9" font-weight="bold">3. Email autorisation</text>
+  </g>
+  <g>
+    <rect x="564" y="340" width="155" height="28" rx="5" fill="#f97316" opacity="0.15" stroke="#f97316" stroke-width="0.8"/>
+    <text x="641" y="358" text-anchor="middle" fill="#fb923c" font-size="9" font-weight="bold">4. Envoi en atelier</text>
+  </g>
+</svg>

@@ -13,8 +13,10 @@ const RGPD_CERTIFICATES = [
 
 const CERTIFICATS_BASE = "/certificats-rgpd";
 
+type ModalType = "rgpd" | "cisco" | null;
+
 export default function CertificationsSection() {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState<ModalType>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const selected = RGPD_CERTIFICATES[selectedIndex];
@@ -26,58 +28,82 @@ export default function CertificationsSection() {
       <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mb-12" />
 
       <div className="max-w-5xl space-y-10">
-        {/* Une seule carte « Certificats RGPD » — comme la carte CV */}
-        <div className="space-y-6">
-          <div className="flex items-center gap-2">
-            <Shield size={24} className="text-indigo-400" />
-            <h3 className="text-xl font-bold text-white">Certificats RGPD</h3>
-            <div className="w-12 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded" />
-          </div>
-          <p className="text-slate-400 text-sm">
-            Formations et attestations en lien avec la protection des données et le RGPD.
-          </p>
-          <div
-            role="button"
-            tabIndex={0}
-            onClick={() => setModalOpen(true)}
-            onKeyDown={(e) => e.key === "Enter" && setModalOpen(true)}
-            className="relative aspect-[3/4] max-w-xs mx-auto bg-indigo-950/50 rounded-xl border-2 border-indigo-500/40 overflow-hidden hover:border-indigo-500 transition-all duration-300 group cursor-pointer"
-          >
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-              <div className="w-20 h-20 rounded-xl bg-indigo-500/20 flex items-center justify-center mb-4 group-hover:bg-indigo-500/30 transition-colors">
-                <FileText size={40} className="text-indigo-400" />
-              </div>
-              <h4 className="font-bold text-white text-lg">Certificats RGPD</h4>
-              <p className="text-sm text-slate-500 mt-2">5 attestations</p>
-              <span className="mt-4 text-xs text-indigo-300 flex items-center gap-2">
-                <ExternalLink size={14} />
-                Cliquez pour ouvrir
-              </span>
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a2e]/95 via-[#1a1a2e]/40 to-transparent" />
-          </div>
-        </div>
+        {/* Grille des cartes de certifications */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
 
-        {/* Autres certifications (placeholder) */}
-        <div className="space-y-4 pt-4 border-t border-indigo-900/30">
-          <h3 className="text-lg font-bold text-white flex items-center gap-2">
-            <Award size={20} className="text-indigo-400" />
-            Autres certifications
-          </h3>
-          <p className="text-slate-500 text-sm">
-            D’autres certifications pourront être ajoutées ici.
-          </p>
+          {/* Carte Certificats RGPD */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <Shield size={20} className="text-indigo-400" />
+              <h3 className="text-lg font-bold text-white">Certificats RGPD</h3>
+            </div>
+            <p className="text-slate-400 text-sm">
+              Formations et attestations en lien avec la protection des données et le RGPD.
+            </p>
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={() => setModalOpen("rgpd")}
+              onKeyDown={(e) => e.key === "Enter" && setModalOpen("rgpd")}
+              className="relative aspect-[3/4] w-full bg-indigo-950/50 rounded-xl border-2 border-indigo-500/40 overflow-hidden hover:border-indigo-500 transition-all duration-300 group cursor-pointer"
+            >
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+                <div className="w-20 h-20 rounded-xl bg-indigo-500/20 flex items-center justify-center mb-4 group-hover:bg-indigo-500/30 transition-colors">
+                  <FileText size={40} className="text-indigo-400" />
+                </div>
+                <h4 className="font-bold text-white text-lg">Certificats RGPD</h4>
+                <p className="text-sm text-slate-500 mt-2">5 attestations</p>
+                <span className="mt-4 text-xs text-indigo-300 flex items-center gap-2">
+                  <ExternalLink size={14} />
+                  Cliquez pour ouvrir
+                </span>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a2e]/95 via-[#1a1a2e]/40 to-transparent" />
+            </div>
+          </div>
+
+          {/* Carte Cisco – Introduction to Cybersecurity */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <Award size={20} className="text-green-400" />
+              <h3 className="text-lg font-bold text-white">Cisco Networking Academy</h3>
+            </div>
+            <p className="text-slate-400 text-sm">
+              Certification délivrée par Cisco — Introduction to Cybersecurity.
+            </p>
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={() => setModalOpen("cisco")}
+              onKeyDown={(e) => e.key === "Enter" && setModalOpen("cisco")}
+              className="relative aspect-[3/4] w-full bg-green-950/30 rounded-xl border-2 border-green-500/40 overflow-hidden hover:border-green-500 transition-all duration-300 group cursor-pointer"
+            >
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+                <div className="w-20 h-20 rounded-xl bg-green-500/20 flex items-center justify-center mb-4 group-hover:bg-green-500/30 transition-colors">
+                  <Shield size={40} className="text-green-400" />
+                </div>
+                <h4 className="font-bold text-white text-lg">Introduction to Cybersecurity</h4>
+                <p className="text-sm text-slate-400 mt-1">Issued by Cisco</p>
+                <span className="mt-4 text-xs text-green-300 flex items-center gap-2">
+                  <ExternalLink size={14} />
+                  Cliquez pour ouvrir
+                </span>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a1a0f]/95 via-[#0a1a0f]/40 to-transparent" />
+            </div>
+          </div>
+
         </div>
       </div>
 
-      {/* Modal comme le CV : barre d’outils + PDF en iframe */}
-      {modalOpen && pdfUrl && (
+      {/* Modal RGPD */}
+      {modalOpen === "rgpd" && pdfUrl && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in"
-          onClick={() => setModalOpen(false)}
+          onClick={() => setModalOpen(null)}
           role="button"
           tabIndex={0}
-          onKeyDown={(e) => e.key === "Escape" && setModalOpen(false)}
+          onKeyDown={(e) => e.key === "Escape" && setModalOpen(null)}
           aria-label="Fermer"
         >
           <div
@@ -85,7 +111,6 @@ export default function CertificationsSection() {
             onClick={(e) => e.stopPropagation()}
             role="presentation"
           >
-            {/* Barre d’outils — même style que le modal CV */}
             <div className="flex items-center justify-between gap-3 flex-shrink-0 p-3 border-b border-indigo-900/30">
               <div className="flex items-center gap-2 flex-shrink-0 min-w-0 flex-wrap">
                 <select
@@ -121,7 +146,7 @@ export default function CertificationsSection() {
               </div>
               <button
                 type="button"
-                onClick={() => setModalOpen(false)}
+                onClick={() => setModalOpen(null)}
                 className="p-2 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/40 text-white transition-colors flex-shrink-0"
                 aria-label="Fermer"
               >
@@ -133,6 +158,64 @@ export default function CertificationsSection() {
                 src={`${pdfUrl}#toolbar=0&navpanes=0`}
                 className="absolute inset-0 w-full h-full"
                 title={selected.label}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Cisco */}
+      {modalOpen === "cisco" && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in"
+          onClick={() => setModalOpen(null)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Escape" && setModalOpen(null)}
+          aria-label="Fermer"
+        >
+          <div
+            className="relative w-full max-w-4xl h-[90vh] bg-[#0d1f12] rounded-2xl overflow-hidden shadow-2xl animate-scale-in flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+            role="presentation"
+          >
+            <div className="flex items-center justify-between gap-3 flex-shrink-0 p-3 border-b border-green-900/30">
+              <div className="flex items-center gap-2 flex-shrink-0 min-w-0 flex-wrap">
+                <span className="px-3 py-2 rounded-xl bg-green-500/20 text-green-300 text-sm font-medium border border-green-500/30">
+                  Introduction to Cybersecurity — Cisco
+                </span>
+                <a
+                  href="/docs/cisco-intro-cybersecurity.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 rounded-xl bg-green-500/20 hover:bg-green-500/40 text-white text-sm flex items-center gap-2 transition-colors whitespace-nowrap"
+                >
+                  <ExternalLink size={16} />
+                  Ouvrir dans un nouvel onglet
+                </a>
+                <a
+                  href="/docs/cisco-intro-cybersecurity.pdf"
+                  download
+                  className="p-2 rounded-xl bg-green-500/20 hover:bg-green-500/40 text-white transition-colors flex-shrink-0"
+                  aria-label="Télécharger"
+                >
+                  <Printer size={20} />
+                </a>
+              </div>
+              <button
+                type="button"
+                onClick={() => setModalOpen(null)}
+                className="p-2 rounded-xl bg-green-500/20 hover:bg-green-500/40 text-white transition-colors flex-shrink-0"
+                aria-label="Fermer"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <div className="flex-1 min-h-0 relative">
+              <iframe
+                src="/docs/cisco-intro-cybersecurity.pdf#toolbar=0&navpanes=0"
+                className="absolute inset-0 w-full h-full"
+                title="Introduction to Cybersecurity — Cisco"
               />
             </div>
           </div>

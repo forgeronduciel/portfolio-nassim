@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="'Segoe UI', Arial, sans-serif">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0a0a"/>
+      <stop offset="100%" style="stop-color:#2d0f0f"/>
+    </linearGradient>
+    <linearGradient id="diskGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3a3a4a"/>
+      <stop offset="100%" style="stop-color:#1e1e2e"/>
+    </linearGradient>
+    <linearGradient id="eraseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ef4444"/>
+      <stop offset="100%" style="stop-color:#f87171"/>
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ef4444"/>
+      <stop offset="100%" style="stop-color:#b91c1c"/>
+    </linearGradient>
+    <linearGradient id="serverGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a5f"/>
+      <stop offset="100%" style="stop-color:#0f1f3a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="420" fill="url(#bgGrad)" rx="12"/>
+
+  <!-- Grid pattern subtle -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff08" stroke-width="0.5"/>
+  </pattern>
+  <rect width="800" height="420" fill="url(#grid)" rx="12"/>
+
+  <!-- ══════════ PC / LAPTOP (left) ══════════ -->
+  <g transform="translate(60, 80)">
+    <!-- Screen -->
+    <rect x="0" y="0" width="180" height="120" rx="8" fill="#0f0f1a" stroke="#334155" stroke-width="2"/>
+    <rect x="8" y="8" width="164" height="104" rx="4" fill="#0a0a14"/>
+    <!-- Screen content: BIOS -->
+    <text x="82" y="30" text-anchor="middle" fill="#64748b" font-size="9" font-weight="bold">HP Computer Setup</text>
+    <line x1="10" y1="35" x2="172" y2="35" stroke="#1e293b" stroke-width="1"/>
+    <text x="82" y="50" text-anchor="middle" fill="#94a3b8" font-size="8">Security</text>
+    <rect x="20" y="56" width="140" height="2" rx="1" fill="#1e293b"/>
+    <text x="20" y="72" fill="#64748b" font-size="7">Secure Boot</text>
+    <text x="145" y="72" text-anchor="end" fill="#ef4444" font-size="7" font-weight="bold">DISABLED</text>
+    <rect x="20" y="76" width="140" height="1" rx="0.5" fill="#1e293b"/>
+    <text x="20" y="90" fill="#64748b" font-size="7">BIOS Password</text>
+    <text x="145" y="90" text-anchor="end" fill="#22c55e" font-size="7" font-weight="bold">NONE</text>
+    <text x="82" y="108" text-anchor="middle" fill="#475569" font-size="7">Restore defaults → YES</text>
+    <!-- Base -->
+    <rect x="-15" y="122" width="210" height="10" rx="3" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <rect x="75" y="132" width="30" height="5" rx="2" fill="#1e293b"/>
+    <rect x="40" y="137" width="100" height="4" rx="2" fill="#1e293b"/>
+    <!-- Label -->
+    <text x="90" y="160" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="bold">HP EliteBook</text>
+    <text x="90" y="174" text-anchor="middle" fill="#64748b" font-size="9">BIOS UEFI configuré</text>
+  </g>
+
+  <!-- USB Key -->
+  <g transform="translate(170, 255)">
+    <rect x="0" y="0" width="50" height="22" rx="4" fill="#ef4444" stroke="#fca5a5" stroke-width="1.5"/>
+    <rect x="50" y="6" width="10" height="10" rx="2" fill="#fca5a5"/>
+    <rect x="5" y="5" width="30" height="12" rx="2" fill="#b91c1c"/>
+    <text x="20" y="15" text-anchor="middle" fill="white" font-size="7" font-weight="bold">Blancco</text>
+    <text x="90" y="15" fill="#fca5a5" font-size="9" font-weight="bold">USB Bootable</text>
+    <text x="90" y="27" fill="#64748b" font-size="8">BDF v7.13.0 · Ethernet</text>
+  </g>
+
+  <!-- ══════════ DISK (center) ══════════ -->
+  <g transform="translate(305, 70)">
+    <!-- Disk body -->
+    <rect x="0" y="0" width="190" height="130" rx="10" fill="url(#diskGrad)" stroke="#475569" stroke-width="2"/>
+    <rect x="8" y="8" width="174" height="114" rx="6" fill="#0a0a18" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Disk platters -->
+    <ellipse cx="95" cy="65" rx="45" ry="45" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+    <ellipse cx="95" cy="65" rx="32" ry="32" fill="#0f172a" stroke="#1e2940" stroke-width="1"/>
+    <ellipse cx="95" cy="65" rx="20" ry="20" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <ellipse cx="95" cy="65" rx="6" ry="6" fill="#ef4444" filter="url(#glow)"/>
+
+    <!-- Data sectors being erased (animated feel with opacity bands) -->
+    <path d="M 95 65 L 95 22 A 43 43 0 0 1 133 88 Z" fill="#ef444415" stroke="#ef444430" stroke-width="0.5"/>
+    <path d="M 95 65 L 133 88 A 43 43 0 0 1 57 88 Z" fill="#ef444420" stroke="#ef444440" stroke-width="0.5"/>
+    <path d="M 95 65 L 57 88 A 43 43 0 0 1 57 42 Z" fill="#ef444410" stroke="#ef444420" stroke-width="0.5"/>
+
+    <!-- Disk info -->
+    <text x="155" y="30" text-anchor="end" fill="#94a3b8" font-size="8">Samsung NVMe</text>
+    <text x="155" y="42" text-anchor="end" fill="#64748b" font-size="7.5">256,06 Go · S/N: 5672N51T</text>
+
+    <!-- Label -->
+    <text x="95" y="152" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="bold">Disque NVMe cible</text>
+  </g>
+
+  <!-- ══════════ ERASURE PROGRESS (center bottom) ══════════ -->
+  <g transform="translate(280, 230)">
+    <rect x="0" y="0" width="240" height="70" rx="8" fill="#0f0f1a" stroke="#ef444450" stroke-width="1.5"/>
+    <!-- Blancco header -->
+    <rect x="0" y="0" width="240" height="22" rx="8" fill="#ef444420"/>
+    <rect x="0" y="14" width="240" height="8" fill="#ef444420"/>
+    <!-- Blancco logo dots -->
+    <rect x="8" y="5" width="4" height="4" rx="1" fill="#ef4444"/>
+    <rect x="14" y="5" width="4" height="4" rx="1" fill="#f87171"/>
+    <rect x="20" y="5" width="4" height="4" rx="1" fill="#fca5a5"/>
+    <text x="30" y="13" fill="white" font-size="9" font-weight="bold">blancco</text>
+    <text x="200" y="13" text-anchor="end" fill="#94a3b8" font-size="7">Drive Eraser</text>
+
+    <!-- Progress bar -->
+    <text x="10" y="36" fill="#94a3b8" font-size="8">Effacement en cours...</text>
+    <rect x="10" y="42" width="220" height="8" rx="4" fill="#1e293b"/>
+    <rect x="10" y="42" width="165" height="8" rx="4" fill="url(#eraseGrad)" filter="url(#glow)"/>
+    <text x="235" y="50" text-anchor="end" fill="#ef4444" font-size="8" font-weight="bold">75%</text>
+
+    <!-- Status -->
+    <circle cx="15" cy="62" r="3" fill="#22c55e" filter="url(#glow)"/>
+    <text x="22" y="65" fill="#22c55e" font-size="7.5">Connecté au réseau</text>
+    <circle cx="110" cy="62" r="3" fill="#22c55e" filter="url(#glow)"/>
+    <text x="117" y="65" fill="#22c55e" font-size="7.5">BMC authentifié</text>
+  </g>
+
+  <!-- ══════════ BMC SERVER (right) ══════════ -->
+  <g transform="translate(570, 75)">
+    <rect x="0" y="0" width="170" height="160" rx="8" fill="url(#serverGrad)" stroke="#2563eb50" stroke-width="2"/>
+    <!-- Server units -->
+    <rect x="10" y="15" width="150" height="22" rx="4" fill="#1e3a5f" stroke="#2563eb40" stroke-width="1"/>
+    <circle cx="22" cy="26" r="4" fill="#22c55e" filter="url(#glow)"/>
+    <text x="32" y="30" fill="#94a3b8" font-size="8">Blancco BMC</text>
+    <text x="148" y="30" text-anchor="end" fill="#64748b" font-size="7">Online</text>
+
+    <rect x="10" y="42" width="150" height="22" rx="4" fill="#1e3a5f" stroke="#2563eb40" stroke-width="1"/>
+    <circle cx="22" cy="53" r="4" fill="#3b82f6" filter="url(#glow)"/>
+    <text x="32" y="57" fill="#94a3b8" font-size="8">Licence validée</text>
+
+    <rect x="10" y="69" width="150" height="22" rx="4" fill="#1e3a5f" stroke="#2563eb40" stroke-width="1"/>
+    <circle cx="22" cy="80" r="4" fill="#f59e0b" filter="url(#glow)"/>
+    <text x="32" y="84" fill="#94a3b8" font-size="8">Rapport en attente...</text>
+
+    <!-- Rapport certifié -->
+    <rect x="10" y="100" width="150" height="40" rx="4" fill="#0f2a0f" stroke="#22c55e40" stroke-width="1"/>
+    <text x="85" y="115" text-anchor="middle" fill="#22c55e" font-size="8" font-weight="bold">Rapport certifié</text>
+    <text x="85" y="128" text-anchor="middle" fill="#64748b" font-size="7">NIST 800-88 · DoD 5220.22-M</text>
+
+    <text x="85" y="155" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="bold">Console BMC</text>
+    <text x="85" y="168" text-anchor="middle" fill="#64748b" font-size="8.5">Archivage certifié</text>
+  </g>
+
+  <!-- ══════════ ARROWS ══════════ -->
+  <!-- PC → Disk -->
+  <g filter="url(#glow)">
+    <line x1="250" y1="140" x2="300" y2="140" stroke="#ef4444" stroke-width="2" stroke-dasharray="5,3"/>
+    <polygon points="300,136 310,140 300,144" fill="#ef4444"/>
+    <text x="275" y="132" text-anchor="middle" fill="#ef4444" font-size="8">Boot USB</text>
+  </g>
+
+  <!-- Disk → Server -->
+  <g filter="url(#glow)">
+    <line x1="498" y1="140" x2="565" y2="140" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,3"/>
+    <polygon points="565,136 575,140 565,144" fill="#3b82f6"/>
+    <text x="530" y="132" text-anchor="middle" fill="#3b82f6" font-size="8">Réseau RJ45</text>
+  </g>
+
+  <!-- USB → PC (bottom arrow) -->
+  <g>
+    <line x1="212" y1="260" x2="212" y2="210" stroke="#ef444480" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <polygon points="208,212 212,202 216,212" fill="#ef444480"/>
+  </g>
+
+  <!-- ══════════ SHIELD OVERLAY ══════════ -->
+  <g transform="translate(360, 310)">
+    <path d="M 40 0 L 80 15 L 80 50 Q 80 75 40 88 Q 0 75 0 50 L 0 15 Z" fill="url(#shieldGrad)" opacity="0.15"/>
+    <path d="M 40 5 L 75 18 L 75 50 Q 75 72 40 84 Q 5 72 5 50 L 5 18 Z" fill="none" stroke="#ef4444" stroke-width="1.5" opacity="0.6"/>
+    <!-- Checkmark -->
+    <polyline points="22,48 35,61 58,35" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  </g>
+
+  <!-- ══════════ TITLE ══════════ -->
+  <text x="400" y="395" text-anchor="middle" fill="#475569" font-size="10">Effacement certifié · Blancco BDF 7.13.0 · Norme NIST 800-88</text>
+
+</svg>

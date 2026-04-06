@@ -6,6 +6,7 @@ import {
   BookOpen, Server, Code, Monitor, Building2, Globe, Lock, Users,
   CheckCircle2, ArrowRight, Zap, Database, Shield, Wifi
 } from "lucide-react";
+import { rssFeeds } from "@/lib/rssFeeds";
 
 /* ─────────────────────────────────────────────────────────────────
    TYPES
@@ -83,7 +84,7 @@ const veilleData: EraBlock[] = [
   {
     era: "présent",
     label: "2024 → 2025",
-    subtitle: "IA générative, Zero Trust & coûts cloud",
+    subtitle: "IA générative, FinOps & Edge computing",
     icon: <Cloud size={18} />,
     color: "from-indigo-500 to-purple-600",
     items: [
@@ -94,14 +95,6 @@ const veilleData: EraBlock[] = [
         url: "https://www.kalyptus.fr/le-boom-du-cloud-en-2025/",
         source: "Kalyptus",
         sourceUrl: "https://www.kalyptus.fr/",
-      },
-      {
-        title: "2025 Cloud Highlights : IA, pannes majeures et futur de l'infrastructure",
-        summary:
-          "Forrester Research confirme en 2024 que le ZTNA (Zero Trust Network Access) dépasse le VPN comme mécanisme d'accès distant privilégié. Le principe 'ne jamais faire confiance, toujours vérifier' s'applique à chaque connexion : identité, appareil, contexte. Cloudflare Access, Zscaler et Microsoft Entra mènent ce marché.",
-        url: "https://www.datacenterknowledge.com/cloud/2025-cloud-highlights-ai-outages-and-the-future-of-infrastructure",
-        source: "Data Center Knowledge",
-        sourceUrl: "https://www.datacenterknowledge.com/",
       },
       {
         title: "FinOps : les entreprises luttent contre l'explosion des coûts cloud en 2024-2025",
@@ -227,13 +220,6 @@ function ServiceModelsSchema() {
               <div className="flex-1 min-w-0">
                 <p className="text-white font-semibold text-sm">{layer.full}</p>
                 <p className="text-slate-400 text-xs mt-1 leading-relaxed">{layer.desc}</p>
-                <div className="flex flex-wrap gap-1.5 mt-2">
-                  {layer.examples.map((ex) => (
-                    <span key={ex} className="text-xs bg-white/5 border border-white/10 text-slate-300 px-2 py-0.5 rounded-md">
-                      {ex}
-                    </span>
-                  ))}
-                </div>
               </div>
               <span className="text-xs text-slate-500 shrink-0 mt-1 hidden sm:block">→ {layer.who}</span>
             </div>
@@ -479,7 +465,7 @@ function EnterpriseArchitectureSchema() {
 
         {/* Bloc 3 — Services on-prem */}
         <div className="flex flex-col gap-2 flex-1">
-          <div className="text-center text-xs font-semibold text-slate-400 mb-1">On-Premise (IaaS privé)</div>
+          <div className="text-center text-xs font-semibold text-slate-400 mb-1">On-Premise (Infrastructure physique)</div>
           {[
             { label: "Proxmox / VMs", icon: <Server size={14} />, color: "border-violet-700/40 bg-violet-500/5" },
             { label: "NAS / Stockage", icon: <Database size={14} />, color: "border-violet-700/40 bg-violet-500/5" },
@@ -656,14 +642,13 @@ function CloudExplainer() {
           Lien avec mon infrastructure personnelle
         </h3>
         <p className="text-slate-300 text-sm leading-relaxed mb-4">
-          Ma baie informatique reproduit une infrastructure de type <strong className="text-white">cloud hybride privé</strong>.
-          L'hyperviseur <strong className="text-white">Proxmox VE</strong> joue le rôle d'un IaaS privé (comme Azure Stack ou AWS Outposts),
-          hébergeant des services réels : Active Directory, NAS TrueNAS et Nextcloud en DMZ.
+          Ma baie informatique reproduit une infrastructure <strong className="text-white">on-premise</strong> complète.
+          L'hyperviseur <strong className="text-white">Proxmox VE</strong> tourne sur mon propre serveur physique et héberge des services réels : Active Directory, NAS TrueNAS et Nextcloud en DMZ.
         </p>
         <div className="grid sm:grid-cols-3 gap-3">
           {[
-            { concept: "IaaS privé", impl: "Proxmox VE → VMs à la demande", icon: <Server size={14} />, color: "text-violet-400" },
-            { concept: "Annuaire centralisé", impl: "Active Directory → Azure AD (équivalent)", icon: <Users size={14} />, color: "text-blue-400" },
+            { concept: "On-premise", impl: "Proxmox VE → VMs sur serveur physique", icon: <Server size={14} />, color: "text-violet-400" },
+            { concept: "Annuaire centralisé", impl: "Active Directory", icon: <Users size={14} />, color: "text-blue-400" },
             { concept: "SaaS privé", impl: "Nextcloud → alternative à OneDrive/SharePoint", icon: <Cloud size={14} />, color: "text-teal-400" },
           ].map((item) => (
             <div key={item.concept} className="rounded-xl bg-white/3 border border-white/10 p-3 space-y-1">
@@ -826,57 +811,108 @@ export default function VeilleSection() {
           </div>
         )}
 
-        {/* ── Tab 3 : Flux RSS ─────────────────────────────────── */}
+        {/* ── Tab 3 : Flux RSS via Feedly ───────────────────────── */}
         {activeTab === "rss" && (
-          <div className="space-y-4">
-            <p className="text-slate-400 text-sm">
-              Articles récents mis à jour automatiquement — Cloud Computing, AWS, Azure, GCP, DevOps, sécurité cloud.
-            </p>
-            {rssLoading && (
-              <div className="flex items-center justify-center py-14 text-slate-400 gap-2">
-                <Loader2 size={24} className="animate-spin" />
-                <span className="text-sm">Chargement des flux…</span>
+          <div className="space-y-6">
+
+            {/* Feedly banner */}
+            <div className="flex items-center justify-between gap-4 p-4 rounded-xl border border-[#2bb24c]/30 bg-[#2bb24c]/5">
+              <div className="flex items-center gap-3">
+                <img
+                  src="https://feedly.com/favicon.ico"
+                  alt="Feedly"
+                  className="w-6 h-6 rounded"
+                />
+                <div>
+                  <p className="text-sm font-semibold text-[#2bb24c]">Veille suivie via Feedly</p>
+                  <p className="text-xs text-slate-400">Cloud · Sécurité · Infrastructure IT</p>
+                </div>
               </div>
-            )}
-            {rssError && (
-              <div className="card-bg rounded-2xl p-6 border border-amber-900/40 text-amber-200/90 text-sm">
-                {rssError}
-              </div>
-            )}
-            {!rssLoading && !rssError && rssItems.length === 0 && (
-              <p className="text-slate-500 text-sm py-6">Aucun article disponible pour le moment.</p>
-            )}
-            {!rssLoading && !rssError && rssItems.length > 0 && (
-              <div className="grid md:grid-cols-2 gap-4">
-                {rssItems.map((item, i) => (
-                  <div
-                    key={`${item.source}-${item.link}-${i}`}
-                    className="card-bg rounded-2xl p-5 border border-indigo-900/30 hover:border-indigo-500 transition-all duration-300 hover-lift group"
-                  >
-                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="flex items-start justify-between gap-3">
-                      <h4 className="font-semibold text-white group-hover:text-indigo-400 transition-colors line-clamp-2 text-sm">
-                        {item.title}
-                      </h4>
-                      <ExternalLink size={16} className="text-indigo-400 flex-shrink-0 mt-0.5" />
+              <a
+                href="https://feedly.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#2bb24c] text-white text-xs font-semibold hover:bg-[#24a044] transition-colors flex-shrink-0"
+              >
+                Ouvrir Feedly
+                <ExternalLink size={12} />
+              </a>
+            </div>
+
+            {/* Sources list */}
+            <div>
+              <p className="text-xs text-slate-500 uppercase tracking-widest mb-3">Sources suivies</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+                {rssFeeds.map((feed) => {
+                  return (
+                    <a
+                      key={feed.id}
+                      href={feed.websiteUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg bg-indigo-950/40 border border-indigo-900/20 hover:border-[#2bb24c]/50 hover:bg-[#2bb24c]/5 transition-all group text-xs"
+                    >
+                      <span className="text-slate-300 group-hover:text-[#2bb24c] truncate">{feed.label}</span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-900/40 text-slate-500 group-hover:text-[#2bb24c] flex-shrink-0 uppercase tracking-wide">
+                        {feed.category === "french" ? "FR" : feed.category}
+                      </span>
                     </a>
-                    {item.summary ? (
-                      <p className="text-sm text-slate-400 mt-2 line-clamp-2">{item.summary}</p>
-                    ) : (
-                      <p className="text-sm text-slate-500 mt-2 italic">Lire l'article</p>
-                    )}
-                    <div className="text-xs text-slate-500 mt-3 flex items-center gap-2 flex-wrap">
-                      <span>{item.source}</span>
-                      {item.pubDate && (
-                        <>
-                          <span>·</span>
-                          <time dateTime={item.pubDate}>{formatRssDate(item.pubDate)}</time>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
-            )}
+            </div>
+
+            {/* Articles */}
+            <div>
+              <p className="text-xs text-slate-500 uppercase tracking-widest mb-3">Derniers articles</p>
+              {rssLoading && (
+                <div className="flex items-center justify-center py-14 text-slate-400 gap-2">
+                  <Loader2 size={24} className="animate-spin" />
+                  <span className="text-sm">Chargement…</span>
+                </div>
+              )}
+              {rssError && (
+                <div className="card-bg rounded-2xl p-6 border border-amber-900/40 text-amber-200/90 text-sm">
+                  {rssError}
+                </div>
+              )}
+              {!rssLoading && !rssError && rssItems.length === 0 && (
+                <p className="text-slate-500 text-sm py-6">Aucun article disponible pour le moment.</p>
+              )}
+              {!rssLoading && !rssError && rssItems.length > 0 && (
+                <div className="grid md:grid-cols-2 gap-4">
+                  {rssItems.map((item, i) => (
+                    <div
+                      key={`${item.source}-${item.link}-${i}`}
+                      className="card-bg rounded-2xl p-5 border border-indigo-900/30 hover:border-[#2bb24c]/40 transition-all duration-300 hover-lift group"
+                    >
+                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="flex items-start justify-between gap-3">
+                        <h4 className="font-semibold text-white group-hover:text-[#2bb24c] transition-colors line-clamp-2 text-sm">
+                          {item.title}
+                        </h4>
+                        <ExternalLink size={16} className="text-[#2bb24c]/60 flex-shrink-0 mt-0.5" />
+                      </a>
+                      {item.summary ? (
+                        <p className="text-sm text-slate-400 mt-2 line-clamp-2">{item.summary}</p>
+                      ) : (
+                        <p className="text-sm text-slate-500 mt-2 italic">Lire l'article</p>
+                      )}
+                      <div className="text-xs text-slate-500 mt-3 flex items-center gap-2 flex-wrap">
+                        <img src="https://feedly.com/favicon.ico" alt="" className="w-3 h-3 opacity-50" />
+                        <span>{item.source}</span>
+                        {item.pubDate && (
+                          <>
+                            <span>·</span>
+                            <time dateTime={item.pubDate}>{formatRssDate(item.pubDate)}</time>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
           </div>
         )}
       </div>

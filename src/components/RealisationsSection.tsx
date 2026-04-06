@@ -23,7 +23,7 @@ const SOUS_CRITERES = [
     "Mettre en place et vérifier les niveaux d'habilitation associés à un service",
     "Vérifier les conditions de la continuité d'un service informatique",
     "Gérer des sauvegardes",
-    "Vérifier le respect des règles d'utilisation des ressources numériques",
+    "Vérifier le respect des règles d'utilisation des ressources numérique",
   ],
   [
     "Collecter, suivre et orienter des demandes",
@@ -60,7 +60,7 @@ const FORMATION: Row[] = [
   { realisation: "Projet E6 : Infrastructure AD + Nextcloud", periode: "2025-2026", competences: [true, true, false, false, true, false] },
   { realisation: "Projet E6 : Serveur NAS TrueNAS", periode: "2025-2026", competences: [true, true, false, false, true, false] },
   { realisation: "Portfolio", periode: "2025-2026", competences: [false, false, true, false, false, true] },
-  { realisation: "SSO (Single Sign-On)", periode: "2025-2026", competences: [true, true, false, false, true, false] },
+  { realisation: "Authentik SSO", periode: "2025-2026", competences: [true, false, false, false, true, false] },
 ];
 
 const PREMIERE_ANNEE: Row[] = [
@@ -71,9 +71,9 @@ const PREMIERE_ANNEE: Row[] = [
 
 const SECONDE_ANNEE: Row[] = [
   { realisation: "Masterisation PC", periode: "2025-2026", competences: [true, false, false, false, true, false] },
+  { realisation: "Effacement sécurisé (Blancco)", periode: "2025-2026", competences: [true, false, false, false, true, false] },
   { realisation: "Support technique", periode: "2025-2026", competences: [true, false, false, false, true, false] },
   { realisation: "Outil de ticketing", periode: "2025-2026", competences: [true, true, false, false, true, false] },
-  { realisation: "Préparation événement", periode: "2025-2026", competences: [false, false, false, false, false, false] },
   { realisation: "Gestion stock", periode: "2025-2026", competences: [true, true, false, false, false, false] },
 ];
 
@@ -112,7 +112,25 @@ function DataRows({ rows }: { rows: Row[] }) {
           {row.competences.map((checked, j) => (
             <td key={j} className="py-2.5 text-center border-r border-slate-700/20 last:border-r-0">
               {checked && (
-                <span className="font-extrabold text-cyan-300" style={{ fontSize: "13px" }}>X</span>
+                <span className="relative group inline-block cursor-default">
+                  <span className="font-extrabold text-cyan-300" style={{ fontSize: "13px" }}>X</span>
+                  {/* Tooltip */}
+                  <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50
+                    w-44 rounded-lg px-3 py-2 text-center shadow-xl
+                    bg-slate-900 border border-cyan-500/40
+                    text-cyan-200 font-semibold opacity-0 group-hover:opacity-100
+                    transition-opacity duration-150"
+                    style={{ fontSize: "10px", lineHeight: "1.4" }}
+                  >
+                    <span className="block text-cyan-400 font-bold mb-0.5" style={{ fontSize: "9px" }}>
+                      C{j + 1} — Compétence validée
+                    </span>
+                    {COMPETENCES_NOMS[j]}
+                    <span className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0"
+                      style={{ borderLeft: "5px solid transparent", borderRight: "5px solid transparent", borderTop: "5px solid rgba(6,182,212,0.4)" }}
+                    />
+                  </span>
+                </span>
               )}
             </td>
           ))}
@@ -124,100 +142,105 @@ function DataRows({ rows }: { rows: Row[] }) {
 
 function TableauCompetences() {
   return (
-    <div className="overflow-x-auto rounded-xl border border-slate-600/30 shadow-xl">
+    <div className="rounded-xl border border-slate-600/30 shadow-xl overflow-visible">
       <table
-        className="border-collapse bg-[#0b1829] text-sm"
-        style={{ minWidth: "980px", width: "100%", tableLayout: "fixed" }}
+        className="border-collapse bg-[#0b1829] text-sm w-full"
+        style={{ tableLayout: "fixed" }}
       >
         <colgroup>
-          <col style={{ width: "22%" }} />
-          <col style={{ width: "7%" }} />
-          <col style={{ width: "11.83%" }} />
-          <col style={{ width: "11.83%" }} />
-          <col style={{ width: "11.83%" }} />
-          <col style={{ width: "11.83%" }} />
-          <col style={{ width: "11.83%" }} />
-          <col style={{ width: "11.83%" }} />
+          <col style={{ width: "18%" }} />
+          <col style={{ width: "11%" }} />
+          <col style={{ width: "11%" }} />
+          <col style={{ width: "11%" }} />
+          <col style={{ width: "11%" }} />
+          <col style={{ width: "11%" }} />
+          <col style={{ width: "11%" }} />
+          <col style={{ width: "11%" }} />
         </colgroup>
         <thead>
-          {/* ── LIGNE 1 : cellule diagonale + Période (rowSpan=2) + noms compétences ── */}
+          {/* ── LIGNE 1 : titre + noms compétences ── */}
           <tr>
-            {/* Cellule diagonale : rowSpan=2 */}
             <th
-              rowSpan={2}
-              className="relative border-r border-slate-600/40 bg-[#0b1829] p-0"
-              style={{ verticalAlign: "bottom" }}
+              className="border-r border-b border-slate-600/40 bg-[#0d1a2e] px-3 py-3 text-left"
+              style={{ verticalAlign: "middle" }}
             >
-              <div className="relative" style={{ height: "190px" }}>
-                <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-                  <line x1="0" y1="0" x2="100%" y2="100%" stroke="rgba(148,163,184,0.3)" strokeWidth="1" />
-                </svg>
-                <span
-                  className="absolute italic text-slate-400 text-right leading-snug"
-                  style={{ top: "10px", right: "8px", fontSize: "9px", maxWidth: "55%" }}
-                >
-                  Compétences<br />mises en œuvre
-                </span>
-                <div className="absolute text-left" style={{ bottom: "10px", left: "8px" }}>
-                  <span className="block font-bold text-white" style={{ fontSize: "10px" }}>Réalisations</span>
-                  <span className="block italic text-slate-500 mt-0.5" style={{ fontSize: "8px" }}>
-                    (intitulé et liste des documents)
-                  </span>
-                </div>
-              </div>
+              <span className="block font-bold text-white uppercase tracking-wide" style={{ fontSize: "9px" }}>
+                Compétences mises en œuvre
+              </span>
             </th>
-
-            {/* Période : rowSpan=2 — colonne indépendante */}
+            {/* Période — pas de rowspan, juste ligne 1 */}
             <th
-              rowSpan={2}
-              className="text-center font-bold text-slate-300 border-r border-l border-slate-600/40 bg-[#0b1829] px-1"
+              className="text-center font-bold text-slate-300 border-r border-b border-slate-600/40 bg-[#0d1a2e] px-1"
               style={{ fontSize: "9px", verticalAlign: "middle" }}
             >
               Période
             </th>
-
-            {/* Noms des 6 compétences */}
             {COMPETENCES_NOMS.map((nom, i) => (
               <th
                 key={i}
-                className="px-1 py-2 text-center font-bold text-white border-l border-b border-slate-600/40 bg-[#0e1e3a]"
-                style={{ fontSize: "10px", verticalAlign: "bottom", lineHeight: "1.3" }}
+                className="relative group px-2 py-2 text-center font-bold text-white border-l border-b border-slate-600/40 bg-[#0e1e3a] cursor-default"
+                style={{ fontSize: "9px", verticalAlign: "middle", lineHeight: "1.3" }}
               >
                 {nom}
+                <span className="block font-normal text-indigo-400 mt-1" style={{ fontSize: "8px" }}>
+                  Survoler pour détails
+                </span>
+                {/* Tooltip sous-critères */}
+                <span className="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50
+                  w-52 rounded-xl px-3 py-3 text-left shadow-2xl
+                  bg-slate-900 border border-indigo-500/40
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-150"
+                  style={{ fontSize: "9px", lineHeight: "1.5" }}
+                >
+                  <span className="block text-indigo-300 font-bold mb-2" style={{ fontSize: "9px" }}>
+                    C{i + 1} — {nom}
+                  </span>
+                  <ul className="space-y-1">
+                    {SOUS_CRITERES[i].map((c, j) => (
+                      <li key={j} className="text-slate-300 flex gap-1.5 items-start">
+                        <span className="text-indigo-400 flex-shrink-0 mt-px">›</span>
+                        <span>{c}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <span className="absolute left-1/2 -translate-x-1/2 bottom-full w-0 h-0"
+                    style={{ borderLeft: "5px solid transparent", borderRight: "5px solid transparent", borderBottom: "5px solid rgba(99,102,241,0.4)" }}
+                  />
+                </span>
               </th>
             ))}
           </tr>
 
-          {/* ── LIGNE 2 : sous-critères verticaux ── */}
+          {/* ── LIGNE 2 : "Réalisations" + sous-critères en liste ── */}
           <tr style={{ borderBottom: "2px solid rgba(100,116,139,0.5)" }}>
+            <th
+              className="border-r border-slate-600/40 bg-[#0b1829] px-3 py-2 text-left"
+              style={{ verticalAlign: "top" }}
+            >
+              <span className="block font-semibold text-slate-300" style={{ fontSize: "9px" }}>
+                Réalisations
+              </span>
+            </th>
+            {/* Période — vide */}
+            <th className="border-r border-slate-600/40 bg-[#0b1829]" />
             {SOUS_CRITERES.map((criteres, i) => (
               <th
                 key={i}
-                className="border-l border-slate-600/30 bg-[#080e1c]"
-                style={{ height: "130px", padding: "4px 2px", verticalAlign: "bottom" }}
+                className="border-l border-slate-600/30 bg-[#080e1c] px-2 py-2 text-left font-normal"
+                style={{ verticalAlign: "top" }}
               >
-                <div style={{ display: "flex", flexDirection: "row", gap: "3px", justifyContent: "center", alignItems: "flex-end", height: "100%" }}>
+                <ul className="space-y-1">
                   {criteres.map((c, j) => (
-                    <span
+                    <li
                       key={j}
-                      className="text-slate-400"
-                      style={{
-                        writingMode: "vertical-lr",
-                        transform: "rotate(180deg)",
-                        fontSize: "8px",
-                        lineHeight: "1.15",
-                        whiteSpace: "normal",
-                        wordBreak: "break-word",
-                        maxHeight: "122px",
-                        overflow: "hidden",
-                        display: "block",
-                        flexShrink: 1,
-                      }}
+                      className="text-slate-400 flex gap-1 items-start"
+                      style={{ fontSize: "8px", lineHeight: "1.3" }}
                     >
-                      {c}
-                    </span>
+                      <span className="text-indigo-400 mt-px flex-shrink-0">›</span>
+                      <span>{c}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </th>
             ))}
           </tr>
