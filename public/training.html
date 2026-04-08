@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entraînement BTS SIO — Élouan</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a14;
+      --surface: #13131f;
+      --surface2: #1a1a2e;
+      --border: rgba(99,102,241,.25);
+      --indigo: #6366f1;
+      --indigo-light: #818cf8;
+      --purple: #a855f7;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --radius: 14px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,20,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .logo { font-size: 18px; font-weight: 800; background: linear-gradient(90deg,#6366f1,#a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .mode-tabs { display: flex; gap: 8px; margin-left: auto; }
+    .tab-btn {
+      padding: 8px 18px; border-radius: 999px; border: 1px solid var(--border);
+      background: transparent; color: var(--muted); cursor: pointer; font-size: 14px; font-weight: 600;
+      transition: all .2s;
+    }
+    .tab-btn.active { background: var(--indigo); border-color: var(--indigo); color: #fff; }
+    .tab-btn:hover:not(.active) { border-color: var(--indigo); color: var(--indigo-light); }
+
+    /* CONTAINER */
+    .container { max-width: 820px; margin: 0 auto; padding: 32px 16px; }
+
+    /* ─── FLASHCARDS ─── */
+    .category-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px; margin-bottom: 32px;
+    }
+    .cat-btn {
+      padding: 14px 16px; border-radius: var(--radius);
+      border: 1.5px solid var(--border); background: var(--surface);
+      color: var(--text); cursor: pointer; font-size: 13px; font-weight: 600;
+      text-align: left; transition: all .2s; line-height: 1.3;
+    }
+    .cat-btn:hover, .cat-btn.active { border-color: var(--indigo); background: rgba(99,102,241,.12); }
+    .cat-emoji { font-size: 22px; display: block; margin-bottom: 6px; }
+    .cat-count { font-size: 11px; color: var(--muted); margin-top: 4px; font-weight: 400; }
+
+    /* Flashcard */
+    .fc-area { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .fc-progress { width: 100%; display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--muted); }
+    .progress-bar { flex: 1; height: 6px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--indigo), var(--purple)); border-radius: 99px; transition: width .4s; }
+
+    .flashcard {
+      width: 100%; min-height: 240px;
+      border-radius: 20px; border: 1.5px solid var(--border);
+      background: var(--surface);
+      padding: 36px; cursor: pointer;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; gap: 12px;
+      transition: transform .15s, box-shadow .15s;
+      position: relative; overflow: hidden;
+    }
+    .flashcard:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(99,102,241,.18); }
+    .flashcard::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--indigo), var(--purple));
+    }
+    .fc-label {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--indigo-light); margin-bottom: 4px;
+    }
+    .fc-q { font-size: 18px; font-weight: 700; color: #fff; line-height: 1.4; }
+    .fc-hint { font-size: 12px; color: var(--muted); margin-top: 8px; }
+    .fc-answer {
+      width: 100%; border-radius: 16px; border: 1px solid rgba(16,185,129,.3);
+      background: rgba(16,185,129,.07); padding: 24px; font-size: 14px;
+      color: var(--text); line-height: 1.7; display: none;
+    }
+    .fc-answer.visible { display: block; }
+    .fc-answer ul { padding-left: 18px; margin-top: 8px; }
+    .fc-answer li { margin-bottom: 6px; }
+    .fc-answer strong { color: #fff; }
+    .fc-answer .tag {
+      display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px;
+      font-weight: 600; margin: 2px; background: rgba(99,102,241,.2); color: var(--indigo-light);
+      border: 1px solid rgba(99,102,241,.3);
+    }
+
+    .fc-actions { display: flex; gap: 12px; width: 100%; }
+    .btn {
+      flex: 1; padding: 12px; border-radius: var(--radius); border: none;
+      font-size: 14px; font-weight: 700; cursor: pointer; transition: all .15s;
+    }
+    .btn-reveal { background: var(--indigo); color: #fff; }
+    .btn-reveal:hover { background: #5254cc; }
+    .btn-ok { background: rgba(16,185,129,.2); color: var(--emerald); border: 1px solid rgba(16,185,129,.4); }
+    .btn-ok:hover { background: rgba(16,185,129,.35); }
+    .btn-nok { background: rgba(244,63,94,.2); color: var(--rose); border: 1px solid rgba(244,63,94,.4); }
+    .btn-nok:hover { background: rgba(244,63,94,.35); }
+    .btn-sec { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+    .btn-sec:hover { color: var(--text); }
+    .btn-next { background: linear-gradient(90deg,var(--indigo),var(--purple)); color: #fff; }
+    .btn-next:hover { opacity: .88; }
+
+    .score-box {
+      display: flex; gap: 24px; padding: 16px 24px;
+      background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border);
+      width: 100%; justify-content: center; flex-wrap: wrap;
+    }
+    .score-item { text-align: center; }
+    .score-num { font-size: 24px; font-weight: 800; }
+    .score-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .green { color: var(--emerald); }
+    .red { color: var(--rose); }
+    .indigo { color: var(--indigo-light); }
+
+    /* ─── JURY SIMULATION ─── */
+    .jury-header {
+      background: var(--surface); border-radius: 20px; border: 1px solid var(--border);
+      padding: 24px; margin-bottom: 24px; display: flex; gap: 20px; align-items: center;
+    }
+    .jury-avatar {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: linear-gradient(135deg,#1e40af,#6366f1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; flex-shrink: 0;
+    }
+    .jury-info h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .jury-info p { font-size: 13px; color: var(--muted); }
+
+    .jury-progress {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+      font-size: 13px; color: var(--muted);
+    }
+    .jury-dots { display: flex; gap: 6px; }
+    .jury-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--surface2); border: 1px solid var(--border);
+      transition: all .3s;
+    }
+    .jury-dot.done-ok { background: var(--emerald); border-color: var(--emerald); }
+    .jury-dot.done-nok { background: var(--rose); border-color: var(--rose); }
+    .jury-dot.current { background: var(--indigo); border-color: var(--indigo); transform: scale(1.3); }
+
+    .jury-q-box {
+      background: var(--surface); border-radius: 20px; border: 1.5px solid var(--border);
+      padding: 28px; margin-bottom: 16px; position: relative; overflow: hidden;
+    }
+    .jury-q-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,var(--indigo),var(--purple)); }
+    .jury-q-category { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--indigo-light); font-weight: 700; margin-bottom: 10px; }
+    .jury-q-text { font-size: 19px; font-weight: 700; color: #fff; line-height: 1.4; }
+    .jury-q-icon { font-size: 28px; position: absolute; top: 24px; right: 24px; opacity: .4; }
+
+    .jury-answer-box {
+      background: rgba(16,185,129,.07); border: 1px solid rgba(16,185,129,.25);
+      border-radius: 16px; padding: 24px; margin-bottom: 16px;
+      font-size: 14px; color: var(--text); line-height: 1.8; display: none;
+    }
+    .jury-answer-box.visible { display: block; }
+    .jury-answer-box h4 { color: var(--emerald); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; }
+    .jury-answer-box ul { padding-left: 18px; }
+    .jury-answer-box li { margin-bottom: 6px; }
+    .jury-answer-box strong { color: #fff; }
+    .jury-answer-box .kw {
+      display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 12px;
+      background: rgba(99,102,241,.2); color: var(--indigo-light); font-weight: 600;
+      border: 1px solid rgba(99,102,241,.3); margin: 1px;
+    }
+
+    .self-eval {
+      display: none; gap: 8px;
+    }
+    .self-eval.visible { display: flex; }
+    .eval-btn {
+      flex: 1; padding: 12px; border-radius: var(--radius); border: none;
+      font-size: 14px; font-weight: 700; cursor: pointer; transition: all .15s;
+    }
+    .eval-ok { background: rgba(16,185,129,.2); color: var(--emerald); border: 1px solid rgba(16,185,129,.4); }
+    .eval-ok:hover { background: rgba(16,185,129,.4); }
+    .eval-partial { background: rgba(245,158,11,.2); color: var(--amber); border: 1px solid rgba(245,158,11,.4); }
+    .eval-partial:hover { background: rgba(245,158,11,.4); }
+    .eval-nok { background: rgba(244,63,94,.2); color: var(--rose); border: 1px solid rgba(244,63,94,.4); }
+    .eval-nok:hover { background: rgba(244,63,94,.4); }
+
+    .jury-actions { display: flex; gap: 12px; }
+
+    /* Results */
+    .results-card {
+      background: var(--surface); border-radius: 20px; border: 1.5px solid var(--border);
+      padding: 40px; text-align: center;
+    }
+    .results-card h2 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+    .results-card p { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
+    .big-score { font-size: 72px; font-weight: 900; line-height: 1; margin: 16px 0; }
+    .grade { font-size: 22px; font-weight: 700; margin-top: 4px; }
+    .grade.A { color: var(--emerald); }
+    .grade.B { color: #3b82f6; }
+    .grade.C { color: var(--amber); }
+    .grade.D { color: var(--rose); }
+    .results-grid { display: flex; gap: 16px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+    .result-item { text-align: center; padding: 16px 24px; background: var(--surface2); border-radius: var(--radius); }
+    .result-item .num { font-size: 28px; font-weight: 800; }
+    .result-item .lbl { font-size: 12px; color: var(--muted); }
+
+    /* Misc */
+    .section-title { font-size: 22px; font-weight: 700; margin-bottom: 20px; color: #fff; }
+    .hidden { display: none !important; }
+    .shuffle-row { display: flex; gap: 10px; margin-bottom: 20px; align-items: center; }
+    .shuffle-row label { font-size: 13px; color: var(--muted); }
+    .toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--indigo); cursor: pointer; }
+
+    @media (max-width: 600px) {
+      .category-grid { grid-template-columns: 1fr 1fr; }
+      .fc-actions { flex-wrap: wrap; }
+      .mode-tabs { gap: 4px; }
+      .tab-btn { padding: 6px 12px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🎓 BTS SIO Entraînement</div>
+  <div class="mode-tabs">
+    <button class="tab-btn active" onclick="switchMode('flashcards')">🃏 Flashcards</button>
+    <button class="tab-btn" onclick="switchMode('jury')">🎤 Jury</button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════
+     FLASHCARD MODE
+════════════════════════════════════════════ -->
+<div id="mode-flashcards" class="container">
+  <h1 class="section-title">Flashcards — Choisir une catégorie</h1>
+
+  <div class="shuffle-row">
+    <label class="toggle">
+      <input type="checkbox" id="shuffleCheck" />
+      Mélanger les cartes
+    </label>
+  </div>
+
+  <div class="category-grid" id="cat-grid"></div>
+
+  <div class="fc-area hidden" id="fc-area">
+    <div class="score-box" id="score-box">
+      <div class="score-item"><div class="score-num green" id="s-ok">0</div><div class="score-lbl">✓ Sus</div></div>
+      <div class="score-item"><div class="score-num red" id="s-nok">0</div><div class="score-lbl">✗ À revoir</div></div>
+      <div class="score-item"><div class="score-num indigo" id="s-left">0</div><div class="score-lbl">Restantes</div></div>
+    </div>
+
+    <div class="fc-progress">
+      <span id="fc-pos">1 / 1</span>
+      <div class="progress-bar"><div class="progress-fill" id="fc-bar" style="width:0%"></div></div>
+      <span id="fc-pct">0%</span>
+    </div>
+
+    <div class="flashcard" onclick="revealAnswer()" id="fc-card">
+      <div class="fc-label" id="fc-cat-label">Catégorie</div>
+      <div class="fc-q" id="fc-q">Question</div>
+      <div class="fc-hint">👆 Cliquer pour révéler la réponse</div>
+    </div>
+
+    <div class="fc-answer" id="fc-answer"></div>
+
+    <div class="fc-actions" id="fc-actions-main">
+      <button class="btn btn-reveal" id="btn-reveal" onclick="revealAnswer()">Révéler la réponse</button>
+    </div>
+    <div class="fc-actions hidden" id="fc-actions-eval">
+      <button class="btn btn-nok" onclick="markCard(false)">❌ À revoir</button>
+      <button class="btn btn-ok" onclick="markCard(true)">✅ Je savais !</button>
+    </div>
+    <div class="fc-actions" style="margin-top:4px">
+      <button class="btn btn-sec" onclick="backToCategories()">← Catégories</button>
+      <button class="btn btn-next" onclick="nextCard()">Suivante →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     JURY MODE
+════════════════════════════════════════════ -->
+<div id="mode-jury" class="container hidden">
+  <div class="jury-header">
+    <div class="jury-avatar">👨‍💼</div>
+    <div class="jury-info">
+      <h3>Simulation Jury E6 — BTS SIO SISR</h3>
+      <p>Le jury vous pose des questions. Répondez à voix haute puis évaluez-vous.</p>
+    </div>
+  </div>
+
+  <div id="jury-main">
+    <div class="jury-progress">
+      <span id="jury-pos">Question 1 / 20</span>
+      <div class="jury-dots" id="jury-dots"></div>
+    </div>
+
+    <div class="jury-q-box">
+      <div class="jury-q-icon" id="jury-icon">🎯</div>
+      <div class="jury-q-category" id="jury-cat">Présentation</div>
+      <div class="jury-q-text" id="jury-q">Loading...</div>
+    </div>
+
+    <div class="jury-answer-box" id="jury-answer">
+      <h4>✅ Éléments de réponse attendus</h4>
+      <div id="jury-answer-content"></div>
+    </div>
+
+    <div class="self-eval" id="self-eval">
+      <button class="eval-btn eval-nok" onclick="juryEval(0)">❌ Pas su</button>
+      <button class="eval-btn eval-partial" onclick="juryEval(1)">🟡 Partiel</button>
+      <button class="eval-btn eval-ok" onclick="juryEval(2)">✅ Bien répondu</button>
+    </div>
+
+    <div class="jury-actions" style="margin-top:12px">
+      <button class="btn btn-reveal" id="jury-reveal-btn" onclick="revealJuryAnswer()">Révéler la réponse</button>
+      <button class="btn btn-next" id="jury-next-btn" onclick="nextJuryQ()" style="display:none">Question suivante →</button>
+    </div>
+  </div>
+
+  <div id="jury-results" class="hidden">
+    <div class="results-card">
+      <h2>Simulation terminée !</h2>
+      <p>Voici votre résultat de l'oral E6</p>
+      <div class="big-score indigo" id="final-score">—</div>
+      <div class="grade" id="final-grade"></div>
+      <div class="results-grid">
+        <div class="result-item"><div class="num green" id="r-ok">0</div><div class="lbl">Bien répondu</div></div>
+        <div class="result-item"><div class="num" style="color:var(--amber)" id="r-partial">0</div><div class="lbl">Partiellement</div></div>
+        <div class="result-item"><div class="num red" id="r-nok">0</div><div class="lbl">À revoir</div></div>
+      </div>
+      <div style="margin-top:28px;display:flex;gap:12px;justify-content:center">
+        <button class="btn btn-next" style="flex:0;padding:12px 28px" onclick="restartJury()">🔄 Recommencer</button>
+        <button class="btn btn-sec" style="flex:0;padding:12px 28px" onclick="switchMode('flashcards')">🃏 Flashcards</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════
+   DATA — FLASHCARDS
+══════════════════════════════════════ */
+const CATEGORIES = [
+  {
+    id: "projets-ecole",
+    emoji: "🏫",
+    label: "Projets école",
+    sublabel: "7 projets",
+    cards: [
+      {
+        q: "Qu'est-ce que Proxmox VE et à quoi ça sert ?",
+        a: `<strong>Proxmox VE</strong> est une plateforme de virtualisation open-source basée sur Debian.<br><br>
+<ul>
+<li>Héberge des <strong>machines virtuelles</strong> (KVM) et des <strong>conteneurs LXC</strong></li>
+<li>Gestion du stockage <strong>ZFS</strong> avec snapshots et sauvegardes</li>
+<li>Configuration des <strong>VLANs</strong> et bridges réseau virtuels</li>
+<li>Interface web intuitive pour administrer toute l'infrastructure</li>
+</ul><br>
+<span class="tag">KVM</span><span class="tag">LXC</span><span class="tag">ZFS</span><span class="tag">VLAN</span>`
+      },
+      {
+        q: "Quels services Cloudflare avez-vous configurés ?",
+        a: `<ul>
+<li><strong>DNS</strong> : enregistrements A, CNAME, MX, TXT</li>
+<li><strong>Proxy & protection DDoS</strong> : trafic passe par Cloudflare</li>
+<li><strong>SSL/TLS Full Strict</strong> : chiffrement bout-en-bout</li>
+<li><strong>Tunnel Zero Trust</strong> : accès sécurisé sans port exposé</li>
+<li>Analyse des logs et alertes de trafic</li>
+</ul>
+<span class="tag">DNS</span><span class="tag">DDoS</span><span class="tag">SSL/TLS</span><span class="tag">Zero Trust</span>`
+      },
+      {
+        q: "Qu'est-ce qu'Active Directory et comment l'avez-vous configuré ?",
+        a: `<strong>Active Directory</strong> est l'annuaire Microsoft pour la gestion centralisée des identités.<br><br>
+<ul>
+<li>Installation <strong>Windows Server 2025</strong> + promotion en contrôleur de domaine</li>
+<li>Création des <strong>OU</strong> (Unités d'Organisation), utilisateurs, groupes</li>
+<li>Déploiement des <strong>GPO</strong> (stratégies de groupe) : logiciels, restrictions</li>
+<li>Intégration postes clients Windows au domaine</li>
+<li>Services <strong>DHCP</strong> et <strong>DNS</strong> Active Directory</li>
+</ul>
+<span class="tag">Windows Server 2025</span><span class="tag">GPO</span><span class="tag">DHCP</span><span class="tag">DNS</span>`
+      },
+      {
+        q: "Qu'est-ce que Nextcloud et comment l'avez-vous déployé ?",
+        a: `<strong>Nextcloud</strong> est une solution de cloud privé auto-hébergé.<br><br>
+<ul>
+<li>Partage de fichiers, synchronisation, calendrier, contacts, Talk</li>
+<li>Intégration <strong>LDAP</strong> pour l'authentification via Active Directory</li>
+<li>Gestion des utilisateurs, groupes et quotas de stockage</li>
+<li>Applications collaboratives activées</li>
+</ul>
+<span class="tag">LDAP</span><span class="tag">Nextcloud</span><span class="tag">Cloud privé</span>`
+      },
+      {
+        q: "Décrivez votre projet Infrastructure AD + Nextcloud (projet majeur)",
+        a: `Infrastructure d'entreprise complète — domaine <strong>AFR.LOCAL</strong><br><br>
+<ul>
+<li><strong>2 contrôleurs de domaine</strong> avec réplication AD</li>
+<li>OU structurées : Admins, Utilisateurs, Postes, Operators</li>
+<li>GPO : déploiement automatique Nextcloud MSI</li>
+<li>Nextcloud en <strong>DMZ</strong> (192.168.20.0/24) sur Debian</li>
+<li>Authentification <strong>LDAP/LDAPS</strong> avec svc-nextcloud@AFR.LOCAL</li>
+<li>ACL routeur : flux autorisés LDAP (389/636), DNS (53), NTP (123)</li>
+<li>3 VLANs : Clients (10), Serveurs (30), DMZ (20)</li>
+</ul>
+<span class="tag">AFR.LOCAL</span><span class="tag">LDAP/LDAPS</span><span class="tag">DMZ</span><span class="tag">ACL</span><span class="tag">VLAN</span>`
+      },
+      {
+        q: "Expliquez le projet Authentik SSO — comment ça fonctionne ?",
+        a: `<strong>Authentik</strong> est un Identity Provider (IdP) open-source.<br><br>
+<ul>
+<li>Serveur Authentik : <strong>192.168.30.22:9000</strong></li>
+<li>Connecté à l'Active Directory (<strong>192.168.30.42</strong>) via LDAP</li>
+<li>Protocole : <strong>OAuth2 / OpenID Connect</strong></li>
+<li>Plugin <strong>Social Login</strong> dans Nextcloud → Client ID + Secret</li>
+<li>Flux SSO : Nextcloud → Authentik → Vérif AD → Token → Accès</li>
+<li><strong>Single Logout</strong> : déconnexion centralisée</li>
+</ul>
+<span class="tag">SSO</span><span class="tag">OAuth2</span><span class="tag">OpenID Connect</span><span class="tag">Identity Provider</span>`
+      },
+      {
+        q: "Décrivez le projet NAS TrueNAS SCALE (projet majeur)",
+        a: `NAS TrueNAS SCALE en VM Proxmox — domaine <strong>AFR.LOCAL</strong><br><br>
+<ul>
+<li>VM : VMID 105, 6 Go RAM, 3 cores</li>
+<li>Pool <strong>ZFS POOL_AFR</strong> en RAID-1 Mirror (2 × 100 GiB)</li>
+<li>Dataset DATA : préréglage SMB + ACL <strong>NFSv4</strong></li>
+<li>Jonction au domaine via <strong>Kerberos</strong> (svc-nas@AFR.LOCAL)</li>
+<li>ACL : Contrôle total admins, droits Modifier utilisateurs</li>
+<li>Partage : <strong>\\\\NAS-AFR\\DATA</strong></li>
+</ul>
+<span class="tag">TrueNAS SCALE</span><span class="tag">ZFS RAID-1</span><span class="tag">SMB</span><span class="tag">NFSv4</span><span class="tag">Kerberos</span>`
+      },
+    ]
+  },
+  {
+    id: "projets-entreprise",
+    emoji: "🏢",
+    label: "Projets entreprise",
+    sublabel: "2 projets",
+    cards: [
+      {
+        q: "Qu'est-ce que la masterisation d'un poste Windows ?",
+        a: `La <strong>masterisation</strong> consiste à créer une image système standardisée pour déployer des postes identiques.<br><br>
+<ul>
+<li>Installation et personnalisation de <strong>Windows 11</strong> selon standards entreprise</li>
+<li>Configuration logiciels métiers, paramètres réseau</li>
+<li>Intégration au domaine <strong>Active Directory</strong></li>
+<li>Procédure documentée pour reproductibilité</li>
+<li>Outil utilisé : <strong>Microsoft MDT</strong> (Microsoft Deployment Toolkit)</li>
+</ul>
+<span class="tag">Windows 11</span><span class="tag">MDT</span><span class="tag">Active Directory</span>`
+      },
+      {
+        q: "Décrivez la procédure d'effacement sécurisé Blancco",
+        a: `<strong>Blancco</strong> : logiciel d'effacement certifié conforme NIST/DoD<br><br>
+<ul>
+<li>Réinitialisation du <strong>BIOS</strong> aux paramètres d'usine</li>
+<li>Désactivation du <strong>Secure Boot</strong> pour booter sur clé Linux</li>
+<li>Connexion réseau (Ethernet), authentification console <strong>BMC</strong></li>
+<li>Sélection du disque <strong>NVMe Samsung</strong> → lancement effacement</li>
+<li>Rapport certifié généré : <strong>NIST 800-88</strong>, DoD 5220.22-M</li>
+</ul>
+<span class="tag">Blancco</span><span class="tag">BIOS UEFI</span><span class="tag">Secure Boot</span><span class="tag">NVMe</span><span class="tag">NIST 800-88</span>`
+      },
+    ]
+  },
+  {
+    id: "competences",
+    emoji: "🎯",
+    label: "Compétences C1–C6",
+    sublabel: "6 compétences",
+    cards: [
+      {
+        q: "C1 — Gérer le patrimoine informatique : quels sont les sous-critères ?",
+        a: `<ul>
+<li>Recenser et identifier les ressources numériques</li>
+<li>Exploiter des référentiels, normes et standards adoptés par le prestataire informatique</li>
+<li>Mettre en place et vérifier les niveaux d'habilitation associés à un service</li>
+<li>Vérifier les conditions de la continuité d'un service informatique</li>
+<li>Gérer des sauvegardes</li>
+<li>Vérifier le respect des règles d'utilisation des ressources numériques</li>
+</ul>`
+      },
+      {
+        q: "C2 — Répondre aux incidents et aux demandes d'assistance : quels sont les sous-critères ?",
+        a: `<ul>
+<li>Collecter, suivre et orienter des résolutions d'incidents</li>
+<li>Traiter des demandes concernant les services réseau et système, applicatifs</li>
+<li>Assister les utilisateurs en centre de services</li>
+</ul>`
+      },
+      {
+        q: "C3 — Développer la présence en ligne de l'organisation : quels sont les sous-critères ?",
+        a: `<ul>
+<li>Participer à la valorisation de l'image de l'organisation sur les médias numériques en tenant compte du cadre juridique et des enjeux économiques</li>
+<li>Référencer les services en ligne de l'organisation et mesurer l'efficacité des services en ligne</li>
+<li>Participer à l'évolution d'un site Web exploitant les données de l'organisation</li>
+</ul>`
+      },
+      {
+        q: "C4 — Travailler en mode projet : quels sont les sous-critères ?",
+        a: `<ul>
+<li>Analyser les objectifs et les modalités d'organisation d'un projet</li>
+<li>Planifier les activités</li>
+<li>Évaluer les indicateurs de suivi d'un projet et analyser les écarts</li>
+</ul>`
+      },
+      {
+        q: "C5 — Mettre à disposition des utilisateurs un service informatique : quels sont les sous-critères ?",
+        a: `<ul>
+<li>Réaliser les tests d'intégration et d'acceptation d'un service</li>
+<li>Déployer un service</li>
+<li>Accompagner les utilisateurs dans la mise en place d'un service</li>
+</ul>`
+      },
+      {
+        q: "C6 — Organiser son développement professionnel : quels sont les sous-critères ?",
+        a: `<ul>
+<li>Mettre en place son environnement d'apprentissage personnel</li>
+<li>Mettre en œuvre des outils et stratégies de veille informationnelle</li>
+<li>Gérer son identité professionnelle</li>
+<li>Développer son projet professionnel</li>
+</ul>`
+      },
+    ]
+  },
+  {
+    id: "veille",
+    emoji: "📡",
+    label: "Veille technologique",
+    sublabel: "3 périodes × 4 articles",
+    cards: [
+      {
+        q: "Veille 2023-2024 : Quelle est la tendance principale du Cloud ?",
+        a: `<strong>Cloud hybride & multi-cloud</strong><br><br>
+Plus de <strong>85 % des entreprises</strong> ont adopté une stratégie multi-cloud ou hybride (Gartner 2023).<br>
+Les DSI combinent infrastructure <strong>on-premise</strong> et services cloud publics pour allier contrôle des données sensibles et flexibilité.<br><br>
+<span class="tag">Multi-cloud</span><span class="tag">Hybride</span><span class="tag">Gartner 2023</span>`
+      },
+      {
+        q: "Veille 2023-2024 : Qu'est-ce que Microsoft Entra ID ?",
+        a: `Microsoft a <strong>rebaptisé Azure Active Directory en Entra ID</strong> en 2023.<br><br>
+Cette évolution illustre l'unification de la gestion des identités :<br>
+<ul>
+<li>L'AD local se synchronise avec le cloud</li>
+<li>Permet le <strong>SSO (Single Sign-On)</strong> sur toutes les applications SaaS</li>
+<li>Gestion des identités on-premise ET cloud unifiée</li>
+</ul>
+<span class="tag">Azure AD → Entra ID</span><span class="tag">SSO</span><span class="tag">SaaS</span>`
+      },
+      {
+        q: "Veille 2023-2024 : Qu'est-ce que SecNumCloud ?",
+        a: `<strong>SecNumCloud</strong> est le référentiel de qualification cloud de l'<strong>ANSSI</strong> (mis à jour en 2024).<br><br>
+<ul>
+<li>Qualifie les hébergeurs cloud garantissant la <strong>souveraineté des données françaises</strong></li>
+<li>Données des <strong>OIV</strong> (Opérateurs d'Importance Vitale) protégées</li>
+<li>Aucune juridiction étrangère ne peut y accéder (vs Cloud Act américain)</li>
+</ul>
+<span class="tag">ANSSI</span><span class="tag">SecNumCloud</span><span class="tag">OIV</span><span class="tag">Souveraineté</span>`
+      },
+      {
+        q: "Veille 2023-2024 : Quel est l'état d'adoption de Kubernetes ?",
+        a: `Rapport <strong>CNCF Annual Report 2023</strong> :<br><br>
+<ul>
+<li><strong>96 % des organisations</strong> utilisent ou évaluent Kubernetes</li>
+<li>Standard pour déployer des applications <strong>cloud-native</strong></li>
+<li>Applications portables entre environnements on-premise et cloud public</li>
+</ul>
+<span class="tag">Kubernetes</span><span class="tag">CNCF</span><span class="tag">Cloud-native</span><span class="tag">Conteneurs</span>`
+      },
+      {
+        q: "Veille 2024-2025 : Comment l'IA générative impacte le Cloud ?",
+        a: `En 2024, AWS, Azure, GCP intègrent nativement l'<strong>IA générative</strong> à leur catalogue.<br><br>
+<ul>
+<li>GPT-4, Claude, Gemini disponibles via <strong>API cloud</strong></li>
+<li>Sans gérer d'infrastructure GPU</li>
+<li><strong>IA-as-a-Service</strong> devient un différenciateur majeur entre providers</li>
+</ul>
+<span class="tag">IA générative</span><span class="tag">LLM</span><span class="tag">IA-as-a-Service</span><span class="tag">AWS/Azure/GCP</span>`
+      },
+      {
+        q: "Veille 2024-2025 : Qu'est-ce que le Zero Trust Network Access (ZTNA) ?",
+        a: `<strong>ZTNA</strong> dépasse le VPN comme mécanisme d'accès distant (Forrester 2024).<br><br>
+Principe : <strong>« ne jamais faire confiance, toujours vérifier »</strong><br>
+<ul>
+<li>Chaque connexion vérifiée : identité, appareil, contexte</li>
+<li>Acteurs : Cloudflare Access, Zscaler, Microsoft Entra</li>
+</ul>
+<span class="tag">Zero Trust</span><span class="tag">ZTNA</span><span class="tag">VPN</span><span class="tag">Cloudflare Access</span>`
+      },
+      {
+        q: "Veille 2024-2025 : Qu'est-ce que le FinOps ?",
+        a: `<strong>FinOps</strong> = discipline de gestion des coûts cloud.<br><br>
+En 2024, <strong>82 % des entreprises ont dépassé leur budget cloud</strong> (FinOps Foundation).<br>
+<ul>
+<li>Rightsizing des VMs, extinction des ressources inactives</li>
+<li>Instances réservées vs spot</li>
+<li>Outils : AWS Cost Explorer, Azure Cost Management</li>
+</ul>
+<span class="tag">FinOps</span><span class="tag">Optimisation coûts</span><span class="tag">Rightsizing</span>`
+      },
+      {
+        q: "Veille 2024-2025 : Qu'est-ce que l'Edge Computing (Cloudflare Workers) ?",
+        a: `<strong>Cloudflare Workers</strong> (2025) : exécuter du code directement sur les PoP Cloudflare.<br><br>
+<ul>
+<li><strong>300+ points de présence</strong> dans le monde</li>
+<li>À moins de <strong>50 ms</strong> de n'importe quel utilisateur</li>
+<li>Réduit la latence, décentralise les applications</li>
+<li>Préfigure le modèle <strong>Edge Computing</strong></li>
+</ul>
+<span class="tag">Edge Computing</span><span class="tag">Cloudflare Workers</span><span class="tag">Latence</span>`
+      },
+      {
+        q: "Veille 2026 : Que prédit Gartner sur l'Edge Computing ?",
+        a: `<strong>Gartner</strong> : <strong>75 % des données d'entreprise</strong> seront traitées hors datacenter traditionnel d'ici 2026.<br><br>
+<ul>
+<li>Traitement à la périphérie : IoT, usines connectées, micro-datacenters</li>
+<li>Le <strong>cloud central devient superviseur</strong>, non plus processeur principal</li>
+</ul>
+<span class="tag">Edge Computing</span><span class="tag">IoT</span><span class="tag">Gartner 2026</span>`
+      },
+      {
+        q: "Veille 2026 : Qu'est-ce que GAIA-X ?",
+        a: `<strong>GAIA-X</strong> : projet cloud souverain européen.<br><br>
+<ul>
+<li>Porté par l'<strong>Union Européenne</strong></li>
+<li>Face au <strong>Cloud Act américain</strong> (accès des autorités US aux données hébergées par AWS/Azure/GCP)</li>
+<li>Garantit que les données européennes restent sous <strong>juridiction européenne</strong></li>
+</ul>
+<span class="tag">GAIA-X</span><span class="tag">Souveraineté numérique</span><span class="tag">Cloud Act</span><span class="tag">UE</span>`
+      },
+      {
+        q: "Veille 2026 : Qu'est-ce que l'Agentic AI dans le Cloud ?",
+        a: `En 2026, les <strong>agents IA autonomes</strong> (LLM) commencent à gérer l'infrastructure cloud.<br><br>
+<ul>
+<li>Provisioning automatique, détection d'anomalies</li>
+<li>Optimisation des coûts, réponse aux incidents</li>
+<li>AWS, Azure, GCP intègrent des <strong>« cloud copilots »</strong></li>
+<li>Exécution d'actions sur l'infrastructure <strong>sans intervention humaine</strong></li>
+</ul>
+<span class="tag">Agentic AI</span><span class="tag">LLM</span><span class="tag">Automatisation</span><span class="tag">Infrastructure</span>`
+      },
+      {
+        q: "Veille 2026 : Qu'est-ce que la stratégie Multi-Cloud avec Terraform ?",
+        a: `Les grandes entreprises répartissent leurs workloads sur <strong>AWS + Azure + GCP</strong> simultanément.<br><br>
+<ul>
+<li>Objectif : éviter le <strong>vendor lock-in</strong></li>
+<li>Outils : <strong>Terraform</strong> (IaC), Kubernetes, API ouvertes</li>
+<li>Standardisation de la portabilité</li>
+<li>En 2026 : norme pour les entreprises du CAC 40 / Fortune 500</li>
+</ul>
+<span class="tag">Multi-Cloud</span><span class="tag">Terraform</span><span class="tag">Kubernetes</span><span class="tag">Vendor lock-in</span>`
+      },
+    ]
+  },
+  {
+    id: "certifications",
+    emoji: "🏆",
+    label: "Certifications",
+    sublabel: "RGPD + Cisco",
+    cards: [
+      {
+        q: "Quelles certifications avez-vous obtenues ?",
+        a: `<ul>
+<li><strong>5 Certificats RGPD</strong> — formations et attestations sur la protection des données personnelles</li>
+<li><strong>Cisco Introduction to Cybersecurity</strong> — certification Cisco Networking Academy couvrant les fondamentaux de la cybersécurité</li>
+</ul>
+<span class="tag">RGPD</span><span class="tag">Cisco</span><span class="tag">Cybersécurité</span>`
+      },
+      {
+        q: "Que couvre le RGPD (Règlement Général sur la Protection des Données) ?",
+        a: `<ul>
+<li>Protection des données personnelles des citoyens européens</li>
+<li>Droit à l'oubli, portabilité, consentement explicite</li>
+<li>Obligation de signaler les violations dans les <strong>72h</strong></li>
+<li>Amendes : jusqu'à <strong>4 % du CA mondial</strong> ou 20 M€</li>
+<li>DPO (Délégué à la Protection des Données) obligatoire pour certaines entités</li>
+</ul>
+<span class="tag">RGPD</span><span class="tag">DPO</span><span class="tag">Données personnelles</span>`
+      },
+      {
+        q: "Que couvre la certification Cisco Introduction to Cybersecurity ?",
+        a: `<ul>
+<li>Les <strong>cybermenaces</strong> (malwares, phishing, ransomware)</li>
+<li>Les principes de base de la <strong>sécurité réseau</strong></li>
+<li>Chiffrement, authentification, contrôle d'accès</li>
+<li>Sensibilisation aux bonnes pratiques de cybersécurité</li>
+</ul>
+<span class="tag">Cisco</span><span class="tag">Cybersécurité</span><span class="tag">Réseau</span>`
+      },
+    ]
+  },
+  {
+    id: "parcours",
+    emoji: "🛤️",
+    label: "Parcours & Entreprises",
+    sublabel: "Formation + Alternance",
+    cards: [
+      {
+        q: "Quel est votre parcours de formation ?",
+        a: `<ul>
+<li><strong>Bac STI2D</strong> — Sciences et Technologies de l'Industrie et du Développement Durable</li>
+<li><strong>BTS SIO SISR</strong> — Solutions Informatiques aux Organisations, option Systèmes et Réseaux</li>
+<li><strong>Année 1</strong> : Alternance chez <strong>Kereis</strong></li>
+<li><strong>Année 2</strong> : Alternance à la <strong>Banque de France — DGSI</strong></li>
+</ul>
+<span class="tag">BTS SIO</span><span class="tag">SISR</span><span class="tag">Alternance</span>`
+      },
+      {
+        q: "Qu'avez-vous fait lors de votre alternance chez Kereis (année 1) ?",
+        a: `<strong>Kereis</strong> — Année 1 d'alternance<br><br>
+<ul>
+<li><strong>Support technique</strong> : assistance aux utilisateurs</li>
+<li><strong>Gestion des tickets</strong> : suivi et résolution des incidents</li>
+</ul>`
+      },
+      {
+        q: "Qu'avez-vous fait lors de votre alternance à la Banque de France — DGSI (année 2) ?",
+        a: `<strong>Banque de France — DGSI</strong> (Direction Générale des Systèmes d'Information)<br><br>
+<ul>
+<li><strong>Masterisation</strong> des postes Windows 11 (MDT)</li>
+<li><strong>Effacement sécurisé</strong> avec Blancco (NIST 800-88)</li>
+<li><strong>Support technique</strong> aux utilisateurs</li>
+<li><strong>Gestion des tickets</strong> d'incidents</li>
+<li><strong>Gestion du stock</strong> informatique</li>
+</ul>
+<span class="tag">DGSI</span><span class="tag">MDT</span><span class="tag">Blancco</span><span class="tag">Support</span>`
+      },
+      {
+        q: "Qu'est-ce que le BTS SIO option SISR ?",
+        a: `<strong>BTS SIO</strong> = Brevet de Technicien Supérieur Services Informatiques aux Organisations<br><br>
+<strong>SISR</strong> = Solutions d'Infrastructure, Systèmes et Réseaux<br><br>
+<ul>
+<li>Administration des serveurs (Windows Server, Linux)</li>
+<li>Réseaux : VLANs, routage, pare-feu, VPN</li>
+<li>Services : AD, DNS, DHCP, Cloud</li>
+<li>Épreuve E6 : présentation de son dossier de compétences au jury</li>
+</ul>
+<span class="tag">BTS SIO</span><span class="tag">SISR</span><span class="tag">Systèmes</span><span class="tag">Réseaux</span>`
+      },
+    ]
+  },
+  {
+    id: "tech",
+    emoji: "🔧",
+    label: "Questions techniques",
+    sublabel: "Concepts clés",
+    cards: [
+      {
+        q: "Quelle est la différence entre OAuth2 et OpenID Connect ?",
+        a: `<ul>
+<li><strong>OAuth2</strong> : protocole d'<strong>autorisation</strong> — délègue l'accès à une ressource (ex : « Nextcloud peut accéder à votre profil »)</li>
+<li><strong>OpenID Connect</strong> : couche d'<strong>authentification</strong> au-dessus d'OAuth2 — vérifie l'identité de l'utilisateur (qui est-il ?)</li>
+</ul>
+Résumé : OAuth2 = <em>autorisation</em>, OpenID Connect = <em>authentification</em><br><br>
+<span class="tag">OAuth2</span><span class="tag">OpenID Connect</span><span class="tag">JWT</span>`
+      },
+      {
+        q: "Qu'est-ce que LDAP et LDAPS ? Quelle est la différence ?",
+        a: `<ul>
+<li><strong>LDAP</strong> (Lightweight Directory Access Protocol) : protocole d'accès aux annuaires (port <strong>389</strong>), non chiffré</li>
+<li><strong>LDAPS</strong> : LDAP over SSL/TLS (port <strong>636</strong>), communications chiffrées</li>
+<li>Utilisé pour interroger Active Directory et vérifier les identifiants utilisateurs</li>
+</ul>
+<span class="tag">LDAP port 389</span><span class="tag">LDAPS port 636</span><span class="tag">Active Directory</span>`
+      },
+      {
+        q: "Qu'est-ce qu'un VLAN et pourquoi en avoir plusieurs ?",
+        a: `<strong>VLAN</strong> (Virtual LAN) : segmentation logique d'un réseau physique.<br><br>
+Dans votre projet AD+Nextcloud :<br>
+<ul>
+<li>VLAN 10 — <strong>Clients</strong> (postes utilisateurs)</li>
+<li>VLAN 20 — <strong>DMZ</strong> (Nextcloud exposé, 192.168.20.0/24)</li>
+<li>VLAN 30 — <strong>Serveurs</strong> (AD, NAS, 192.168.30.0/24)</li>
+</ul>
+Avantages : isolation, sécurité, limitation des broadcasts<br>
+<span class="tag">VLAN</span><span class="tag">DMZ</span><span class="tag">Segmentation réseau</span>`
+      },
+      {
+        q: "Qu'est-ce que le ZFS et le RAID-1 Mirror dans TrueNAS ?",
+        a: `<strong>ZFS</strong> = système de fichiers avancé avec protection intégrée des données.<br><br>
+<ul>
+<li><strong>RAID-1 Mirror</strong> : 2 disques identiques — chaque donnée est dupliquée</li>
+<li>Si un disque tombe, l'autre prend le relais → <strong>haute disponibilité</strong></li>
+<li>ZFS inclut checksums, snapshots, compression</li>
+<li>Dans votre projet : 2 × 100 GiB = pool POOL_AFR</li>
+</ul>
+<span class="tag">ZFS</span><span class="tag">RAID-1</span><span class="tag">TrueNAS</span><span class="tag">Redondance</span>`
+      },
+      {
+        q: "Qu'est-ce qu'une GPO et donnez un exemple concret",
+        a: `<strong>GPO</strong> (Group Policy Object) = stratégie de groupe Windows appliquée à des OU.<br><br>
+Exemples concrets dans vos projets :<br>
+<ul>
+<li>Déploiement automatique du <strong>client Nextcloud MSI</strong> sur tous les postes</li>
+<li>Restrictions utilisateurs (interdire panneau de configuration)</li>
+<li>Configuration wallpaper, proxy, scripts de démarrage</li>
+</ul>
+<span class="tag">GPO</span><span class="tag">Active Directory</span><span class="tag">OU</span><span class="tag">MSI</span>`
+      },
+      {
+        q: "Qu'est-ce qu'une ACL et comment l'avez-vous utilisée ?",
+        a: `<strong>ACL</strong> (Access Control List) = liste de règles contrôlant les flux réseau ou les droits d'accès.<br><br>
+Dans vos projets :<br>
+<ul>
+<li><strong>ACL routeur</strong> (AD+Nextcloud) : flux autorisés LDAP (389/636), DNS (53), NTP (123) entre VLANs</li>
+<li><strong>ACL NFSv4</strong> (TrueNAS) : Contrôle total pour admins, droits Modifier pour utilisateurs</li>
+</ul>
+<span class="tag">ACL</span><span class="tag">NFSv4</span><span class="tag">Routeur</span><span class="tag">Sécurité</span>`
+      },
+      {
+        q: "Qu'est-ce que Kerberos et comment est-il utilisé dans TrueNAS ?",
+        a: `<strong>Kerberos</strong> : protocole d'authentification réseau basé sur des tickets.<br><br>
+<ul>
+<li>Utilisé par <strong>Active Directory</strong> pour l'authentification sécurisée</li>
+<li>Dans TrueNAS : jonction au domaine AFR.LOCAL via <strong>Kerberos</strong></li>
+<li>Compte de service : <strong>svc-nas@AFR.LOCAL</strong></li>
+<li>Évite la transmission des mots de passe en clair sur le réseau</li>
+</ul>
+<span class="tag">Kerberos</span><span class="tag">Active Directory</span><span class="tag">Tickets</span>`
+      },
+      {
+        q: "Qu'est-ce que le Secure Boot et pourquoi le désactiver pour Blancco ?",
+        a: `<strong>Secure Boot</strong> : fonctionnalité UEFI qui empêche le démarrage de systèmes non signés numériquement.<br><br>
+<ul>
+<li>Protège contre les malwares de démarrage (bootkit)</li>
+<li>Blancco démarre depuis une clé USB Linux non signée → <strong>Secure Boot doit être désactivé</strong></li>
+<li>Après l'effacement, il peut être réactivé</li>
+</ul>
+<span class="tag">Secure Boot</span><span class="tag">UEFI</span><span class="tag">Blancco</span><span class="tag">Bootkit</span>`
+      },
+    ]
+  }
+];
+
+/* ══════════════════════════════════════
+   DATA — JURY QUESTIONS
+══════════════════════════════════════ */
+const JURY_QUESTIONS = [
+  {
+    cat: "🎤 Présentation",
+    icon: "👋",
+    q: "Présentez-vous brièvement. Qui êtes-vous et quel est votre parcours ?",
+    answer: `<ul>
+<li>Formation : <strong>Bac STI2D</strong> puis <strong>BTS SIO SISR</strong> en alternance</li>
+<li>Année 1 chez <strong>Kereis</strong> : support technique et gestion des tickets</li>
+<li>Année 2 à la <strong>Banque de France — DGSI</strong> : masterisation, effacement Blancco, support, stock</li>
+<li>Projets école : AD, Nextcloud, TrueNAS, Authentik SSO, Cloudflare, Proxmox</li>
+<li>Veille sur le <strong>Cloud hybride, Zero Trust, IA générative</strong></li>
+</ul>`
+  },
+  {
+    cat: "🏢 Entreprise",
+    icon: "🏦",
+    q: "Décrivez votre alternance à la Banque de France. Quel était votre rôle ?",
+    answer: `<ul>
+<li>Poste à la <strong>DGSI</strong> (Direction Générale des Systèmes d'Information)</li>
+<li><strong>Masterisation</strong> des postes Windows 11 via MDT (Microsoft Deployment Toolkit)</li>
+<li><strong>Effacement sécurisé</strong> des disques NVMe avec Blancco (conformité NIST 800-88)</li>
+<li><strong>Support technique</strong> de niveau 1 et 2 aux agents</li>
+<li>Gestion des <strong>tickets</strong> d'incidents</li>
+<li>Gestion du <strong>stock informatique</strong></li>
+</ul>`
+  },
+  {
+    cat: "🏫 Projet majeur",
+    icon: "🔗",
+    q: "Présentez votre projet AD + Nextcloud. Pourquoi est-il votre projet le plus important ?",
+    answer: `<ul>
+<li>Infrastructure complète : domaine <strong>AFR.LOCAL</strong> avec 2 contrôleurs de domaine</li>
+<li>3 VLANs séparés : Clients (10), Serveurs (30), DMZ (20)</li>
+<li>Nextcloud en DMZ avec authentification <strong>LDAP/LDAPS</strong></li>
+<li>Compte de service <strong>svc-nextcloud@AFR.LOCAL</strong></li>
+<li>ACL routeur : flux contrôlés LDAP 389/636, DNS 53, NTP 123</li>
+<li>GPO : déploiement automatique client Nextcloud MSI</li>
+<li>Résultat : accès <strong>cloud.afr-com.com</strong> via reverse proxy HTTPS</li>
+</ul>`
+  },
+  {
+    cat: "🔐 Technique",
+    icon: "🔑",
+    q: "Expliquez ce qu'est le SSO (Single Sign-On) et comment vous l'avez mis en place avec Authentik.",
+    answer: `<ul>
+<li><strong>SSO</strong> = authentification unique : un seul login pour accéder à plusieurs services</li>
+<li>Serveur Authentik : <strong>192.168.30.22:9000</strong></li>
+<li>Connecté à l'AD (<strong>192.168.30.42</strong>) via LDAP → vérifie les comptes domaine</li>
+<li>Protocole : <strong>OAuth2 / OpenID Connect</strong></li>
+<li>Plugin Social Login Nextcloud → Client ID + Client Secret</li>
+<li>Flux : Nextcloud → Authentik → Vérif AD → Token JWT → Accès</li>
+<li>Single Logout : déconnexion centralisée de tous les services</li>
+</ul>`
+  },
+  {
+    cat: "🔐 Technique",
+    icon: "🆚",
+    q: "Quelle est la différence entre OAuth2 et OpenID Connect ?",
+    answer: `<ul>
+<li><strong>OAuth2</strong> : protocole d'<strong>autorisation</strong> — « tu peux accéder à cette ressource au nom de l'utilisateur »</li>
+<li><strong>OpenID Connect (OIDC)</strong> : couche d'<strong>authentification</strong> au-dessus d'OAuth2 — « voici QUI est l'utilisateur »</li>
+<li>OIDC ajoute un <strong>ID Token</strong> (JWT) qui contient l'identité</li>
+<li>Dans votre projet : Authentik utilise <strong>OIDC</strong> pour que Nextcloud sache qui se connecte</li>
+</ul>`
+  },
+  {
+    cat: "🏫 Projet majeur",
+    icon: "💾",
+    q: "Décrivez votre projet TrueNAS. Quels choix techniques avez-vous faits et pourquoi ?",
+    answer: `<ul>
+<li><strong>TrueNAS SCALE</strong> en VM Proxmox (VMID 105, 6 Go RAM, 3 cores)</li>
+<li>Pool ZFS <strong>RAID-1 Mirror</strong> (2 × 100 GiB) → redondance, pas de perte de données</li>
+<li>Dataset DATA : préréglage SMB + <strong>ACL NFSv4</strong></li>
+<li>Jonction au domaine via <strong>Kerberos</strong> (svc-nas@AFR.LOCAL)</li>
+<li>Partage <strong>\\\\NAS-AFR\\DATA</strong> accessible depuis tous les postes Windows du domaine</li>
+<li>ACL différenciées : admins → Contrôle total, utilisateurs → Modifier</li>
+</ul>`
+  },
+  {
+    cat: "🔧 Technique",
+    icon: "🌐",
+    q: "Expliquez le principe d'une DMZ et pourquoi vous l'avez utilisée dans votre infrastructure.",
+    answer: `<ul>
+<li><strong>DMZ</strong> (Zone Démilitarisée) : réseau intermédiaire entre Internet et le réseau interne</li>
+<li>Les serveurs accessibles de l'extérieur sont en DMZ → Nextcloud (192.168.20.0/24)</li>
+<li>Si un attaquant compromet Nextcloud, il n'accède pas directement aux serveurs internes</li>
+<li>ACL routeur : seuls les flux nécessaires traversent (LDAP 389/636, DNS 53)</li>
+<li>Principe du <strong>moindre privilège</strong> appliqué au réseau</li>
+</ul>`
+  },
+  {
+    cat: "🔧 Technique",
+    icon: "🗂️",
+    q: "Qu'est-ce qu'une GPO ? Donnez un exemple concret de GPO que vous avez déployée.",
+    answer: `<ul>
+<li><strong>GPO</strong> (Group Policy Object) : stratégie appliquée à une OU dans Active Directory</li>
+<li>Exemple concret : déploiement automatique du <strong>client Nextcloud MSI</strong> sur tous les postes clients du domaine</li>
+<li>Dès qu'un poste rejoint le domaine, il reçoit automatiquement l'installation</li>
+<li>Autres usages : restrictions, wallpaper, proxy, mappage lecteurs réseau</li>
+</ul>`
+  },
+  {
+    cat: "🏢 Entreprise",
+    icon: "🧹",
+    q: "Expliquez la procédure d'effacement sécurisé Blancco. Pourquoi est-ce important ?",
+    answer: `<ul>
+<li>Avant restitution ou recyclage d'un poste, les données doivent être <strong>irrémédiablement effacées</strong></li>
+<li>BIOS réinitialisé → Secure Boot désactivé → boot sur clé USB Linux Blancco</li>
+<li>Connexion réseau (Ethernet) → authentification console <strong>BMC</strong></li>
+<li>Sélection disque NVMe Samsung → lancement effacement</li>
+<li>Rapport certifié généré : <strong>NIST 800-88</strong>, DoD 5220.22-M</li>
+<li>Conformité légale : aucune donnée récupérable, rapport archivé dans BMC</li>
+</ul>`
+  },
+  {
+    cat: "📡 Veille",
+    icon: "☁️",
+    q: "Présentez votre veille technologique. Quel est le fil conducteur ?",
+    answer: `<ul>
+<li>Thème général : <strong>évolution du Cloud computing</strong> de 2023 à 2026</li>
+<li>2023-2024 : Cloud hybride (85% entreprises), Entra ID, SecNumCloud, Kubernetes 96%</li>
+<li>2024-2025 : IA générative dans le cloud, Zero Trust/ZTNA, FinOps, Edge Computing</li>
+<li>2026 : 75% données hors datacenter (Gartner), GAIA-X souveraineté EU, Agentic AI, Multi-Cloud Terraform</li>
+<li>Lien avec mes projets : Cloudflare Zero Trust, AD/SSO, cloud souverain</li>
+</ul>`
+  },
+  {
+    cat: "📡 Veille",
+    icon: "🤖",
+    q: "Qu'est-ce que l'Agentic AI dans le Cloud ? Quels risques cela représente ?",
+    answer: `<ul>
+<li><strong>Agentic AI</strong> : agents IA autonomes (LLM) qui exécutent des tâches sur l'infrastructure</li>
+<li>En 2026 : provisioning auto, détection d'anomalies, optimisation coûts, réponse incidents</li>
+<li><strong>Risques</strong> : décisions erronées sans contrôle humain, sécurité (prompt injection), dépendance au fournisseur</li>
+<li>AWS, Azure, GCP développent des « cloud copilots »</li>
+</ul>`
+  },
+  {
+    cat: "🎯 Compétences",
+    icon: "📋",
+    q: "Quelles compétences BTS (C1-C6) avez-vous validées ? Citez des exemples concrets.",
+    answer: `<ul>
+<li><strong>C1</strong> — Gérer le patrimoine : inventaire matériel (TrueNAS, Proxmox), gestion des droits ACL</li>
+<li><strong>C2</strong> — Répondre aux incidents : support technique Kereis et Banque de France, tickets</li>
+<li><strong>C5</strong> — Mettre à disposition des services : déploiement AD, Nextcloud, SSO, NAS, masterisation</li>
+<li><strong>C4</strong> — Mode projet : planification des projets école (AD+Nextcloud, NAS)</li>
+<li><strong>C6</strong> — Développement pro : veille cloud, certifications RGPD, Cisco</li>
+</ul>`
+  },
+  {
+    cat: "🔧 Technique",
+    icon: "🔒",
+    q: "Qu'est-ce que LDAP/LDAPS ? Sur quels ports fonctionnent-ils ?",
+    answer: `<ul>
+<li><strong>LDAP</strong> (Lightweight Directory Access Protocol) : port <strong>389</strong> — non chiffré</li>
+<li><strong>LDAPS</strong> : LDAP over SSL/TLS : port <strong>636</strong> — communications chiffrées</li>
+<li>Permet d'interroger l'Active Directory pour vérifier les identifiants</li>
+<li>Dans AD+Nextcloud : flux LDAP/LDAPS autorisés par ACL routeur entre DMZ et VLAN Serveurs</li>
+</ul>`
+  },
+  {
+    cat: "📡 Veille",
+    icon: "🇪🇺",
+    q: "Qu'est-ce que le Cloud Act et pourquoi GAIA-X est une réponse ?",
+    answer: `<ul>
+<li><strong>Cloud Act</strong> (USA, 2018) : les autorités américaines peuvent exiger l'accès aux données hébergées par des entreprises US (AWS, Azure, GCP), même en Europe</li>
+<li><strong>Risque</strong> : données sensibles européennes potentiellement accessibles hors UE</li>
+<li><strong>GAIA-X</strong> : cloud souverain européen, données sous juridiction UE uniquement</li>
+<li>ANSSI → <strong>SecNumCloud</strong> : même logique pour la France (OIV)</li>
+</ul>`
+  },
+  {
+    cat: "🏫 Projet",
+    icon: "🔐",
+    q: "Expliquez le fonctionnement du Secure Boot et pourquoi vous avez dû le désactiver.",
+    answer: `<ul>
+<li><strong>Secure Boot</strong> : fonctionnalité UEFI qui vérifie la signature numérique du chargeur de démarrage</li>
+<li>Empêche le démarrage de systèmes non signés → protection contre les bootkits/malwares</li>
+<li>Blancco démarre depuis une clé USB Linux non signée par Microsoft → <strong>Secure Boot bloque le démarrage</strong></li>
+<li>Solution : désactivation temporaire dans le BIOS pour permettre le boot Blancco</li>
+<li>Après effacement : peut être réactivé sur le poste cible</li>
+</ul>`
+  },
+  {
+    cat: "🎯 Certifications",
+    icon: "🛡️",
+    q: "Parlez de vos certifications. Comment le RGPD impacte votre travail en entreprise ?",
+    answer: `<ul>
+<li><strong>5 certificats RGPD</strong> + <strong>Cisco Introduction to Cybersecurity</strong></li>
+<li>Impact RGPD en entreprise :</li>
+<li>→ Effacement certifié des données (Blancco) avant restitution des postes</li>
+<li>→ Gestion des droits d'accès (ACL, principe du moindre privilège)</li>
+<li>→ Signalement des violations dans les 72h</li>
+<li>→ Pas de données personnelles accessibles sans autorisation</li>
+</ul>`
+  },
+  {
+    cat: "🔧 Technique",
+    icon: "⚡",
+    q: "Qu'est-ce que Proxmox VE et comment l'avez-vous utilisé dans vos projets ?",
+    answer: `<ul>
+<li><strong>Proxmox VE</strong> : hyperviseur open-source basé sur KVM + LXC</li>
+<li>Héberge toute votre infrastructure : AD, Nextcloud, TrueNAS, Authentik</li>
+<li>TrueNAS SCALE : VM dédiée (VMID 105, 6 Go RAM)</li>
+<li>VLANs configurés via bridges réseau virtuels</li>
+<li>Snapshots et sauvegardes ZFS pour la résilience</li>
+</ul>`
+  },
+  {
+    cat: "📡 Veille",
+    icon: "💰",
+    q: "Qu'est-ce que le FinOps ? Pourquoi 82% des entreprises dépassent leur budget cloud ?",
+    answer: `<ul>
+<li><strong>FinOps</strong> : discipline de gestion financière du cloud</li>
+<li>82% des entreprises dépassent leur budget (FinOps Foundation 2024)</li>
+<li>Raisons : ressources mal dimensionnées, VMs actives 24/7 inutilement, manque de visibilité des coûts</li>
+<li>Solutions : <strong>rightsizing</strong>, extinction automatique, instances réservées vs spot</li>
+<li>Outils : AWS Cost Explorer, Azure Cost Management</li>
+</ul>`
+  },
+  {
+    cat: "🏫 Projet",
+    icon: "☁️",
+    q: "Comment Cloudflare Zero Trust fonctionne-t-il ? En quoi diffère-t-il d'un VPN ?",
+    answer: `<ul>
+<li><strong>VPN traditionnel</strong> : une fois connecté, accès à tout le réseau interne</li>
+<li><strong>Cloudflare Zero Trust</strong> : accès granulaire service par service, chaque requête vérifiée</li>
+<li>Principe : <em>« ne jamais faire confiance, toujours vérifier »</em></li>
+<li>Vérification : identité + appareil + contexte (localisation, heure, etc.)</li>
+<li>Tunnel Cloudflare : pas de port exposé sur Internet → surface d'attaque réduite</li>
+</ul>`
+  },
+  {
+    cat: "🎯 Bilan",
+    icon: "🌟",
+    q: "Quel projet vous a le plus appris ? Quelles difficultés avez-vous rencontrées ?",
+    answer: `<ul>
+<li>Réponse attendue personnelle — voici des éléments à mentionner :</li>
+<li><strong>Difficultés techniques</strong> : configuration LDAP/LDAPS entre DMZ et VLAN Serveurs, ACL routeur</li>
+<li><strong>Débogage SSO</strong> : flux OAuth2 mal configuré, endpoints OpenID Connect incorrects</li>
+<li><strong>TrueNAS + Kerberos</strong> : jonction au domaine avec compte de service dédié</li>
+<li><strong>Ce que vous avez appris</strong> : importance de la segmentation réseau, principe du moindre privilège, documentation</li>
+</ul>`
+  },
+];
+
+/* ══════════════════════════════════════
+   STATE
+══════════════════════════════════════ */
+let currentMode = 'flashcards';
+let currentCat = null;
+let currentCards = [];
+let currentIdx = 0;
+let answered = false;
+let scores = { ok: 0, nok: 0 };
+
+let juryIdx = 0;
+let juryResults = [];
+let juryRevealed = false;
+
+/* ══════════════════════════════════════
+   MODE SWITCH
+══════════════════════════════════════ */
+function switchMode(mode) {
+  currentMode = mode;
+  document.getElementById('mode-flashcards').classList.toggle('hidden', mode !== 'flashcards');
+  document.getElementById('mode-jury').classList.toggle('hidden', mode !== 'jury');
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', (mode === 'flashcards' && i === 0) || (mode === 'jury' && i === 1));
+  });
+  if (mode === 'jury') initJury();
+}
+
+/* ══════════════════════════════════════
+   FLASHCARD LOGIC
+══════════════════════════════════════ */
+function renderCategories() {
+  const grid = document.getElementById('cat-grid');
+  grid.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.innerHTML = `<span class="cat-emoji">${cat.emoji}</span>${cat.label}<div class="cat-count">${cat.sublabel}</div>`;
+    btn.onclick = () => startCategory(cat.id);
+    grid.appendChild(btn);
+  });
+}
+
+function startCategory(id) {
+  currentCat = CATEGORIES.find(c => c.id === id);
+  if (!currentCat) return;
+  currentCards = [...currentCat.cards];
+  if (document.getElementById('shuffleCheck').checked) {
+    currentCards.sort(() => Math.random() - .5);
+  }
+  currentIdx = 0;
+  scores = { ok: 0, nok: 0 };
+  answered = false;
+
+  document.getElementById('cat-grid').parentElement.querySelector('.shuffle-row').classList.add('hidden');
+  document.getElementById('cat-grid').classList.add('hidden');
+  document.querySelector('.section-title').classList.add('hidden');
+  document.getElementById('fc-area').classList.remove('hidden');
+  renderCard();
+}
+
+function renderCard() {
+  if (currentIdx >= currentCards.length) {
+    showFCResults();
+    return;
+  }
+  const card = currentCards[currentIdx];
+  answered = false;
+
+  document.getElementById('fc-cat-label').textContent = currentCat.label;
+  document.getElementById('fc-q').textContent = card.q;
+  document.getElementById('fc-answer').innerHTML = card.a;
+  document.getElementById('fc-answer').classList.remove('visible');
+  document.getElementById('fc-actions-main').classList.remove('hidden');
+  document.getElementById('fc-actions-eval').classList.add('hidden');
+  document.getElementById('btn-reveal').style.display = '';
+
+  const total = currentCards.length;
+  const done = currentIdx;
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('fc-pos').textContent = `${currentIdx + 1} / ${total}`;
+  document.getElementById('fc-pct').textContent = `${pct}%`;
+  document.getElementById('fc-bar').style.width = pct + '%';
+
+  document.getElementById('s-ok').textContent = scores.ok;
+  document.getElementById('s-nok').textContent = scores.nok;
+  document.getElementById('s-left').textContent = total - currentIdx;
+}
+
+function revealAnswer() {
+  if (answered) return;
+  answered = true;
+  document.getElementById('fc-answer').classList.add('visible');
+  document.getElementById('fc-actions-main').classList.add('hidden');
+  document.getElementById('fc-actions-eval').classList.remove('hidden');
+}
+
+function markCard(ok) {
+  if (ok) scores.ok++; else scores.nok++;
+  document.getElementById('s-ok').textContent = scores.ok;
+  document.getElementById('s-nok').textContent = scores.nok;
+  nextCard();
+}
+
+function nextCard() {
+  currentIdx++;
+  renderCard();
+}
+
+function showFCResults() {
+  const total = currentCards.length;
+  const pct = Math.round((scores.ok / total) * 100);
+  const area = document.getElementById('fc-area');
+  area.innerHTML = `
+    <div class="results-card" style="width:100%">
+      <h2>Catégorie terminée ! ${pct >= 80 ? '🎉' : pct >= 50 ? '💪' : '📚'}</h2>
+      <p>Résultat sur "${currentCat.label}"</p>
+      <div class="big-score indigo">${pct}%</div>
+      <div class="grade ${pct >= 80 ? 'A' : pct >= 60 ? 'B' : pct >= 40 ? 'C' : 'D'}">
+        ${pct >= 80 ? '✅ Excellent !' : pct >= 60 ? '👍 Bien !' : pct >= 40 ? '🟡 À retravailler' : '❌ Beaucoup à revoir'}
+      </div>
+      <div class="results-grid">
+        <div class="result-item"><div class="num green">${scores.ok}</div><div class="lbl">Sus</div></div>
+        <div class="result-item"><div class="num red">${scores.nok}</div><div class="lbl">À revoir</div></div>
+        <div class="result-item"><div class="num indigo">${total}</div><div class="lbl">Total</div></div>
+      </div>
+      <div style="margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-next" style="flex:0;padding:12px 28px" onclick="startCategory('${currentCat.id}')">🔄 Recommencer</button>
+        <button class="btn btn-sec" style="flex:0;padding:12px 28px" onclick="backToCategories()">← Toutes les catégories</button>
+      </div>
+    </div>`;
+}
+
+function backToCategories() {
+  document.getElementById('cat-grid').classList.remove('hidden');
+  document.querySelector('.section-title').classList.remove('hidden');
+  document.querySelector('.shuffle-row').classList.remove('hidden');
+  const area = document.getElementById('fc-area');
+  area.classList.add('hidden');
+  // Reset fc-area if needed
+  area.innerHTML = `
+    <div class="score-box" id="score-box">
+      <div class="score-item"><div class="score-num green" id="s-ok">0</div><div class="score-lbl">✓ Sus</div></div>
+      <div class="score-item"><div class="score-num red" id="s-nok">0</div><div class="score-lbl">✗ À revoir</div></div>
+      <div class="score-item"><div class="score-num indigo" id="s-left">0</div><div class="score-lbl">Restantes</div></div>
+    </div>
+    <div class="fc-progress">
+      <span id="fc-pos">1 / 1</span>
+      <div class="progress-bar"><div class="progress-fill" id="fc-bar" style="width:0%"></div></div>
+      <span id="fc-pct">0%</span>
+    </div>
+    <div class="flashcard" onclick="revealAnswer()" id="fc-card">
+      <div class="fc-label" id="fc-cat-label">Catégorie</div>
+      <div class="fc-q" id="fc-q">Question</div>
+      <div class="fc-hint">👆 Cliquer pour révéler la réponse</div>
+    </div>
+    <div class="fc-answer" id="fc-answer"></div>
+    <div class="fc-actions" id="fc-actions-main">
+      <button class="btn btn-reveal" id="btn-reveal" onclick="revealAnswer()">Révéler la réponse</button>
+    </div>
+    <div class="fc-actions hidden" id="fc-actions-eval">
+      <button class="btn btn-nok" onclick="markCard(false)">❌ À revoir</button>
+      <button class="btn btn-ok" onclick="markCard(true)">✅ Je savais !</button>
+    </div>
+    <div class="fc-actions" style="margin-top:4px">
+      <button class="btn btn-sec" onclick="backToCategories()">← Catégories</button>
+      <button class="btn btn-next" onclick="nextCard()">Suivante →</button>
+    </div>`;
+}
+
+/* ══════════════════════════════════════
+   JURY LOGIC
+══════════════════════════════════════ */
+function initJury() {
+  juryIdx = 0;
+  juryResults = [];
+  juryRevealed = false;
+  document.getElementById('jury-main').classList.remove('hidden');
+  document.getElementById('jury-results').classList.add('hidden');
+  renderJuryDots();
+  renderJuryQ();
+}
+
+function renderJuryDots() {
+  const dots = document.getElementById('jury-dots');
+  dots.innerHTML = '';
+  JURY_QUESTIONS.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'jury-dot' + (i === juryIdx ? ' current' : (juryResults[i] !== undefined ? (juryResults[i] >= 2 ? ' done-ok' : (juryResults[i] === 1 ? '' : ' done-nok')) : ''));
+    if (juryResults[i] === 1) { d.style.background = 'var(--amber)'; d.style.borderColor = 'var(--amber)'; }
+    dots.appendChild(d);
+  });
+}
+
+function renderJuryQ() {
+  const q = JURY_QUESTIONS[juryIdx];
+  juryRevealed = false;
+
+  document.getElementById('jury-pos').textContent = `Question ${juryIdx + 1} / ${JURY_QUESTIONS.length}`;
+  document.getElementById('jury-cat').textContent = q.cat;
+  document.getElementById('jury-icon').textContent = q.icon;
+  document.getElementById('jury-q').textContent = q.q;
+  document.getElementById('jury-answer').classList.remove('visible');
+  document.getElementById('jury-answer-content').innerHTML = q.answer;
+  document.getElementById('self-eval').classList.remove('visible');
+  document.getElementById('jury-reveal-btn').style.display = '';
+  document.getElementById('jury-next-btn').style.display = 'none';
+  renderJuryDots();
+}
+
+function revealJuryAnswer() {
+  juryRevealed = true;
+  document.getElementById('jury-answer').classList.add('visible');
+  document.getElementById('self-eval').classList.add('visible');
+  document.getElementById('jury-reveal-btn').style.display = 'none';
+}
+
+function juryEval(score) {
+  juryResults[juryIdx] = score;
+  document.getElementById('self-eval').classList.remove('visible');
+  document.getElementById('jury-next-btn').style.display = '';
+  renderJuryDots();
+}
+
+function nextJuryQ() {
+  if (juryIdx < JURY_QUESTIONS.length - 1) {
+    juryIdx++;
+    renderJuryQ();
+  } else {
+    showJuryResults();
+  }
+}
+
+function showJuryResults() {
+  document.getElementById('jury-main').classList.add('hidden');
+  document.getElementById('jury-results').classList.remove('hidden');
+
+  const ok = juryResults.filter(r => r === 2).length;
+  const partial = juryResults.filter(r => r === 1).length;
+  const nok = juryResults.filter(r => r === 0).length;
+  const total = JURY_QUESTIONS.length;
+  const pct = Math.round(((ok * 2 + partial) / (total * 2)) * 100);
+
+  document.getElementById('final-score').textContent = pct + '%';
+  document.getElementById('r-ok').textContent = ok;
+  document.getElementById('r-partial').textContent = partial;
+  document.getElementById('r-nok').textContent = nok;
+
+  const gradeEl = document.getElementById('final-grade');
+  if (pct >= 85) { gradeEl.textContent = '🏆 Excellent — Prêt pour le jury !'; gradeEl.className = 'grade A'; }
+  else if (pct >= 70) { gradeEl.textContent = '✅ Bien — Encore un peu de révision'; gradeEl.className = 'grade B'; }
+  else if (pct >= 50) { gradeEl.textContent = '🟡 Moyen — Concentre-toi sur les lacunes'; gradeEl.className = 'grade C'; }
+  else { gradeEl.textContent = '❌ À retravailler — Revois les flashcards !'; gradeEl.className = 'grade D'; }
+}
+
+function restartJury() {
+  initJury();
+}
+
+/* ══════════════════════════════════════
+   INIT
+══════════════════════════════════════ */
+renderCategories();
+</script>
+</body>
+</html>

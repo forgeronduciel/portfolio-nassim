@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { ExternalLink, Server, Cloud, Shield, Database, GraduationCap, Briefcase, Network, FileText, CheckCircle2, ChevronDown, Star, X, ArrowUpRight, KeyRound, Monitor, Laptop, Printer, ClipboardList } from "lucide-react";
+import { ExternalLink, Server, Cloud, Shield, Database, GraduationCap, Briefcase, Network, FileText, CheckCircle2, ChevronDown, Star, X, ArrowUpRight, KeyRound, Monitor, Laptop, Printer, ClipboardList, Phone, UserCog } from "lucide-react";
 
 type TabType = "pro" | "perso";
 
@@ -28,6 +28,7 @@ type Activite = {
   gradient: string;
   logoUrl?: string;
   imageUrl?: string;
+  requirePassword?: string;
 };
 
 const projetsEcole: Activite[] = [
@@ -57,86 +58,6 @@ const projetsEcole: Activite[] = [
     resultats:
       "Infrastructure supervisée opérationnelle : le serveur NAS et le poste Windows sont surveillés en temps réel via Observium. Les alertes email sont configurées pour prévenir l'administrateur en cas d'événement critique.",
     docUrl: "/docs/01.TP01_ConfServeurSupervision_Rev04.docx",
-  },
-  {
-    id: "proxmox",
-    titre: "Proxmox VE",
-    soustitre: "Plateforme de virtualisation",
-    annee: "2024-2025",
-    badge: "Formation",
-    icon: <Server size={22} />,
-    gradient: "from-emerald-500 to-teal-600",
-    logoUrl: "https://upload.wikimedia.org/wikipedia/commons/9/92/Logo_Proxmox.svg",
-    objectifs: "Déployer et administrer une plateforme de virtualisation Proxmox VE pour héberger des machines virtuelles et conteneurs LXC en environnement de formation.",
-    travaux: [
-      "Installation et configuration de Proxmox VE sur serveur dédié",
-      "Création de VMs (Linux Debian, Windows Server 2025) et templates réutilisables",
-      "Gestion du stockage ZFS, sauvegardes et snapshots",
-      "Configuration des VLANs et bridges réseau virtuels",
-    ],
-    technologies: [],
-    competences: ["Virtualisation", "Linux", "Réseau", "Administration système"],
-    resultats: "Infrastructure virtuelle opérationnelle hébergeant l'ensemble des services du lab (AD, NAS, Nextcloud, supervision).",
-  },
-  {
-    id: "cloudflare",
-    titre: "Cloudflare",
-    soustitre: "DNS & sécurité web",
-    annee: "2024-2025",
-    badge: "Formation",
-    icon: <Cloud size={22} />,
-    gradient: "from-amber-500 to-orange-600",
-    logoUrl: "https://cdn.simpleicons.org/cloudflare/F38020",
-    objectifs: "Utiliser Cloudflare pour sécuriser et optimiser des services web exposés sur Internet (DNS, protection DDoS, SSL/TLS).",
-    travaux: [
-      "Configuration DNS et gestion des enregistrements A, CNAME, MX, TXT",
-      "Activation du proxy Cloudflare et configuration SSL/TLS (Full Strict)",
-      "Déploiement d'un tunnel Cloudflare Zero Trust pour l'accès sécurisé",
-      "Analyse des logs de trafic et configuration des alertes",
-    ],
-    technologies: [],
-    competences: ["Réseau", "Sécurité", "DNS"],
-    resultats: "Services web sécurisés, protégés contre les attaques DDoS et accessibles via tunnel chiffré sans port exposé.",
-  },
-  {
-    id: "windows-server-ad",
-    titre: "Windows Server AD",
-    soustitre: "Active Directory & GPO",
-    annee: "2024-2025",
-    badge: "Formation",
-    icon: <Shield size={22} />,
-    gradient: "from-blue-500 to-indigo-600",
-    logoUrl: "/logos/windows.svg",
-    objectifs: "Installer et configurer un contrôleur de domaine Active Directory pour la gestion centralisée des utilisateurs, postes et stratégies de groupe.",
-    travaux: [
-      "Installation de Windows Server 2025 et promotion en contrôleur de domaine",
-      "Création d'Unités d'Organisation (OU), utilisateurs et groupes structurés",
-      "Configuration et déploiement des GPO (déploiement logiciels, restrictions)",
-      "Intégration des postes clients Windows au domaine",
-      "Configuration du service DHCP et DNS Active Directory",
-    ],
-    technologies: [],
-    competences: ["Active Directory", "Windows Server", "GPO", "Réseau"],
-    resultats: "Annuaire centralisé opérationnel pour l'authentification et la gestion des droits utilisateurs.",
-  },
-  {
-    id: "nextcloud",
-    titre: "Nextcloud",
-    soustitre: "Cloud privé collaboratif",
-    annee: "2024-2025",
-    badge: "Formation",
-    icon: <Database size={22} />,
-    gradient: "from-violet-500 to-purple-600",
-    logoUrl: "https://cdn.simpleicons.org/nextcloud/0082C9",
-    objectifs: "Déployer un serveur Nextcloud pour le partage de fichiers, la synchronisation et la collaboration en mode cloud privé.",
-    travaux: [
-      "Configuration des utilisateurs, groupes et quotas de stockage",
-      "Activation des applications collaboratives (calendrier, contacts, Talk)",
-      "Intégration LDAP pour l'authentification via Active Directory",
-    ],
-    technologies: [],
-    competences: ["Linux", "Services réseau", "Sécurité", "LDAP"],
-    resultats: "Solution de cloud privé opérationnelle avec authentification AD, partage de fichiers et collaboration en temps réel.",
   },
   {
     id: "ad-nextcloud",
@@ -222,14 +143,70 @@ const projetsEcole: Activite[] = [
 
 const projetsEntreprise: Activite[] = [
   {
+    id: "support-telephonique",
+    titre: "Support téléphonique",
+    annee: "2024-2025",
+    badge: "Activité",
+    icon: <Phone size={22} />,
+    gradient: "from-orange-400 to-amber-500",
+    imageUrl: "/images/support-telephonique.svg",
+    requirePassword: "Azerty13247@",
+    objectifs:
+      "Assurer le support téléphonique de premier niveau auprès des utilisateurs de Kereis : réceptionner les appels, diagnostiquer les problèmes à distance et guider les utilisateurs pas à pas vers la résolution de leur incident.",
+    travaux: [
+      "Réception d'un appel de Mme DUPONT (Chargée de clientèle) signalant l'impossibilité de se connecter à sa session Windows",
+      "Diagnostic à distance : identification d'un mot de passe expiré après le délai de 90 jours",
+      "Guidage téléphonique pas à pas pour la réinitialisation du mot de passe via la procédure Windows",
+      "Vérification de la reconnexion réussie et du bon fonctionnement des applications métier (Outlook, logiciel de gestion)",
+      "Envoi d'un e-mail de suivi récapitulatif avec conseils de prévention (anticipation de l'expiration du MDP)",
+      "Réception de la confirmation de résolution par retour e-mail de l'utilisatrice",
+    ],
+    technologies: [],
+    competences: [
+      "C1 – Gérer le patrimoine informatique",
+      "C2 – Répondre aux incidents et aux demandes d'assistance",
+    ],
+    resultats:
+      "Incident résolu en 16 minutes par téléphone, sans déplacement. Session utilisateur rétablie, accès Outlook et logiciel métier confirmés. Suivi écrit réalisé par e-mail pour traçabilité et archivage.",
+    docUrl: "/docs/Procedure_Support_Telephonique.docx",
+  },
+  {
+    id: "support-compte",
+    titre: "Support informatique — Compte",
+    annee: "2024-2025",
+    badge: "Activité",
+    icon: <UserCog size={22} />,
+    gradient: "from-orange-400 to-amber-500",
+    imageUrl: "/images/support-compte.svg",
+    requirePassword: "Azerty13247@",
+    objectifs:
+      "Traiter une demande de réinitialisation de mot de passe reçue par e-mail : identifier l'utilisateur, réinitialiser le compte via Active Directory et confirmer la résolution par retour e-mail.",
+    travaux: [
+      "Réception d'un e-mail de Thomas Martin signalant l'impossibilité d'accéder à son compte Kereis",
+      "Identification et localisation du compte dans la console Active Directory Users and Computers",
+      "Réinitialisation du mot de passe via ADUC avec obligation de changement à la prochaine connexion",
+      "Communication du mot de passe temporaire à l'utilisateur par voie téléphonique sécurisée",
+      "Envoi de l'e-mail de confirmation avec instructions de première connexion",
+      "Clôture du ticket TKT-2025-0312 après vérification de la résolution",
+    ],
+    technologies: [],
+    competences: [
+      "C1 – Gérer le patrimoine informatique",
+      "C2 – Répondre aux incidents et aux demandes d'assistance",
+    ],
+    resultats:
+      "Compte utilisateur rétabli en moins de 15 minutes. Ticket clôturé avec traçabilité complète de l'échange e-mail. Utilisateur autonome après réinitialisation du mot de passe via Active Directory.",
+    docUrl: "/docs/Ticket_Reinitialisation_MDP_Kereis.docx",
+  },
+  {
     id: "incident-pc",
     titre: "Gestion d'un incident PC",
-    soustitre: "BMC Remedy · Support N1/N2 · Traçabilité ITIL",
     annee: "2025-2026",
     badge: "Activité",
     icon: <Laptop size={22} />,
     gradient: "from-orange-500 to-amber-600",
     imageUrl: "/images/incident-pc.svg",
+    requirePassword: "Utec1234@",
     objectifs:
       "Prendre en charge un poste Windows défaillant signalé par un utilisateur, ouvrir un ticket d'incident dans BMC Remedy, obtenir les autorisations nécessaires et expédier le matériel en atelier pour réparation.",
     travaux: [
@@ -252,12 +229,12 @@ const projetsEntreprise: Activite[] = [
   {
     id: "imprimante",
     titre: "Partage d'imprimante réseau",
-    soustitre: "PADII · ADBDF · Réservation IP · Active Directory",
     annee: "2025-2026",
     badge: "Activité",
     icon: <Printer size={22} />,
     gradient: "from-teal-500 to-cyan-600",
     imageUrl: "/images/imprimante.svg",
+    requirePassword: "Utec1234@",
     objectifs:
       "Mettre en service une imprimante réseau partagée à la Banque de France via l'outil PADII (Gestion des files d'impression ADBDF), en effectuant la réservation d'adresse IP, le raccordement réseau et la configuration du partage.",
     travaux: [
@@ -279,13 +256,13 @@ const projetsEntreprise: Activite[] = [
   },
   {
     id: "ticketing-portsair",
-    titre: "Outil de ticketing — EV Service Manager",
-    soustitre: "Portsair · ITIL · Incidents · Demandes",
+    titre: "Outil de ticketing — Portsair",
     annee: "2025-2026",
     badge: "Activité",
     icon: <ClipboardList size={22} />,
     gradient: "from-violet-500 to-indigo-600",
     imageUrl: "/images/ticketing-portsair.svg",
+    requirePassword: "Utec1234@",
     objectifs:
       "Utiliser l'outil de ticketing EV Service Manager (Portsair) de la Banque de France pour créer, suivre et clôturer des tickets d'incidents et de demandes de service dans le respect du processus ITIL.",
     travaux: [
@@ -307,12 +284,12 @@ const projetsEntreprise: Activite[] = [
   {
     id: "masterisation",
     titre: "Masterisation d'un poste Windows",
-    soustitre: "Sysprep · WIM · Windows 11 · Active Directory",
     annee: "2025-2026",
-    badge: "Projet majeur",
+    badge: "Activité",
     icon: <Server size={22} />,
     gradient: "from-blue-500 to-cyan-600",
     imageUrl: "/images/masterisation.svg",
+    requirePassword: "Utec1234@",
     objectifs:
       "Réaliser la masterisation complète d'un poste Windows 11 en entreprise : préparation et personnalisation du système, généralisation via Sysprep, capture de l'image WIM et redéploiement sur un poste cible intégré au domaine Active Directory.",
     travaux: [
@@ -331,12 +308,12 @@ const projetsEntreprise: Activite[] = [
   {
     id: "blancco",
     titre: "Effacement sécurisé des données",
-    soustitre: "Blancco · BIOS UEFI · Secure Boot · NVMe",
     annee: "2025-2026",
-    badge: "Projet majeur",
+    badge: "Activité",
     icon: <Shield size={22} />,
     gradient: "from-red-500 to-rose-600",
     imageUrl: "/images/blancco-erasure.svg",
+    requirePassword: "Utec1234@",
     objectifs:
       "Réaliser l'effacement sécurisé et certifié des données d'un poste informatique avant restitution ou recyclage, à l'aide du logiciel Blancco déployé depuis une clé USB bootable.",
     travaux: [
@@ -362,6 +339,9 @@ const projetsEntreprise: Activite[] = [
    MODAL DÉTAIL PROJET
 ───────────────────────────────────────────── */
 function ModalProjet({ activite, onClose }: { activite: Activite; onClose: () => void }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
   return createPortal(
     <div
       className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
@@ -471,15 +451,87 @@ function ModalProjet({ activite, onClose }: { activite: Activite; onClose: () =>
 /* ─────────────────────────────────────────────
    CARTE PROJET MAJEUR — Image + bouton détails
 ───────────────────────────────────────────── */
+/* ─────────────────────────────────────────────
+   MODAL MOT DE PASSE
+───────────────────────────────────────────── */
+function ModalPassword({ onSuccess, onClose, gradient, password }: { onSuccess: () => void; onClose: () => void; gradient: string; password: string }) {
+  const [value, setValue] = useState("");
+  const [error, setError] = useState(false);
+  const [shake, setShake] = useState(false);
+  const [show, setShow] = useState(false);
+
+  function handleCheck() {
+    if (value === password) {
+      onSuccess();
+    } else {
+      setError(true);
+      setShake(true);
+      setValue("");
+      setTimeout(() => setShake(false), 500);
+    }
+  }
+
+  if (typeof window === "undefined") return null;
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={onClose}>
+      <div
+        className={`relative w-full max-w-sm rounded-2xl border border-indigo-700/40 bg-[#13131f] p-7 shadow-2xl ${shake ? "animate-[shake_0.4s_ease]" : ""}`}
+        style={{ animation: shake ? "shake 0.4s ease" : undefined }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Barre gradient top */}
+        <div className={`absolute top-0 left-0 right-0 h-1 rounded-t-2xl bg-gradient-to-r ${gradient}`} />
+
+        <button onClick={onClose} className="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">
+          <X size={18} />
+        </button>
+
+        <div className="flex flex-col items-center gap-3 mb-6">
+          <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${gradient} text-white shadow-lg`}>
+            <KeyRound size={22} />
+          </div>
+          <h2 className="text-lg font-bold text-white">Accès protégé</h2>
+          <p className="text-xs text-slate-400 text-center">Ce document est confidentiel.<br />Entrez le mot de passe pour y accéder.</p>
+        </div>
+
+        <form onSubmit={(e) => { e.preventDefault(); handleCheck(); }} className="space-y-4">
+          <div className="relative">
+            <input
+              type={show ? "text" : "password"}
+              value={value}
+              onChange={(e) => { setValue(e.target.value); setError(false); }}
+              placeholder="Mot de passe"
+              autoFocus
+              className={`w-full rounded-xl border ${error ? "border-red-500/60 bg-red-500/5" : "border-indigo-700/40 bg-[#1a1a2e]"} px-4 py-2.5 pr-10 text-sm text-white placeholder-slate-500 outline-none focus:border-indigo-500/60 transition-colors`}
+            />
+            <button type="button" onClick={() => setShow(!show)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors">
+              {show ? <Shield size={15} /> : <Shield size={15} />}
+            </button>
+          </div>
+          {error && <p className="text-xs text-red-400 text-center">Mot de passe incorrect. Réessayez.</p>}
+          <button
+            type="submit"
+            className={`w-full rounded-xl bg-gradient-to-r ${gradient} px-4 py-2.5 text-sm font-bold text-white shadow hover:opacity-90 transition-opacity`}
+          >
+            Accéder
+          </button>
+        </form>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
 function CarteMajeure({ activite, index }: { activite: Activite; index: number }) {
   const [open, setOpen] = useState(false);
+  const [askPassword, setAskPassword] = useState(false);
 
   return (
     <>
       <article
         className="group relative overflow-hidden rounded-2xl border border-indigo-900/40 bg-[#13131f] cursor-pointer hover:border-indigo-500/50 hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300"
         style={{ animationDelay: `${index * 0.1}s` }}
-        onClick={() => setOpen(true)}
+        onClick={() => { if (activite.requirePassword) { setAskPassword(true); } else { setOpen(true); } }}
       >
         {/* Image */}
         <div className="relative w-full h-48 overflow-hidden">
@@ -508,13 +560,15 @@ function CarteMajeure({ activite, index }: { activite: Activite; index: number }
 
         {/* Bas de carte */}
         <div className="p-4">
-          <div className="flex items-center gap-3 mb-2">
+          <div className="flex items-center gap-3 mb-3">
             <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${activite.gradient} text-white shadow`}>
               {activite.icon}
             </div>
             <div className="min-w-0">
-              <h3 className="text-base font-bold text-white leading-tight">{activite.titre}</h3>
-              {activite.soustitre && <p className="text-xs text-slate-500 truncate">{activite.soustitre}</p>}
+              <h3 className="text-sm font-bold text-white leading-tight truncate">{activite.titre}</h3>
+              {activite.soustitre && (
+                <p className="text-xs text-slate-500 truncate mt-0.5">{activite.soustitre}</p>
+              )}
             </div>
           </div>
 
@@ -522,14 +576,23 @@ function CarteMajeure({ activite, index }: { activite: Activite; index: number }
           <button
             type="button"
             className={`w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r ${activite.gradient} px-4 py-2.5 text-sm font-bold text-white shadow-md hover:opacity-90 hover:shadow-lg transition-all duration-200`}
-            onClick={(e) => { e.stopPropagation(); setOpen(true); }}
+            onClick={(e) => { e.stopPropagation(); if (activite.requirePassword) { setAskPassword(true); } else { setOpen(true); } }}
           >
+            {activite.requirePassword && <KeyRound size={13} />}
             Voir les détails
             <ArrowUpRight size={15} />
           </button>
         </div>
       </article>
 
+      {askPassword && (
+        <ModalPassword
+          gradient={activite.gradient}
+          password={activite.requirePassword!}
+          onClose={() => setAskPassword(false)}
+          onSuccess={() => { setAskPassword(false); setOpen(true); }}
+        />
+      )}
       {open && <ModalProjet activite={activite} onClose={() => setOpen(false)} />}
     </>
   );
@@ -683,9 +746,9 @@ export default function ActivitesSection() {
                 <Briefcase size={22} />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-semibold uppercase tracking-widest text-amber-400/70 mb-0.5">Alternance · Banque de France</p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-amber-400/70 mb-0.5">Alternance · Kereis &amp; Banque de France</p>
                 <h3 className="text-lg font-bold text-white">Projets Professionnels</h3>
-                <p className="text-xs text-slate-500 mt-0.5">{projetsEntreprise.length} projet{projetsEntreprise.length > 1 ? "s" : ""} · Banque de France</p>
+                <p className="text-xs text-slate-500 mt-0.5">{projetsEntreprise.length} activités · 2 entreprises</p>
               </div>
               {/* indicateur actif */}
               <div className={`w-2.5 h-2.5 rounded-full shrink-0 transition-all duration-300 ${activeTab === "pro" ? "bg-amber-400 shadow-[0_0_8px_2px_rgba(251,191,36,0.5)]" : "bg-slate-700"}`} />
@@ -728,30 +791,56 @@ export default function ActivitesSection() {
 
         {/* ── CONTENU SELON ONGLET ── */}
         {activeTab === "pro" && (
-          <div key="pro" className="animate-fade-in">
-            {projetsEntreprise.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-20 rounded-2xl border border-dashed border-amber-500/20 bg-amber-500/5">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-500/10 mb-5">
-                  <Briefcase size={28} className="text-amber-400/60" />
+          <div key="pro" className="animate-fade-in space-y-12">
+
+            {/* ── 1ère année · Kereis ── */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/25">
+                  <Briefcase size={12} className="text-orange-400" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-orange-300">1ère année · Kereis · 2024-2025</span>
                 </div>
-                <p className="text-lg font-semibold text-white/70 mb-1">Projets professionnels à venir</p>
-                <p className="text-sm text-slate-500 text-center max-w-xs">
-                  Les projets réalisés en alternance à la Banque de France seront ajoutés prochainement.
-                </p>
+                <div className="flex-1 h-px bg-gradient-to-r from-orange-500/20 to-transparent" />
               </div>
-            ) : (
               <div className="grid sm:grid-cols-2 gap-5">
-                {projetsEntreprise.map((activite, index) => (
-                  <div
-                    key={activite.id}
-                    className="animate-slide-up opacity-0"
-                    style={{ animationDelay: `${0.05 + index * 0.1}s`, animationFillMode: "forwards" }}
-                  >
-                    <CarteMajeure activite={activite} index={index} />
-                  </div>
-                ))}
+                {projetsEntreprise
+                  .filter((a) => a.annee === "2024-2025")
+                  .map((activite, index) => (
+                    <div
+                      key={activite.id}
+                      className="animate-slide-up opacity-0"
+                      style={{ animationDelay: `${0.05 + index * 0.1}s`, animationFillMode: "forwards" }}
+                    >
+                      <CarteMajeure activite={activite} index={index} />
+                    </div>
+                  ))}
               </div>
-            )}
+            </div>
+
+            {/* ── 2ème année · Banque de France ── */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/25">
+                  <Briefcase size={12} className="text-amber-400" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-amber-300">2ème année · Banque de France · 2025-2026</span>
+                </div>
+                <div className="flex-1 h-px bg-gradient-to-r from-amber-500/20 to-transparent" />
+              </div>
+              <div className="grid sm:grid-cols-2 gap-5">
+                {projetsEntreprise
+                  .filter((a) => a.annee === "2025-2026")
+                  .map((activite, index) => (
+                    <div
+                      key={activite.id}
+                      className="animate-slide-up opacity-0"
+                      style={{ animationDelay: `${0.05 + index * 0.1}s`, animationFillMode: "forwards" }}
+                    >
+                      <CarteMajeure activite={activite} index={index} />
+                    </div>
+                  ))}
+              </div>
+            </div>
+
           </div>
         )}
 
@@ -787,7 +876,7 @@ export default function ActivitesSection() {
               <div className="flex items-center gap-3 mb-6">
                 <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/25">
                   <GraduationCap size={13} className="text-indigo-400" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-indigo-300">Formations & Lab</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-indigo-300">Projets</span>
                 </div>
                 <div className="flex-1 h-px bg-gradient-to-r from-indigo-500/20 to-transparent" />
               </div>

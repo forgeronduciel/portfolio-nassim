@@ -32,9 +32,12 @@ export async function GET() {
     return text.length > 200 ? `${text.slice(0, 197)}…` : text || null;
   }
 
+  const withTimeout = <T>(p: Promise<T>, ms: number): Promise<T> =>
+    Promise.race([p, new Promise<never>((_, rej) => setTimeout(() => rej(new Error("timeout")), ms))]);
+
   const results = await Promise.allSettled(
     feeds.map(async (feed) => {
-      const parsed = await parser.parseURL(feed.url);
+      const parsed = await withTimeout(parser.parseURL(feed.url), 5000);
       return (parsed.items || []).slice(0, 5).map((item) => ({
         title: (item.title ?? "Sans titre").trim(),
         link: item.link ?? "#",

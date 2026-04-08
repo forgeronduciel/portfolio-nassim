@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import {
   ExternalLink, Rss, Loader2, FileText, Cloud, TrendingUp, History,
   BookOpen, Server, Code, Monitor, Building2, Globe, Lock, Users,
-  CheckCircle2, ArrowRight, Zap, Database, Shield, Wifi
+  CheckCircle2, ArrowRight, Zap, Database, Shield, Wifi, Calendar
 } from "lucide-react";
 import { rssFeeds } from "@/lib/rssFeeds";
 
@@ -34,6 +34,7 @@ type EraBlock = {
   icon: React.ReactNode;
   color: string;
   items: CuratedItem[];
+  banners?: CuratedItem[];
 };
 
 /* ─────────────────────────────────────────────────────────────────
@@ -42,116 +43,108 @@ type EraBlock = {
 const veilleData: EraBlock[] = [
   {
     era: "passé",
-    label: "2023 → 2024",
-    subtitle: "Montée en puissance du Cloud hybride & sécurité",
+    label: "2024",
+    subtitle: "Le cloud explose avec l'IA — demande et consommation en flèche",
     icon: <History size={18} />,
     color: "from-slate-500 to-blue-600",
     items: [
       {
-        title: "Les grandes tendances du Cloud en 2024 — Oodrive",
+        title: "L'IA générative propulse la demande cloud à des niveaux records en 2024",
         summary:
-          "En 2023, Gartner confirme que plus de 85 % des entreprises ont adopté une stratégie multi-cloud ou hybride. Les DSI combinent infrastructure on-premise et services cloud publics pour allier contrôle des données sensibles et flexibilité des workloads scalables.",
+          "En 2024, l'intégration massive de l'IA générative (ChatGPT, Copilot, Gemini) dans les entreprises provoque une explosion de la demande en ressources cloud. AWS, Azure et GCP enregistrent des croissances à deux chiffres : les data centers GPU tournent à pleine capacité et les délais de provisioning s'allongent. La consommation électrique des infrastructures cloud augmente de 30 % en un an selon l'AIE.",
         url: "https://www.oodrive.com/fr/blog/actualites/transformation-numerique/cloud-tendances-2024/",
         source: "Oodrive — Tendances Cloud 2024",
         sourceUrl: "https://www.oodrive.com/",
       },
       {
-        title: "Microsoft lance Azure AD renommé en Entra ID — vers l'identité cloud unifiée (2023)",
+        title: "Cloud hybride et multi-cloud : la stratégie dominante des entreprises en 2024",
         summary:
-          "Microsoft rebaptise Azure Active Directory en Microsoft Entra ID en 2023, signalant l'unification de la gestion des identités on-premise et cloud. Cette évolution illustre la tendance : l'AD local se synchronise avec le cloud pour permettre le SSO (Single Sign-On) sur toutes les applications SaaS.",
-        url: "https://learn.microsoft.com/fr-fr/azure/active-directory/fundamentals/whatis",
-        source: "Microsoft Learn",
-        sourceUrl: "https://learn.microsoft.com/",
-      },
-      {
-        title: "Prévisions de nuages pour 2024 : les grandes évolutions du Cloud — Eviden",
-        summary:
-          "L'ANSSI met à jour le référentiel SecNumCloud en 2024 pour qualifier les hébergeurs cloud garantissant la souveraineté des données françaises. Ce cadre impose que les données des OIV (Opérateurs d'Importance Vitale) ne soient accessibles à aucune juridiction étrangère, notamment face au Cloud Act américain.",
+          "Gartner confirme qu'en 2024, plus de 85 % des entreprises combinent cloud public et infrastructure on-premise. Les DSI cherchent à équilibrer flexibilité, contrôle des données sensibles et maîtrise des coûts. Le cloud hybride s'impose comme le modèle de référence, notamment dans les secteurs bancaire et industriel.",
         url: "https://eviden.com/fr-fr/actualites/blog/previsions-de-nuages-pour-2024/",
         source: "Eviden — Prévisions Cloud 2024",
         sourceUrl: "https://eviden.com/",
       },
+    ],
+    banners: [
       {
-        title: "Kubernetes atteint 96 % d'adoption en production — CNCF Annual Report 2023",
-        summary:
-          "Le rapport annuel de la CNCF (Cloud Native Computing Foundation) 2023 révèle que 96 % des organisations utilisent ou évaluent Kubernetes. La conteneurisation s'impose comme standard pour déployer des applications cloud-native, portables et scalables entre environnements on-premise et cloud public.",
-        url: "https://www.cncf.io/reports/cncf-annual-report-2023/",
-        source: "CNCF — Annual Report 2023",
-        sourceUrl: "https://www.cncf.io/",
+        title: "NVIDIA : des ventes de GPU record portées par la demande cloud IA en 2024",
+        summary: "Les revenus data center de NVIDIA triplent en 2024 grâce à l'explosion de la demande en GPU H100/H200 pour l'entraînement des LLM.",
+        url: "https://www.lemonde.fr/economie/article/2024/02/21/nvidia-des-resultats-records-portes-par-l-engouement-pour-l-ia_6218006_3234.html",
+        source: "Le Monde",
+        sourceUrl: "https://www.lemonde.fr/",
+      },
+      {
+        title: "AWS, Azure, GCP : les hyperscalers investissent 200 Md$ dans les data centers IA",
+        summary: "En 2024, les trois géants du cloud annoncent des plans d'investissement massifs pour construire de nouveaux data centers capables d'absorber la demande en calcul IA.",
+        url: "https://www.lemagit.fr/actualites/366572568/AWS-Azure-Google-Cloud-les-investissements-explosent-pour-repondre-a-la-demande-IA",
+        source: "LeMagIT",
+        sourceUrl: "https://www.lemagit.fr/",
       },
     ],
   },
   {
     era: "présent",
-    label: "2024 → 2025",
-    subtitle: "IA générative, FinOps & Edge computing",
+    label: "2025",
+    subtitle: "Explosion des budgets cloud — les entreprises cherchent à optimiser",
     icon: <Cloud size={18} />,
     color: "from-indigo-500 to-purple-600",
     items: [
       {
-        title: "Le boom du cloud en 2025 : IA générative, nouveaux usages et accélération des providers",
+        title: "82 % des entreprises dépassent leur budget cloud en 2025 — la FinOps s'impose",
         summary:
-          "En 2024, les trois grands fournisseurs cloud (AWS, Azure, GCP) intègrent nativement l'IA générative à leur catalogue. Les entreprises accèdent à GPT-4, Claude ou Gemini via des API cloud sans gérer d'infrastructure GPU. L'IA-as-a-Service devient un différenciateur majeur entre les providers.",
-        url: "https://www.kalyptus.fr/le-boom-du-cloud-en-2025/",
-        source: "Kalyptus",
-        sourceUrl: "https://www.kalyptus.fr/",
-      },
-      {
-        title: "FinOps : les entreprises luttent contre l'explosion des coûts cloud en 2024-2025",
-        summary:
-          "La FinOps Foundation rapporte qu'en 2024, 82 % des entreprises ont dépassé leur budget cloud. La gestion des coûts (FinOps) devient une discipline à part entière : rightsizing des VMs, extinction automatique des ressources inactives, choix entre instances réservées et spot. AWS Cost Explorer et Azure Cost Management sont plébiscités.",
+          "La FinOps Foundation rapporte qu'en 2025, la quasi-totalité des grandes entreprises ont explosé leurs prévisions budgétaires cloud. L'IA as-a-Service (GPU à la demande, inférence LLM) représente désormais une part majeure des factures. La discipline FinOps — rightsizing, extinction automatique, instances réservées — devient incontournable pour contenir les dépenses.",
         url: "https://www.finops.org/introduction/what-is-finops/",
         source: "FinOps Foundation",
         sourceUrl: "https://www.finops.org/",
       },
       {
-        title: "Cloudflare Workers et l'edge computing : le code au plus près des utilisateurs (2025)",
+        title: "Le boom du cloud en 2025 : nouveaux usages, nouveaux acteurs, nouveaux risques",
         summary:
-          "Cloudflare Workers permet en 2025 d'exécuter du code JavaScript directement sur les 300+ points de présence Cloudflare dans le monde, à moins de 50 ms de n'importe quel utilisateur. Ce modèle d'edge computing réduit la latence et préfigure la décentralisation des applications cloud vers la périphérie du réseau.",
-        url: "https://workers.cloudflare.com/",
-        source: "Cloudflare Workers",
-        sourceUrl: "https://www.cloudflare.com/",
+          "En 2025, les fournisseurs cloud rivalisent d'offres IA natives : AWS Bedrock, Azure OpenAI Service, Google Vertex AI. Les PME adoptent massivement le SaaS IA sans mesurer l'impact sur leur souveraineté des données. Parallèlement, la consommation énergétique des data centers devient un enjeu politique et réglementaire en Europe.",
+        url: "https://www.kalyptus.fr/le-boom-du-cloud-en-2025/",
+        source: "Kalyptus — Cloud 2025",
+        sourceUrl: "https://www.kalyptus.fr/",
+      },
+    ],
+    banners: [
+      {
+        title: "Le FinOps, ou comment maîtriser les coûts du cloud",
+        summary: "Le rightsizing, les instances réservées et l'extinction automatique des ressources inutilisées deviennent les pratiques clés pour maîtriser les factures cloud en 2025.",
+        url: "https://www.lemagit.fr/conseil/Le-FinOps-ou-comment-maitriser-les-couts-du-Cloud",
+        source: "LeMagIT",
+        sourceUrl: "https://www.lemagit.fr/",
+      },
+      {
+        title: "Cloud souverain : un bras de fer serré entre OVHcloud et Scaleway",
+        summary: "Face à l'hégémonie d'AWS, Azure et GCP, les acteurs européens misent sur la certification SecNumCloud et la conformité RGPD pour séduire les entreprises françaises.",
+        url: "https://www.journaldunet.com/cloud/1540545-cloud-souverain-un-bras-de-fer-serre-entre-ovhcloud-et-scaleway/",
+        source: "Journal du Net",
+        sourceUrl: "https://www.journaldunet.com/",
       },
     ],
   },
   {
     era: "futur",
     label: "2026",
-    subtitle: "Multi-Cloud, Edge, souveraineté & IA autonome",
+    subtitle: "Data Act européen — un nouveau cadre réglementaire pour le cloud",
     icon: <TrendingUp size={18} />,
     color: "from-emerald-500 to-teal-600",
     items: [
       {
-        title: "Gartner prédit : 75 % des données traitées hors datacenter traditionnel d'ici 2026",
+        title: "Le Data Act européen entre en application : un tournant pour le cloud en 2026",
         summary:
-          "Selon Gartner, l'edge computing va inverser la centralisation cloud : en 2026, trois quarts des données d'entreprise seront traitées à la périphérie (edge), sur des appareils IoT, des usines connectées ou des micro-datacenters locaux. Le cloud central devient le superviseur, non plus le processeur principal.",
-        url: "https://www.lemagit.fr/actualites/252521010/Gartner-en-2025-75-des-donnees-dentreprise-seront-creees-a-la-peripherie-du-reseau",
-        source: "LeMagIT — Gartner Edge",
-        sourceUrl: "https://www.lemagit.fr/",
+          "Le règlement européen sur les données (Data Act), publié au Journal officiel de l'UE en décembre 2023 et applicable à partir de septembre 2025, impose de nouvelles obligations aux fournisseurs cloud. Les entreprises peuvent désormais exiger la portabilité de leurs données entre providers, mettre fin aux pratiques de verrouillage propriétaire (vendor lock-in) et s'assurer que les données générées sur leurs équipements leur appartiennent pleinement.",
+        url: "https://www.cnil.fr/fr/reglement-donnees-data-act-nouveau-cadre-europeen-pour-partage-utilisation-donnees",
+        source: "CNIL — Data Act 2026",
+        sourceUrl: "https://www.cnil.fr/",
       },
       {
-        title: "GAIA-X et la souveraineté numérique européenne : l'alternative aux GAFAM pour 2026",
+        title: "GAIA-X et la souveraineté numérique européenne face aux GAFAM",
         summary:
-          "Le projet GAIA-X, porté par l'Union Européenne, vise à créer un écosystème cloud souverain d'ici 2026. Face au Cloud Act américain qui permet aux autorités US d'accéder aux données hébergées par des entreprises américaines (AWS, Azure, GCP), GAIA-X garantit que les données européennes restent sous juridiction européenne.",
+          "Le projet GAIA-X, porté par l'Union Européenne, prend de l'ampleur en 2026 pour créer un écosystème cloud souverain. Combiné au Data Act, il vise à garantir que les données des entreprises et citoyens européens restent sous juridiction européenne, face au Cloud Act américain qui permet aux autorités US d'accéder aux données hébergées chez AWS, Azure ou GCP.",
         url: "https://www.lemagit.fr/actualites/366621954/Gaia-X-et-Data-Spaces-2025-annee-du-passage-a-lechelle",
-        source: "LeMagIT — GAIA-X 2025",
+        source: "LeMagIT — GAIA-X 2026",
         sourceUrl: "https://www.lemagit.fr/",
-      },
-      {
-        title: "Agentic AI dans le Cloud : les agents IA autonomes gèrent l'infrastructure en 2026",
-        summary:
-          "En 2026, les agents IA (LLM autonomes) commencent à gérer des tâches d'administration cloud : provisioning automatique, détection d'anomalies, optimisation des coûts, réponse aux incidents. AWS, Azure et GCP intègrent des 'cloud copilots' capables d'exécuter des actions sur l'infrastructure sans intervention humaine.",
-        url: "https://thenewstack.io/agentic-ai-control-plane-production/",
-        source: "The New Stack — Agentic AI",
-        sourceUrl: "https://thenewstack.io/",
-      },
-      {
-        title: "Stratégie Multi-Cloud 2026 : Terraform, Kubernetes et la fin du vendor lock-in",
-        summary:
-          "Les grandes entreprises répartissent leurs workloads sur AWS, Azure et GCP simultanément pour éviter la dépendance à un fournisseur unique. Terraform (IaC), Kubernetes et les API ouvertes standardisent la portabilité. En 2026, le multi-cloud devient la norme pour les entreprises du CAC 40 et du Fortune 500.",
-        url: "https://www.infoq.com/news/2026/03/jpmc-multicloud-product-strategy/",
-        source: "InfoQ — Multi-Cloud 2026",
-        sourceUrl: "https://www.infoq.com/",
       },
     ],
   },
@@ -198,6 +191,16 @@ function ServiceModelsSchema() {
       badge: "bg-teal-500/20 text-teal-200 border-teal-500/30",
       who: "Administrateur",
     },
+    {
+      model: "On-Premise",
+      full: "Infrastructure locale",
+      desc: "L'entreprise héberge et gère elle-même tous ses serveurs, son réseau et ses données dans ses propres locaux.",
+      examples: ["Serveurs physiques", "Active Directory", "NAS / SAN", "VMware / Hyper-V"],
+      icon: <Database size={20} />,
+      bg: "from-slate-500 to-slate-700",
+      badge: "bg-slate-500/20 text-slate-200 border-slate-500/30",
+      who: "Équipe IT",
+    },
   ];
 
   return (
@@ -206,7 +209,7 @@ function ServiceModelsSchema() {
         <div
           key={layer.model}
           className="relative rounded-2xl border border-indigo-900/30 overflow-hidden"
-          style={{ marginLeft: `${i * 16}px`, marginRight: `${(layers.length - 1 - i) * 16}px` }}
+          style={{ marginLeft: `${i * 10}px`, marginRight: `${(layers.length - 1 - i) * 10}px` }}
         >
           {/* Gradient left bar */}
           <div className={`absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b ${layer.bg}`} />
@@ -566,98 +569,6 @@ function CloudExplainer() {
         <ServiceModelsSchema />
       </div>
 
-      {/* 3 — Types de déploiement */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 text-white">
-            <Building2 size={16} />
-          </div>
-          <h3 className="text-xl font-bold text-white">Les 3 types de déploiement</h3>
-        </div>
-        <p className="text-slate-400 text-sm">
-          Selon où sont hébergées les ressources et qui y a accès, on distingue trois modèles de déploiement.
-          La majorité des entreprises aujourd'hui opèrent en <strong className="text-white">cloud hybride</strong>.
-        </p>
-        <DeploymentModelsSchema />
-      </div>
-
-      {/* 4 — Tableau des responsabilités */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 text-white">
-            <Shield size={16} />
-          </div>
-          <h3 className="text-xl font-bold text-white">Modèle de responsabilité partagée</h3>
-        </div>
-        <p className="text-slate-400 text-sm">
-          En cloud, la responsabilité de la sécurité et de la gestion est <strong className="text-white">partagée</strong> entre
-          l'entreprise et le fournisseur. Ce tableau montre clairement qui gère quoi selon le modèle choisi.
-        </p>
-        <ResponsibilityTable />
-      </div>
-
-      {/* 5 — Architecture entreprise */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-teal-500 to-cyan-600 text-white">
-            <Building2 size={16} />
-          </div>
-          <h3 className="text-xl font-bold text-white">Comment ça fonctionne en entreprise ?</h3>
-        </div>
-        <p className="text-slate-400 text-sm">
-          En pratique, une entreprise combine son infrastructure locale (on-premise) avec des services cloud publics.
-          Les utilisateurs accèdent aux ressources via Internet, sécurisés par un firewall, un Active Directory et une
-          authentification multi-facteur.
-        </p>
-        <EnterpriseArchitectureSchema />
-      </div>
-
-      {/* 6 — Chiffres clés */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-pink-500 to-rose-600 text-white">
-            <TrendingUp size={16} />
-          </div>
-          <h3 className="text-xl font-bold text-white">Le Cloud en chiffres (2025)</h3>
-        </div>
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { stat: "94%", desc: "des entreprises utilisent au moins un service cloud", color: "text-indigo-400", bg: "bg-indigo-500/10 border-indigo-700/30" },
-            { stat: "678 Md$", desc: "de revenus mondiaux du marché cloud en 2024 (Gartner)", color: "text-emerald-400", bg: "bg-emerald-500/10 border-emerald-700/30" },
-            { stat: "96%", desc: "des DevOps utilisent ou évaluent Kubernetes (CNCF 2024)", color: "text-violet-400", bg: "bg-violet-500/10 border-violet-700/30" },
-            { stat: "75%", desc: "des données traitées à la périphérie (edge) d'ici 2025 (Gartner)", color: "text-amber-400", bg: "bg-amber-500/10 border-amber-700/30" },
-          ].map((item) => (
-            <div key={item.stat} className={`rounded-2xl border ${item.bg} p-5 text-center space-y-2`}>
-              <p className={`text-3xl font-black ${item.color}`}>{item.stat}</p>
-              <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* 7 — Lien avec mon lab */}
-      <div className="rounded-2xl border border-teal-700/30 bg-gradient-to-br from-teal-950/30 to-emerald-950/20 p-6">
-        <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
-          <CheckCircle2 size={20} className="text-teal-400" />
-          Lien avec mon infrastructure personnelle
-        </h3>
-        <p className="text-slate-300 text-sm leading-relaxed mb-4">
-          Ma baie informatique reproduit une infrastructure <strong className="text-white">on-premise</strong> complète.
-          L'hyperviseur <strong className="text-white">Proxmox VE</strong> tourne sur mon propre serveur physique et héberge des services réels : Active Directory, NAS TrueNAS et Nextcloud en DMZ.
-        </p>
-        <div className="grid sm:grid-cols-3 gap-3">
-          {[
-            { concept: "On-premise", impl: "Proxmox VE → VMs sur serveur physique", icon: <Server size={14} />, color: "text-violet-400" },
-            { concept: "Annuaire centralisé", impl: "Active Directory", icon: <Users size={14} />, color: "text-blue-400" },
-            { concept: "SaaS privé", impl: "Nextcloud → alternative à OneDrive/SharePoint", icon: <Cloud size={14} />, color: "text-teal-400" },
-          ].map((item) => (
-            <div key={item.concept} className="rounded-xl bg-white/3 border border-white/10 p-3 space-y-1">
-              <p className={`text-xs font-semibold flex items-center gap-1.5 ${item.color}`}>{item.icon}{item.concept}</p>
-              <p className="text-xs text-slate-400 leading-snug">{item.impl}</p>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
@@ -785,6 +696,30 @@ export default function VeilleSection() {
                       </div>
                     ))}
                   </div>
+
+                  {/* ── Petites banderoles cliquables ── */}
+                  {block.banners && block.banners.length > 0 && (
+                    <div className="flex flex-col gap-2 mt-1">
+                      {block.banners.map((banner) => (
+                        <a
+                          key={banner.title}
+                          href={banner.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`group flex items-center gap-3 px-4 py-2.5 rounded-xl border ${colors.border} ${colors.bg} hover:border-slate-400/40 hover:bg-slate-500/15 transition-all duration-200`}
+                        >
+                          <span className={`shrink-0 w-1.5 h-1.5 rounded-full ${block.era === "passé" ? "bg-slate-400" : block.era === "présent" ? "bg-indigo-400" : "bg-emerald-400"}`} />
+                          <span className={`text-xs font-medium ${colors.text} group-hover:text-white transition-colors truncate flex-1`}>
+                            {banner.title}
+                          </span>
+                          <span className="shrink-0 text-[10px] text-slate-500 group-hover:text-slate-300 transition-colors hidden sm:block truncate max-w-[120px]">
+                            {banner.source}
+                          </span>
+                          <ExternalLink size={12} className="shrink-0 text-slate-600 group-hover:text-slate-300 transition-colors" />
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -797,9 +732,9 @@ export default function VeilleSection() {
               </h3>
               <div className="grid md:grid-cols-3 gap-4 text-sm text-slate-300">
                 {[
-                  { title: "2023 → 2024", text: "Le cloud hybride s'impose comme modèle dominant. Microsoft Entra ID unifie les identités. ANSSI renforce SecNumCloud. Kubernetes atteint 96 % d'adoption en production." },
-                  { title: "2024 → 2025", text: "L'IA générative s'intègre nativement aux offres cloud (AWS Bedrock, Azure OpenAI). Le ZTNA remplace le VPN. La FinOps devient incontournable face à l'explosion des coûts cloud." },
-                  { title: "2026", text: "L'edge computing traite 75 % des données hors datacenter. GAIA-X impose la souveraineté européenne. Les agents IA autonomes commencent à gérer l'infrastructure. Le multi-cloud devient la norme." },
+                  { title: "2024", text: "L'IA générative propulse la demande cloud à des niveaux records. AWS, Azure et GCP saturent leurs data centers GPU. La consommation énergétique des infrastructures cloud bondit de 30 % selon l'AIE." },
+                  { title: "2025", text: "82 % des entreprises explosent leur budget cloud. L'IA as-a-Service devient le premier poste de dépense. La FinOps s'impose comme discipline incontournable pour maîtriser les coûts." },
+                  { title: "2026", text: "Le Data Act européen entre en application : portabilité des données, fin du vendor lock-in. GAIA-X renforce la souveraineté numérique face au Cloud Act américain." },
                 ].map((item) => (
                   <div key={item.title} className="space-y-1">
                     <p className="font-semibold text-slate-200">{item.title}</p>
@@ -884,28 +819,31 @@ export default function VeilleSection() {
                   {rssItems.map((item, i) => (
                     <div
                       key={`${item.source}-${item.link}-${i}`}
-                      className="card-bg rounded-2xl p-5 border border-indigo-900/30 hover:border-[#2bb24c]/40 transition-all duration-300 hover-lift group"
+                      className="relative card-bg rounded-2xl overflow-hidden border border-indigo-900/30 hover:border-[#2bb24c]/40 transition-all duration-300 hover-lift group flex flex-col"
                     >
-                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="flex items-start justify-between gap-3">
-                        <h4 className="font-semibold text-white group-hover:text-[#2bb24c] transition-colors line-clamp-2 text-sm">
-                          {item.title}
-                        </h4>
-                        <ExternalLink size={16} className="text-[#2bb24c]/60 flex-shrink-0 mt-0.5" />
-                      </a>
-                      {item.summary ? (
-                        <p className="text-sm text-slate-400 mt-2 line-clamp-2">{item.summary}</p>
-                      ) : (
-                        <p className="text-sm text-slate-500 mt-2 italic">Lire l'article</p>
-                      )}
-                      <div className="text-xs text-slate-500 mt-3 flex items-center gap-2 flex-wrap">
-                        <img src="https://feedly.com/favicon.ico" alt="" className="w-3 h-3 opacity-50" />
-                        <span>{item.source}</span>
-                        {item.pubDate && (
-                          <>
-                            <span>·</span>
-                            <time dateTime={item.pubDate}>{formatRssDate(item.pubDate)}</time>
-                          </>
+                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#2bb24c] to-teal-600" />
+                      <div className="pl-5 pr-4 pt-4 pb-4 flex flex-col flex-1">
+                        <a href={item.link} target="_blank" rel="noopener noreferrer" className="flex items-start justify-between gap-3">
+                          <h4 className="font-semibold text-white group-hover:text-[#2bb24c] transition-colors line-clamp-2 text-sm leading-snug">
+                            {item.title}
+                          </h4>
+                          <ExternalLink size={14} className="text-[#2bb24c]/50 group-hover:text-[#2bb24c] flex-shrink-0 mt-0.5 transition-colors" />
+                        </a>
+                        {item.summary && (
+                          <p className="text-xs text-slate-400 mt-2 line-clamp-2 leading-relaxed">{item.summary}</p>
                         )}
+                        <div className="flex items-center justify-between gap-2 mt-auto pt-3 flex-wrap">
+                          <span className="flex items-center gap-1.5 text-xs bg-[#2bb24c]/10 border border-[#2bb24c]/20 text-[#2bb24c]/80 px-2 py-0.5 rounded-full truncate max-w-[180px]">
+                            <Rss size={10} />
+                            {item.source}
+                          </span>
+                          {item.pubDate && (
+                            <span className="flex items-center gap-1 text-xs text-slate-500">
+                              <Calendar size={11} />
+                              <time dateTime={item.pubDate}>{formatRssDate(item.pubDate)}</time>
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
                   ))}

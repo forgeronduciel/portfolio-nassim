@@ -60,21 +60,21 @@ const FORMATION: Row[] = [
   { realisation: "Projet E6 : Infrastructure AD + Nextcloud", periode: "2025-2026", competences: [true, true, false, false, true, false] },
   { realisation: "Projet E6 : Serveur NAS TrueNAS", periode: "2025-2026", competences: [true, true, false, false, true, false] },
   { realisation: "Portfolio", periode: "2025-2026", competences: [false, false, true, false, false, true] },
-  { realisation: "Authentik SSO", periode: "2025-2026", competences: [true, false, false, false, true, false] },
+  { realisation: "Authentik SSO", periode: "2025-2026", competences: [true, true, false, false, true, false] },
+  { realisation: "Configuration Supervision", periode: "2025-2026", competences: [true, false, false, false, true, false] },
 ];
 
 const PREMIERE_ANNEE: Row[] = [
   { realisation: "Support informatique (compte utilisateur)", periode: "2024-2025", competences: [true, true, false, false, false, false] },
-  { realisation: "Support téléphonique", periode: "2024-2025", competences: [true, false, false, false, false, false] },
-  { realisation: "Outil de ticketing", periode: "2024-2025", competences: [true, true, false, false, true, false] },
+  { realisation: "Support téléphonique", periode: "2024-2025", competences: [true, true, false, false, false, false] },
 ];
 
 const SECONDE_ANNEE: Row[] = [
   { realisation: "Masterisation PC", periode: "2025-2026", competences: [true, false, false, false, true, false] },
   { realisation: "Effacement sécurisé (Blancco)", periode: "2025-2026", competences: [true, false, false, false, true, false] },
-  { realisation: "Support technique", periode: "2025-2026", competences: [true, false, false, false, true, false] },
   { realisation: "Outil de ticketing", periode: "2025-2026", competences: [true, true, false, false, true, false] },
-  { realisation: "Gestion stock", periode: "2025-2026", competences: [true, true, false, false, false, false] },
+  { realisation: "Imprimante", periode: "2025-2026", competences: [true, true, false, false, true, false] },
+  { realisation: "Incident PC", periode: "2025-2026", competences: [true, true, false, false, true, false] },
 ];
 
 type TabType = "tableau" | "annexe";

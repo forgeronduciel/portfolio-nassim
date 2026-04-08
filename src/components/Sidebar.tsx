@@ -25,17 +25,19 @@ export default function Sidebar() {
   const [activeSection, setActiveSection] = useState("accueil");
   const [isDark, setIsDark] = useState(true);
   const ignoreObserverRef = useRef(false);
+  const initializedRef = useRef(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? true;
     const shouldUseDark = savedTheme ? savedTheme === "dark" : prefersDark;
-
+    initializedRef.current = true;
     setIsDark(shouldUseDark);
     document.documentElement.classList.toggle("theme-light", !shouldUseDark);
   }, []);
 
   useEffect(() => {
+    if (!initializedRef.current) return;
     document.documentElement.classList.toggle("theme-light", !isDark);
     localStorage.setItem("theme", isDark ? "dark" : "light");
   }, [isDark]);

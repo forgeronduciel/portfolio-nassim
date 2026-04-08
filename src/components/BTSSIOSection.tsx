@@ -79,66 +79,6 @@ export default function BTSSIOSection() {
         </div>
       </div>
 
-      {/* Blocs de compétences */}
-      <h3 className="text-2xl font-bold text-white mb-6">Les blocs de compétences</h3>
-      <div className="grid md:grid-cols-2 gap-6 max-w-5xl">
-        {/* Bloc commun */}
-        <div className="card-bg rounded-2xl p-6 border border-indigo-900/30 hover-lift">
-          <div className="flex items-center gap-3 mb-4">
-            <Users size={28} className="text-indigo-400" />
-            <div>
-              <h4 className="text-lg font-bold text-white">Support et mise à disposition de services informatiques</h4>
-              <p className="text-xs text-slate-500">Socle commun aux deux options</p>
-            </div>
-          </div>
-          <p className="text-sm text-slate-400 mb-4">
-            Permet de gérer et maintenir les services informatiques d'une organisation.
-          </p>
-          <p className="text-sm text-slate-400 mb-2">Compétences clés :</p>
-          <ul className="space-y-1">
-            {[
-              "Gestion du patrimoine informatique",
-              "Réponse aux incidents",
-              "Développement de la présence en ligne",
-              "Travail en mode projet",
-              "Organisation du développement professionnel"
-            ].map((item) => (
-              <li key={item} className="flex items-center gap-2 text-xs text-slate-300">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Bloc SISR */}
-        <div className="card-bg rounded-2xl p-6 border border-indigo-500/50 hover-glow">
-          <div className="flex items-center gap-3 mb-4">
-            <Shield size={28} className="text-indigo-400" />
-            <div>
-              <h4 className="text-lg font-bold text-white">SISR – Administration des systèmes et des réseaux</h4>
-              <p className="text-xs text-slate-500">Spécialisation SISR</p>
-            </div>
-          </div>
-          <p className="text-sm text-slate-400 mb-4">
-            Mise en place, configuration et maintenance d'infrastructures réseaux et systèmes.
-          </p>
-          <p className="text-sm text-slate-400 mb-2">Compétences clés :</p>
-          <ul className="space-y-1">
-            {[
-              "Administration des systèmes et serveurs",
-              "Gestion et sécurisation des réseaux",
-              "Déploiement et supervision d'infrastructures",
-              "Support, maintenance et gestion du parc informatique"
-            ].map((item) => (
-              <li key={item} className="flex items-center gap-2 text-xs text-slate-300">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
     </section>
   );
 }

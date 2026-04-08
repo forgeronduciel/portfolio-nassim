@@ -100,7 +100,6 @@ export default function PresentationSection() {
                     <p className="font-bold text-white text-sm">BTS SIO — option SISR · 2e année</p>
                     <p className="text-xs text-indigo-300">Alternance · Banque de France — DGSI</p>
                     <p className="text-xs text-slate-400 mt-1">UTEC — Île-de-France</p>
-                    <p className="text-xs text-slate-500 mt-1">Technicien de proximité · Support N1/N2 · Projets infrastructure</p>
                   </div>
                 </div>
 

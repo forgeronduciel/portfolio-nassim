@@ -1,0 +1,131 @@
+<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" font-family="monospace">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a5f"/>
+      <stop offset="100%" style="stop-color:#1e2d5a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#60a5fa"/>
+    </marker>
+    <marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#34d399"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="220" fill="url(#bg)" rx="8"/>
+
+  <!-- Grid lines -->
+  <line x1="0" y1="40" x2="400" y2="40" stroke="#ffffff08"/>
+  <line x1="0" y1="80" x2="400" y2="80" stroke="#ffffff08"/>
+  <line x1="0" y1="120" x2="400" y2="120" stroke="#ffffff08"/>
+  <line x1="0" y1="160" x2="400" y2="160" stroke="#ffffff08"/>
+  <line x1="80" y1="0" x2="80" y2="220" stroke="#ffffff08"/>
+  <line x1="160" y1="0" x2="160" y2="220" stroke="#ffffff08"/>
+  <line x1="240" y1="0" x2="240" y2="220" stroke="#ffffff08"/>
+  <line x1="320" y1="0" x2="320" y2="220" stroke="#ffffff08"/>
+
+  <!-- === BLOC UTILISATEUR (gauche) === -->
+  <rect x="18" y="30" width="90" height="110" rx="8" fill="url(#cardGrad)" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="63" y="48" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="bold">UTILISATEUR</text>
+  <!-- Avatar -->
+  <circle cx="63" cy="70" r="16" fill="#1e40af" stroke="#60a5fa" stroke-width="1.5"/>
+  <circle cx="63" cy="65" r="7" fill="#93c5fd"/>
+  <ellipse cx="63" cy="82" rx="12" ry="7" fill="#93c5fd"/>
+  <!-- Status rouge = problème -->
+  <circle cx="75" cy="57" r="5" fill="#ef4444" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="75" y="61" text-anchor="middle" fill="white" font-size="7" font-weight="bold">!</text>
+  <!-- Nom -->
+  <text x="63" y="100" text-anchor="middle" fill="#e2e8f0" font-size="8">T. Martin</text>
+  <text x="63" y="112" text-anchor="middle" fill="#64748b" font-size="7">thomas.martin</text>
+  <!-- Badge locked -->
+  <rect x="28" y="120" width="70" height="14" rx="4" fill="#7f1d1d" stroke="#ef4444" stroke-width="1"/>
+  <text x="63" y="130" text-anchor="middle" fill="#fca5a5" font-size="7.5" font-weight="bold">🔒 Accès bloqué</text>
+
+  <!-- === EMAIL DEMANDE (centre-gauche) === -->
+  <rect x="125" y="18" width="90" height="65" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <rect x="125" y="18" width="90" height="18" rx="6" fill="#334155"/>
+  <rect x="125" y="30" width="90" height="6" fill="#334155"/>
+  <text x="170" y="31" text-anchor="middle" fill="#94a3b8" font-size="7.5" font-weight="bold">✉ MAIL REÇU</text>
+  <!-- Lignes de texte simulées -->
+  <rect x="133" y="44" width="50" height="4" rx="2" fill="#475569"/>
+  <rect x="133" y="52" width="74" height="3" rx="1.5" fill="#334155"/>
+  <rect x="133" y="58" width="60" height="3" rx="1.5" fill="#334155"/>
+  <rect x="133" y="64" width="40" height="3" rx="1.5" fill="#334155"/>
+  <text x="133" y="76" fill="#f87171" font-size="7">"J'ai oublié mon MDP..."</text>
+
+  <!-- Flèche mail vers support -->
+  <line x1="108" y1="55" x2="123" y2="55" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow)"/>
+
+  <!-- === BLOC SUPPORT (centre) === -->
+  <rect x="215" y="30" width="85" height="110" rx="8" fill="url(#cardGrad)" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="257" y="48" text-anchor="middle" fill="#a5b4fc" font-size="9" font-weight="bold">SUPPORT IT</text>
+  <!-- Logo clé -->
+  <circle cx="257" cy="75" r="14" fill="#312e81" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="257" y="80" text-anchor="middle" fill="#a5b4fc" font-size="18">🔑</text>
+  <text x="257" y="100" text-anchor="middle" fill="#e2e8f0" font-size="8">N. ABIARI</text>
+  <text x="257" y="112" text-anchor="middle" fill="#64748b" font-size="7">Support N1</text>
+  <!-- Action reset -->
+  <rect x="222" y="120" width="72" height="14" rx="4" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1"/>
+  <text x="258" y="130" text-anchor="middle" fill="#93c5fd" font-size="7.5">Reset Password</text>
+
+  <!-- Flèche traitement -->
+  <line x1="215" y1="85" x2="205" y2="85" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow)"/>
+
+  <!-- === ACTIVE DIRECTORY (centre haut) === -->
+  <rect x="133" y="100" width="78" height="42" rx="6" fill="#1a2744" stroke="#3b82f6" stroke-width="1"/>
+  <text x="172" y="115" text-anchor="middle" fill="#93c5fd" font-size="8" font-weight="bold">Active Directory</text>
+  <rect x="140" y="119" width="58" height="5" rx="2" fill="#1e3a8a"/>
+  <rect x="140" y="127" width="40" height="5" rx="2" fill="#1e3a8a"/>
+  <text x="162" y="124" fill="#60a5fa" font-size="6.5">user: t.martin</text>
+  <text x="152" y="133" fill="#34d399" font-size="6.5">✓ MDP réinitialisé</text>
+
+  <!-- Flèches AD -->
+  <line x1="215" y1="115" x2="212" y2="115" stroke="#60a5fa" stroke-width="1" stroke-dasharray="2,2"/>
+  <line x1="212" y1="115" x2="212" y2="122" stroke="#60a5fa" stroke-width="1"/>
+  <line x1="212" y1="122" x2="213" y2="122" stroke="#60a5fa" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- === EMAIL RÉPONSE (droite-haut) === -->
+  <rect x="315" y="18" width="72" height="60" rx="6" fill="#0f2318" stroke="#34d399" stroke-width="1.5"/>
+  <rect x="315" y="18" width="72" height="16" rx="6" fill="#14532d"/>
+  <rect x="315" y="28" width="72" height="6" fill="#14532d"/>
+  <text x="351" y="30" text-anchor="middle" fill="#86efac" font-size="7.5" font-weight="bold">↩ RÉPONSE</text>
+  <rect x="322" y="41" width="45" height="3.5" rx="1.5" fill="#166534"/>
+  <rect x="322" y="48" width="58" height="3.5" rx="1.5" fill="#166534"/>
+  <rect x="322" y="55" width="40" height="3.5" rx="1.5" fill="#166534"/>
+  <text x="322" y="70" fill="#4ade80" font-size="6.5">"C'est réglé !"</text>
+
+  <!-- Flèche réponse -->
+  <line x1="300" y1="48" x2="313" y2="48" stroke="#34d399" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow2)"/>
+
+  <!-- Flèche de support vers email réponse -->
+  <line x1="257" y1="30" x2="257" y2="22" stroke="#6366f1" stroke-width="1" stroke-dasharray="2,2"/>
+  <line x1="257" y1="22" x2="315" y2="22" stroke="#6366f1" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- === COMPTE DÉBLOQUÉ (droite bas) === -->
+  <rect x="305" y="110" width="82" height="50" rx="6" fill="#0f2318" stroke="#34d399" stroke-width="1.5"/>
+  <text x="346" y="126" text-anchor="middle" fill="#86efac" font-size="8" font-weight="bold">✅ COMPTE OK</text>
+  <circle cx="346" cy="144" r="10" fill="#14532d" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="346" y="149" text-anchor="middle" fill="#4ade80" font-size="13">🔓</text>
+  <text x="346" y="157" text-anchor="middle" fill="#4ade80" font-size="7">Accès rétabli</text>
+
+  <!-- Flèche compte OK vers user -->
+  <line x1="108" y1="90" x2="120" y2="90" stroke="#34d399" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <!-- Légende bas -->
+  <rect x="18" y="155" width="370" height="1" fill="#1e293b"/>
+  <text x="22" y="170" fill="#64748b" font-size="7.5">Kereis — Support N1</text>
+  <text x="22" y="180" fill="#475569" font-size="7">Réf. ticket : TKT-2025-0312  |  Durée : ~15 min  |  Résolution : 1er contact</text>
+
+  <!-- Badge résolu -->
+  <rect x="290" y="158" width="98" height="22" rx="5" fill="#14532d" stroke="#4ade80" stroke-width="1"/>
+  <text x="339" y="173" text-anchor="middle" fill="#4ade80" font-size="8.5" font-weight="bold">✓ Ticket clôturé</text>
+</svg>
