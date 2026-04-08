@@ -25,11 +25,12 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-4">Navigation</h4>
             <ul className="space-y-2 text-sm text-slate-400">
+              <li><a href="#accueil" className="hover:text-indigo-400 transition-colors">Accueil</a></li>
               <li><a href="#presentation" className="hover:text-indigo-400 transition-colors">Présentation</a></li>
               <li><a href="#competences" className="hover:text-indigo-400 transition-colors">Compétences</a></li>
               <li><a href="#realisations" className="hover:text-indigo-400 transition-colors">Tableau de compétences</a></li>
-              <li><a href="#activites" className="hover:text-indigo-400 transition-colors">Activités</a></li>
-              <li><a href="#veille" className="hover:text-indigo-400 transition-colors">Veille technologique</a></li>
+              <li><a href="#activites" className="hover:text-indigo-400 transition-colors">Mes Projets</a></li>
+              <li><a href="#veille" className="hover:text-indigo-400 transition-colors">Veille Technologique</a></li>
               <li><a href="#certifications" className="hover:text-indigo-400 transition-colors">Certifications</a></li>
               <li><a href="#contact" className="hover:text-indigo-400 transition-colors">Contact</a></li>
             </ul>
